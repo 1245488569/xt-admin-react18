@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --fix",
     "preview": "vite preview",
-    "postinstall": "simple-git-hooks"
+    "postinstall": "simple-git-hooks",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -33,6 +34,6 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": "eslint --fix"
+    "*": "eslint --fix"
   }
 }
