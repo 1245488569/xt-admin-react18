@@ -32,5 +32,8 @@
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
     "preserveUnused": true
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
