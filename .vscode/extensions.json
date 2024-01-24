@@ -1,6 +1,9 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "EditorConfig.EditorConfig"
+    "EditorConfig.EditorConfig",
+    "dsznajder.es7-react-js-snippets",
+    "antfu.unocss",
+    "voorjaar.windicss-intellisense"
   ]
 }
