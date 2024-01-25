@@ -5,6 +5,7 @@ function App() {
 
   return (
     <>
+      <SvgIcon />
       <Flex gap="small" wrap="wrap">
         <Button type="primary">Primary Button</Button>
         <Button>Default Button</Button>
