@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.58.3",
+    "antd": "^5.13.2",
     "axios": "^1.6.5",
     "mockjs": "^1.1.0",
     "react": "^18.2.0",
@@ -34,6 +35,8 @@
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.2.2",
     "unocss": "^0.58.3",
+    "unplugin-auto-import": "^0.17.3",
+    "unplugin-auto-import-antd": "^0.0.1",
     "vite": "^5.0.8",
     "vite-plugin-fake-server": "^2.1.1"
   },
