@@ -1,5 +1,5 @@
 import AutoImport from 'unplugin-auto-import/vite'
-import AntdResolver from 'unplugin-auto-import-antd'
+import AntdResolver from 'unplugin-antd-resolver'
 
 export default function setupAutoImport() {
   return AutoImport({
