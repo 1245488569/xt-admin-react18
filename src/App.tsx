@@ -28,6 +28,10 @@ function App() {
         probare, quae sunt a te dicta? Refert tamen, quo modo.
       </p>
       <div className="text-2xl text-red-400">111</div>
+
+      <svg aria-hidden="true">
+        <use xlinkHref="#icon-hamburger-closed" />
+      </svg>
     </>
   )
 }
