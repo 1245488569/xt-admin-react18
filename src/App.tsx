@@ -32,6 +32,8 @@ function App() {
       <svg aria-hidden="true">
         <use xlinkHref="#icon-hamburger-closed" />
       </svg>
+
+      <ICarbonApps />
     </>
   )
 }
