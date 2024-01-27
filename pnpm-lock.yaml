@@ -97,6 +97,9 @@ devDependencies:
   vite:
     specifier: ^5.0.8
     version: 5.0.12(@types/node@20.11.5)
+  vite-plugin-compression:
+    specifier: ^0.5.1
+    version: 0.5.1(vite@5.0.12)
   vite-plugin-fake-server:
     specifier: ^2.1.1
     version: 2.1.1
@@ -6936,6 +6939,19 @@ packages:
   /vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+    dev: true
+
+  /vite-plugin-compression@0.5.1(vite@5.0.12):
+    resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
+    peerDependencies:
+      vite: '>=2.0.0'
+    dependencies:
+      chalk: 4.1.2
+      debug: 4.3.4
+      fs-extra: 10.1.0
+      vite: 5.0.12(@types/node@20.11.5)
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-fake-server@2.1.1:
