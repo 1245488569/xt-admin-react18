@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
-import type { CustomRouteObject } from '../../types/router'
+import type { CustomRouteObject } from 'types/router'
+import Err404 from '@/views/404'
 
 function ViteDemo() {
   return (
@@ -14,6 +15,10 @@ const routes: CustomRouteObject[] = [
   {
     path: '/',
     element: <ViteDemo />,
+  },
+  {
+    path: '*',
+    element: <Err404 />,
   },
 ]
 
