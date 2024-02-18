@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import type { CustomRouteObject } from 'types/router'
+import { lazyLoad } from './LazyLoad'
 import Err404 from '@/views/404'
 
 function ViteDemo() {
@@ -15,6 +16,10 @@ const routes: CustomRouteObject[] = [
   {
     path: '/',
     element: <ViteDemo />,
+  },
+  {
+    path: '/login',
+    element: lazyLoad(lazy(() => import('@/views/login'))),
   },
   {
     path: '*',
