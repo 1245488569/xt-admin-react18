@@ -1,15 +1,20 @@
 import axios from 'axios'
-import { RouterProvider } from 'react-router-dom'
-import Router from './router'
+import { Suspense } from 'react'
+import Loading from './views/Loading'
+import RouterGuard from './router/RouterGuard'
+import rootRouters from './router'
 
 function App() {
   axios.post('/api/login')
 
   return (
-    <>
-      {/* <div>{useRoutes(routes)}</div> */}
-      <RouterProvider router={Router} />
-    </>
+
+    <RouterGuard>
+      <Suspense fallback={<Loading />}>
+        {useRoutes(rootRouters)}
+      </Suspense>
+    </RouterGuard>
+
   )
 }
 

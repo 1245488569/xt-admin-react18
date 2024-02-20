@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import Loading from '../views/Loading'
 
 /**
  * 组件懒加载，结合Suspense实现
@@ -8,12 +9,7 @@ import { Suspense } from 'react'
 export function lazyLoad(Component: React.LazyExoticComponent<React.FC>) {
   return (
     <Suspense
-      fallback={(
-        <Spin
-          size="large"
-          className="h-full flex items-center justify-center"
-        />
-      )}
+      fallback={<Loading />}
     >
       <Component />
     </Suspense>

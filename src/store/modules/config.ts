@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import sysGlobalConfig from '@/GlobalConfig'
 
@@ -8,7 +9,12 @@ const initialState: IGlobalConfig = {
 const configSlice = createSlice({
   name: 'config',
   initialState,
-  reducers: {},
+  reducers: {
+    changeEnableProgressAction(state, { payload }: PayloadAction<boolean>) {
+      state.app.enableProgress = payload
+    },
+  },
 })
 
+export const { changeEnableProgressAction } = configSlice.actions
 export default configSlice.reducer

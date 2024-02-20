@@ -1,4 +1,6 @@
 const NotFound: React.FC = () => {
+  console.log('NotFound tsx')
+
   return (
     <div className="min-h-screen flex items-center justify-center from-purple-300 to-blue-200 bg-gradient-to-r">
       <div className="w-[500px] flex flex-col items-center justify-center rounded-md bg-white py-12">

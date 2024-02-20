@@ -1,22 +1,31 @@
 import type { CustomRouteObject } from 'types/router'
-import { createHashRouter } from 'react-router-dom'
-import { lazyLoad } from './LazyLoad'
-import DemoLoader from './DemoLoader'
 import Err404 from '@/views/404'
 
-const routes: CustomRouteObject[] = [
+const FrameDashboard = lazy(() => import('@/views/frame_dashboard'))
+const Login = lazy(() => import('@/views/login'))
+const Demo1 = lazy(() => import('@/views/demo1'))
+const Demo2 = lazy(() => import('@/views/demo2'))
+
+const rootRouters: CustomRouteObject[] = [
+  {
+    path: '/',
+    element: <FrameDashboard />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
   {
     id: 'root',
-    loader: DemoLoader,
     // element: lazyLoad(lazy(() => import('@/layouts'))),
     children: [
       {
-        path: '/',
-        element: lazyLoad(lazy(() => import('@/views/frame_dashboard'))),
+        path: '/Demo1',
+        element: <Demo1 />,
       },
       {
-        path: '/login',
-        element: lazyLoad(lazy(() => import('@/views/login'))),
+        path: '/Demo2',
+        element: <Demo2 />,
       },
     ],
   },
@@ -27,5 +36,7 @@ const routes: CustomRouteObject[] = [
   },
 ]
 
-const HashRouter = createHashRouter(routes)
-export default HashRouter
+// const HashRouter = createHashRouter(rootRouters)
+// export default HashRouter
+
+export default rootRouters
