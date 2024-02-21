@@ -2,6 +2,8 @@ import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
 import { changeMessageAction } from '@/store/modules/counter'
 
 const FrameDashboard: React.FC = () => {
+  console.log('FrameDashboard tsx')
+
   const { count, message } = useAppSelector(
     state => ({
       count: state.counter.count,

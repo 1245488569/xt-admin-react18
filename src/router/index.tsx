@@ -7,24 +7,26 @@ const Demo1 = lazy(() => import('@/views/demo1'))
 const Demo2 = lazy(() => import('@/views/demo2'))
 
 const rootRouters: CustomRouteObject[] = [
-  {
-    path: '/',
-    element: <FrameDashboard />,
-  },
+
   {
     path: '/login',
     element: <Login />,
   },
   {
     id: 'root',
+    path: '/',
     // element: lazyLoad(lazy(() => import('@/layouts'))),
     children: [
       {
-        path: '/Demo1',
+        path: '',
+        element: <FrameDashboard />,
+      },
+      {
+        path: 'demo1',
         element: <Demo1 />,
       },
       {
-        path: '/Demo2',
+        path: 'demo2',
         element: <Demo2 />,
       },
     ],

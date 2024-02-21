@@ -1,4 +1,4 @@
-import nprogress from 'nprogress'
+import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { Fragment } from 'react'
 import { shallowEqualApp, useAppSelector } from '@/store'
@@ -14,9 +14,9 @@ const Loading: React.FC = () => {
   )
 
   useEffect(() => {
-    enableProgress && nprogress.start()
+    enableProgress && Nprogress.start()
     return () => {
-      enableProgress && nprogress.done()
+      enableProgress && Nprogress.done()
     }
   }, [enableProgress])
 

@@ -10,16 +10,18 @@ const RouterGuard: React.FC<IProps> = (props) => {
   const route = useLocation()
   console.log(route)
 
-  const { globalConfig } = useAppSelector(
+  const { enableDynamicTitle } = useAppSelector(
     state => ({
-      globalConfig: state.config,
+      enableDynamicTitle: state.config.app.enableDynamicTitle,
     }),
     shallowEqualApp,
   )
-
   useEffect(() => {
-    globalConfig.app.enableProgress && console.log('start')
-  }, [globalConfig.app.enableProgress])
+    if (enableDynamicTitle)
+      document.title = 'aaa'
+    else
+      document.title = import.meta.env.VITE_APP_TITLE
+  }, [enableDynamicTitle])
 
   return props.children
 }
