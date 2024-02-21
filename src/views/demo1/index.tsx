@@ -3,12 +3,16 @@ import { changeDefaultLanguageAction, changeEnableDynamicTitleAction, changeEnab
 
 const Demo1: React.FC = () => {
   console.log('Demo1 tsx')
-  const { count, enableProgress, enableDynamicTitle } = useAppSelector(
+
+  const { t, i18n } = useTranslation()
+
+  const { count, enableProgress, enableDynamicTitle, defaultLanguage } = useAppSelector(
     state => ({
       count: state.counter.count,
       message: state.counter.message,
       enableProgress: state.config.app.enableProgress,
       enableDynamicTitle: state.config.app.enableDynamicTitle,
+      defaultLanguage: state.config.defaultLanguage,
     }),
     shallowEqualApp,
   )
@@ -24,6 +28,7 @@ const Demo1: React.FC = () => {
 
   function handleChangeDefaultLanguage(value: Language) {
     dispatch(changeDefaultLanguageAction(value))
+    i18n.changeLanguage(value)
   }
 
   return (
@@ -40,17 +45,20 @@ const Demo1: React.FC = () => {
       <Button onClick={handleChangeProgress}>开/关载入进度条</Button>
       <Button onClick={handleChangeDynamicTitle}>开/关动态标题</Button>
       <Select
-        defaultValue="zh-cn"
+        defaultValue={defaultLanguage}
         style={{ width: 200 }}
         onChange={handleChangeDefaultLanguage}
         options={[
-          { value: 'zh-cn', label: '简体中文' },
-          { value: 'zh-tw', label: '繁体中文' },
+          { value: 'zhCn', label: '简体中文' },
+          { value: 'zhTw', label: '繁体中文' },
           { value: 'en', label: '英文' },
         ]}
       />
 
       <DatePicker />
+      <div>
+        {t('notfound.title')}
+      </div>
     </div>
   )
 }

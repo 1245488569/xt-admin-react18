@@ -6,6 +6,7 @@ import 'virtual:svg-icons-register'
 import 'virtual:uno.css'
 import '@unocss/reset/tailwind-compat.css'
 import store from './store'
+import '@/locales/index'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>

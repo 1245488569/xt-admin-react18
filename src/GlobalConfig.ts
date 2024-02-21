@@ -1,6 +1,6 @@
 const sysGlobalConfig: IGlobalConfig = {
-  // 默认语言. zh-cn: 简体中文 zh-tw: 繁体中文 en: 英文
-  defaultLanguage: 'zh-cn',
+  // 默认语言. zhCn: 简体中文 zhTw: 繁体中文 en: 英文
+  defaultLanguage: 'zhCn',
   /**
    * Element 组件尺寸
    * 这里有和主内容区默认文字大小关联

@@ -1,4 +1,4 @@
-type Language = 'zh-cn' | 'zh-tw' | 'en'
+type Language = 'zhCn' | 'zhTw' | 'en'
 type ElementSize = 'large' | 'default' | 'small'
 type LayoutMode = 'onlyTopNav' | 'onlySubSideNav' | 'mainSubSideNav' | 'topSubSideNav'
 type ColorScheme = '' | 'light' | 'dark'

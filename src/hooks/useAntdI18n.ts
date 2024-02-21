@@ -13,6 +13,6 @@ export default function useAntdI18n() {
     shallowEqualApp,
   )
 
-  const locale = defaultLanguage === 'zh-cn' ? zhCN : defaultLanguage === 'zh-tw' ? zhTW : enUS
+  const locale = defaultLanguage === 'zhCn' ? zhCN : defaultLanguage === 'zhTw' ? zhTW : enUS
   return locale
 }

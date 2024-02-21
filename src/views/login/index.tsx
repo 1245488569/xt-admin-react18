@@ -3,6 +3,7 @@ const Login: React.FC = () => {
     account: string
     password: string
   }
+  const { t } = useTranslation()
   function onFinish(values: FormProps) {
     console.log('Success:', values)
   }
@@ -27,21 +28,21 @@ const Login: React.FC = () => {
 
         <div className="z-999 w-full">
           <div className="my-6 flex items-center justify-center text-3xl">
-            用户登录
+            { t('login.title') }
           </div>
 
           <Form autoComplete="off" onFinish={onFinish}>
-            <Form.Item name="account" rules={[{ required: true, message: '请输入账号' }, { min: 3, max: 20, message: '长度在3到20个字符' }]}>
-              <Input placeholder="账号" prefix={<SvgIcon name="ep:avatar" />} />
+            <Form.Item name="account" rules={[{ required: true, message: t('login.accountRequired') }, { min: 3, max: 20, message: t('login.accountLength') }]}>
+              <Input placeholder={t('login.account')} prefix={<SvgIcon name="ep:avatar" />} />
             </Form.Item>
 
-            <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }, { min: 6, max: 20, message: '长度在6到20个字符' }]}>
-              <Input.Password placeholder="密码" prefix={<SvgIcon name="ep:lock" />} />
+            <Form.Item name="password" rules={[{ required: true, message: t('login.passwordRquired') }, { min: 6, max: 20, message: t('login.passwordLength') }]}>
+              <Input.Password placeholder={t('login.password')} prefix={<SvgIcon name="ep:lock" />} />
             </Form.Item>
 
             <Form.Item>
               <Button type="primary" block htmlType="submit">
-                登录
+                { t('login.loginBtn') }
               </Button>
             </Form.Item>
           </Form>
