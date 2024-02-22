@@ -11,7 +11,6 @@ interface IGlobalApp {
   enableDynamicTitle: boolean
   enableDashboard: boolean
   layoutMode: LayoutMode
-  colorScheme: ColorScheme
 }
 
 interface IGlobalNav {
@@ -70,6 +69,7 @@ interface IGlobalTheme {
 declare interface IGlobalConfig {
   defaultLanguage: Language
   elementSize: ElementSize
+  colorScheme: ColorScheme
   app: IGlobalApp
   nav: IGlobalNav
   tabbar: IGlobalTabbar

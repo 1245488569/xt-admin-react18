@@ -1,4 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { loginApi } from '@/api/test'
+import { LocalStorageService } from '@/utils/storage'
+import { TOKEN, USER_INFO } from '@/config/cache'
 
 interface IState {
   token: string
@@ -7,17 +11,36 @@ interface IState {
 }
 
 const initialState: IState = {
-  token: '',
-  userInfo: {},
+  token: LocalStorageService.get(TOKEN) ?? '',
+  userInfo: LocalStorageService.get(USER_INFO) ?? '',
   permissions: [],
 }
 
-const counterSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-
+    setToken(state, { payload }: PayloadAction<string>) {
+      state.token = payload
+    },
+    setUserInfo(state, { payload }: PayloadAction<any>) {
+      state.userInfo = payload
+    },
+    setPermissions(state, { payload }: PayloadAction<string[]>) {
+      state.permissions = payload
+    },
   },
 })
 
-export default counterSlice.reducer
+export const fetchLoginAction = createAsyncThunk('user/fetchLoginAction', async (form: any, { dispatch }) => {
+  console.log('form', form)
+  const res = await loginApi(form)
+  LocalStorageService.set(TOKEN, res.token)
+  LocalStorageService.set(USER_INFO, res)
+
+  const { setToken, setUserInfo } = userSlice.actions
+  dispatch(setToken(res.token))
+  dispatch(setUserInfo(res))
+})
+
+export default userSlice.reducer

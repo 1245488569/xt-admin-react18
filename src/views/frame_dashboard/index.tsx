@@ -1,5 +1,5 @@
 import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
-import { changeMessageAction } from '@/store/modules/counter'
+import { setMessage } from '@/store/modules/counter'
 
 const FrameDashboard: React.FC = () => {
   console.log('FrameDashboard tsx')
@@ -14,7 +14,7 @@ const FrameDashboard: React.FC = () => {
 
   const dispatch = useAppDispatch()
   function handleChangeMessage() {
-    dispatch(changeMessageAction('Hello xt'))
+    dispatch(setMessage('Hello xt'))
   }
 
   return (

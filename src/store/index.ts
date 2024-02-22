@@ -3,11 +3,13 @@ import type { TypedUseSelectorHook } from 'react-redux'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import counterReducer from './modules/counter'
 import configReducer from './modules/config'
+import userReducer from './modules/user'
 
 const store = configureStore({
   reducer: {
     counter: counterReducer,
     config: configReducer,
+    user: userReducer,
   },
 })
 

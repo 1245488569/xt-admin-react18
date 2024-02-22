@@ -1,5 +1,5 @@
 import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
-import { changeDefaultLanguageAction, changeEnableDynamicTitleAction, changeEnableProgressAction } from '@/store/modules/config'
+import { setDefaultLanguage, setEnableDynamicTitle, setEnableProgress } from '@/store/modules/config'
 
 const Demo1: React.FC = () => {
   console.log('Demo1 tsx')
@@ -19,15 +19,15 @@ const Demo1: React.FC = () => {
 
   const dispatch = useAppDispatch()
   function handleChangeProgress() {
-    dispatch(changeEnableProgressAction(!enableProgress))
+    dispatch(setEnableProgress(!enableProgress))
   }
 
   function handleChangeDynamicTitle() {
-    dispatch(changeEnableDynamicTitleAction(!enableDynamicTitle))
+    dispatch(setEnableDynamicTitle(!enableDynamicTitle))
   }
 
   function handleChangeDefaultLanguage(value: Language) {
-    dispatch(changeDefaultLanguageAction(value))
+    dispatch(setDefaultLanguage(value))
     i18n.changeLanguage(value)
   }
 

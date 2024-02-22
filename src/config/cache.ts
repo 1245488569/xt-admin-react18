@@ -1,0 +1,7 @@
+export const STORAGE_PREFIX = 'xt-react-'
+export const TOKEN = 'token'
+export const USER_INFO = 'user-info'
+export const DEFAULT_LANGUAGE = 'default-language'
+export const Element_SIZE = 'element-size'
+export const COLOR_SCHEME = 'color-scheme'
+export const THEME = 'theme'

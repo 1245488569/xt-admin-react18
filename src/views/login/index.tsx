@@ -1,11 +1,16 @@
+import { useAppDispatch } from '@/store'
+import { fetchLoginAction } from '@/store/modules/user'
+
 const Login: React.FC = () => {
   interface FormProps {
     account: string
     password: string
   }
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
   function onFinish(values: FormProps) {
     console.log('Success:', values)
+    dispatch(fetchLoginAction(values))
   }
 
   return (

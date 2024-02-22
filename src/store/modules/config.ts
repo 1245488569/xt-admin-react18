@@ -11,19 +11,19 @@ const configSlice = createSlice({
   initialState,
   reducers: {
     // 开/关载入进度条
-    changeEnableProgressAction(state, { payload }: PayloadAction<boolean>) {
+    setEnableProgress(state, { payload }: PayloadAction<boolean>) {
       state.app.enableProgress = payload
     },
     // 开/关动态标题
-    changeEnableDynamicTitleAction(state, { payload }: PayloadAction<boolean>) {
+    setEnableDynamicTitle(state, { payload }: PayloadAction<boolean>) {
       state.app.enableDynamicTitle = payload
     },
     // 切换默认语言
-    changeDefaultLanguageAction(state, { payload }: PayloadAction<Language>) {
+    setDefaultLanguage(state, { payload }: PayloadAction<Language>) {
       state.defaultLanguage = payload
     },
   },
 })
 
-export const { changeEnableProgressAction, changeEnableDynamicTitleAction, changeDefaultLanguageAction } = configSlice.actions
+export const { setEnableProgress, setEnableDynamicTitle, setDefaultLanguage } = configSlice.actions
 export default configSlice.reducer

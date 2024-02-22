@@ -15,11 +15,11 @@ const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    changeMessageAction(state, { payload }: PayloadAction<string>) {
+    setMessage(state, { payload }: PayloadAction<string>) {
       state.message = payload
     },
   },
 })
 
-export const { changeMessageAction } = counterSlice.actions
+export const { setMessage } = counterSlice.actions
 export default counterSlice.reducer
