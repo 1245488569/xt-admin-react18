@@ -8,9 +8,16 @@ const Login: React.FC = () => {
   }
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const nav = useNavigate()
+  const [search] = useSearchParams()
+
   function onFinish(values: FormProps) {
     console.log('Success:', values)
-    dispatch(fetchLoginAction(values))
+    dispatch(fetchLoginAction(values)).then(() => {
+      nav(search.get('redirectPath') ?? '/', {
+        replace: true,
+      })
+    })
   }
 
   return (

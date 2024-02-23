@@ -23,7 +23,8 @@ service.interceptors.request.use((config) => {
 
 service.interceptors.response.use((response) => {
   if (response.data.code === 400401) {
-    // 过期的处理
+    window.location.hash = '/login'
+    return
   }
 
   return response.data

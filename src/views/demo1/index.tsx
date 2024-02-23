@@ -31,6 +31,9 @@ const Demo1: React.FC = () => {
     i18n.changeLanguage(value)
   }
 
+  const location = useLocation()
+  console.log(location)
+
   return (
     <div>
       <h2>

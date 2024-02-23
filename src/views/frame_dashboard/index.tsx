@@ -17,6 +17,15 @@ const FrameDashboard: React.FC = () => {
     dispatch(setMessage('Hello xt'))
   }
 
+  const nav = useNavigate()
+  function goDemo1() {
+    nav('/demo1', {
+      state: {
+        key: 'value',
+      },
+    })
+  }
+
   return (
     <div>
       <h2>
@@ -28,6 +37,10 @@ const FrameDashboard: React.FC = () => {
         {message}
       </h2>
       <Button onClick={handleChangeMessage}>修改message</Button>
+
+      <div>
+        <Button onClick={goDemo1}>前往demo1</Button>
+      </div>
     </div>
   )
 }
