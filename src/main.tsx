@@ -11,9 +11,9 @@ import '@/locales/index'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
   <Provider store={store}>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    {/* <HashRouter> */}
+    <App />
+    {/* </HashRouter> */}
   </Provider>,
   // </React.StrictMode>,
 )

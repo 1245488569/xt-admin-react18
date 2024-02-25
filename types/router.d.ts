@@ -1,3 +1,4 @@
+import 'react-router-dom'
 import type { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom'
 
 interface RouteMeta {
@@ -25,14 +26,21 @@ interface RouteMeta {
   isWhite?: boolean
 }
 
-interface CustomIndexRouteObject extends IndexRouteObject {
-  // children?: CustomRouteObject[]
-  meta?: RouteMeta
+declare module 'react-router-dom' {
+  interface IndexRouteObject {
+    meta?: RouteMeta
+    parentIndex?: number
+  }
+
+  interface NonIndexRouteObject {
+    meta?: RouteMeta
+    parentIndex?: number
+  }
 }
 
-interface CustomNonIndexRouteObject extends NonIndexRouteObject {
-  // children?: CustomRouteObject[]
-  meta?: RouteMeta
+export interface IPrivateRoutes {
+  title: string
+  icon: string
+  parentIndex?: number
+  children: CustomRouteObject[]
 }
-
-export type CustomRouteObject = CustomIndexRouteObject | CustomNonIndexRouteObject

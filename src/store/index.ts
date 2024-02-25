@@ -4,13 +4,19 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import counterReducer from './modules/counter'
 import configReducer from './modules/config'
 import userReducer from './modules/user'
+import permissionReducer from './modules/permission'
 
 const store = configureStore({
   reducer: {
     counter: counterReducer,
     config: configReducer,
     user: userReducer,
+    permission: permissionReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false, // 关闭序列化状态检测中间件
+    }),
 })
 
 type GetStateFnType = typeof store.getState

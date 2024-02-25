@@ -33,7 +33,6 @@ const userSlice = createSlice({
 })
 
 export const fetchLoginAction = createAsyncThunk('user/fetchLoginAction', async (form: any, { dispatch }) => {
-  console.log('form', form)
   const res = await loginApi(form)
   LocalStorageService.set(TOKEN, res.token)
   LocalStorageService.set(USER_INFO, res)

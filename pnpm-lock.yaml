@@ -23,6 +23,9 @@ dependencies:
   i18next:
     specifier: ^23.9.0
     version: 23.9.0
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   mockjs:
     specifier: ^1.1.0
     version: 1.1.0
@@ -64,6 +67,9 @@ devDependencies:
   '@svgr/plugin-jsx':
     specifier: ^8.1.0
     version: 8.1.0(@svgr/core@8.1.0)
+  '@types/lodash':
+    specifier: ^4.14.202
+    version: 4.14.202
   '@types/mockjs':
     specifier: ^1.0.10
     version: 1.0.10
@@ -1524,6 +1530,10 @@ packages:
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+    dev: true
+
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
   /@types/mdast@3.0.15:
