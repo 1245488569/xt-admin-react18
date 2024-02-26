@@ -1,13 +1,5 @@
-import { Suspense } from 'react'
-import { type RouteObject, RouterProvider, createHashRouter } from 'react-router-dom'
-import { cloneDeep } from 'lodash'
-import Loading from './views/Loading'
-import RouterGuard from './router/RouterGuard'
+import { RouterProvider, createHashRouter } from 'react-router-dom'
 import useAntdI18n from './hooks/useAntdI18n'
-import { shallowEqualApp, useAppDispatch, useAppSelector } from './store'
-import useSystemRouter from './hooks/useSystemRouter'
-
-import { setRoutes } from './store/modules/permission'
 import rootRoutes from './router'
 
 function App() {

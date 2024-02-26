@@ -1,5 +1,4 @@
-import { useAppDispatch } from '@/store'
-import { fetchLoginAction } from '@/store/modules/user'
+import { useUserStore } from '@/stores/user'
 
 export function Component() {
   interface FormProps {
@@ -7,13 +6,13 @@ export function Component() {
     password: string
   }
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const nav = useNavigate()
   const [search] = useSearchParams()
-
+  const { login } = useUserStore()
   function onFinish(values: FormProps) {
     console.log('Success:', values)
-    dispatch(fetchLoginAction(values)).then(() => {
+    login(values).then(() => {
       nav(search.get('redirectPath') ?? '/', {
         replace: true,
       })

@@ -1,20 +1,21 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 import { message } from 'antd'
-import store from '@/store'
+
+// import store from '@/store'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASEURL,
 })
 
 service.interceptors.request.use((config) => {
-  const defaultLanguage = store.getState().config.defaultLanguage
-  const token = store.getState().user.token
+  // const defaultLanguage = store.getState().config.defaultLanguage
+  // const token = store.getState().user.token
 
-  config.headers['Accept-Language'] = defaultLanguage
-  console.log('token', token)
+  // config.headers['Accept-Language'] = defaultLanguage
+  // console.log('token', token)
 
-  if (token)
-    config.headers.Authorization = token
+  // if (token)
+  //   config.headers.Authorization = token
 
   return config
 }, (error) => {

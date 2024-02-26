@@ -23,6 +23,9 @@ dependencies:
   i18next:
     specifier: ^23.9.0
     version: 23.9.0
+  immer:
+    specifier: ^10.0.3
+    version: 10.0.3
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -47,6 +50,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.21.3
     version: 6.21.3(react-dom@18.2.0)(react@18.2.0)
+  zustand:
+    specifier: ^4.5.1
+    version: 4.5.1(@types/react@18.2.48)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
   '@antfu/eslint-config':
@@ -7389,3 +7395,24 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zustand@4.5.1(@types/react@18.2.48)(immer@10.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-XlauQmH64xXSC1qGYNv00ODaQ3B+tNPoy22jv2diYiP4eoDKr9LA+Bh5Bc3gplTrFdb6JVI+N4kc1DZ/tbtfPg==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0.6'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.48
+      immer: 10.0.3
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false

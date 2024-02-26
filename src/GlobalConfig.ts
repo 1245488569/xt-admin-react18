@@ -1,10 +1,11 @@
-import { COLOR_SCHEME, DEFAULT_LANGUAGE, Element_SIZE, THEME } from './config/cache'
-import { LocalStorageService } from './utils/storage'
+// import { COLOR_SCHEME, DEFAULT_LANGUAGE, Element_SIZE, THEME } from './config/cache'
+// import { LocalStorageService } from './utils/storage'
 
 const sysGlobalConfig: IGlobalConfig = {
 
   // 默认语言. zhCn: 简体中文 zhTw: 繁体中文 en: 英文
-  defaultLanguage: LocalStorageService.get(DEFAULT_LANGUAGE) as Language ?? 'zhCn',
+  // defaultLanguage: LocalStorageService.get(DEFAULT_LANGUAGE) as Language ?? 'zhCn',
+  defaultLanguage: 'zhCn',
   /**
    * Element 组件尺寸
    * 这里有和主内容区默认文字大小关联
@@ -13,14 +14,14 @@ const sysGlobalConfig: IGlobalConfig = {
    * default 主内容区默认文字大小 14px
    * small 主内容区默认文字大小 12px
    */
-  elementSize: LocalStorageService.get(Element_SIZE) as ElementSize ?? 'default',
+  elementSize: 'default',
   /**
    * 颜色方案
    * '' 用户系统默认
    * light 明亮模式
    * dark 暗黑模式
    */
-  colorScheme: LocalStorageService.get(COLOR_SCHEME) as ColorScheme ?? 'light',
+  colorScheme: 'light',
   app: {
     /**
      * 是否开启权限功能
@@ -88,7 +89,7 @@ const sysGlobalConfig: IGlobalConfig = {
     enableNotification: false,
   },
   // 样式设置
-  theme: LocalStorageService.get(THEME) as IGlobalTheme ?? {
+  theme: {
     // --------------app----------------
     // 主区域背景色
     // mianContentBgColor: '#f5f5f5',
