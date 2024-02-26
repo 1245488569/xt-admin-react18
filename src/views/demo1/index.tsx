@@ -1,3 +1,4 @@
+import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
@@ -5,14 +6,21 @@ export function Component() {
 
   const { t, i18n } = useTranslation()
 
-  const { setEnableProgress, setEnableDynamicTitle, setDefaultLanguage, app, defaultLanguage } = useSysConfigStore()
+  const { enableProgress, enableDynamicTitle, defaultLanguage, setEnableProgress, setEnableDynamicTitle, setDefaultLanguage } = useSysConfigStore(useShallow(state => ({
+    enableProgress: state.app.enableProgress,
+    enableDynamicTitle: state.app.enableDynamicTitle,
+    defaultLanguage: state.defaultLanguage,
+    setEnableProgress: state.setEnableProgress,
+    setEnableDynamicTitle: state.setEnableDynamicTitle,
+    setDefaultLanguage: state.setDefaultLanguage,
+  })))
 
   function handleChangeProgress() {
-    setEnableProgress(!app.enableProgress)
+    setEnableProgress(!enableProgress)
   }
 
   function handleChangeDynamicTitle() {
-    setEnableDynamicTitle(!app.enableDynamicTitle)
+    setEnableDynamicTitle(!enableDynamicTitle)
   }
 
   function handleChangeDefaultLanguage(value: Language) {
@@ -24,7 +32,11 @@ export function Component() {
     <div>
       <h2>
         进度条状态:
-        {app.enableProgress.toString()}
+        {enableProgress.toString()}
+      </h2>
+      <h2>
+        动态标题状态:
+        {enableDynamicTitle.toString()}
       </h2>
 
       <Button onClick={handleChangeProgress}>开/关载入进度条</Button>

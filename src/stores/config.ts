@@ -12,26 +12,28 @@ interface IActions {
 }
 
 export const useSysConfigStore = create<IGlobalConfig & IActions>()(
-  persist(set => ({
-    ...sysGlobalConfig,
-    setEnableProgress: (payload: boolean) => {
-      // 深层数据使用produce 并且不能省略 {}
-      set(produce((state: IGlobalConfig) => {
-        state.app.enableProgress = payload
-      }))
-    },
-    setEnableDynamicTitle: (payload: boolean) => {
-      set(produce((state: IGlobalConfig) => {
-        state.app.enableDynamicTitle = payload
-      }))
-    },
-    setDefaultLanguage: (payload: Language) => {
-      set(produce((state: IGlobalConfig) => {
-        state.defaultLanguage = payload
-      }))
-    },
-  }), {
-    name: `${STORAGE_PREFIX}${SYS_CONFIG}`,
-    partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme, theme: state.theme }),
-  }),
+  immer(
+    persist(set => ({
+      ...sysGlobalConfig,
+      setEnableProgress: (payload: boolean) => {
+        // 深层数据使用produce 并且不能省略 {}
+        set(produce((state: IGlobalConfig) => {
+          state.app.enableProgress = payload
+        }))
+      },
+      setEnableDynamicTitle: (payload: boolean) => {
+        set(produce((state: IGlobalConfig) => {
+          state.app.enableDynamicTitle = payload
+        }))
+      },
+      setDefaultLanguage: (payload: Language) => {
+        set((state) => {
+          state.defaultLanguage = payload
+        })
+      },
+    }), {
+      name: `${STORAGE_PREFIX}${SYS_CONFIG}`,
+      partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme, theme: state.theme }),
+    }),
+  ),
 )

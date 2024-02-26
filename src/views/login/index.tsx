@@ -1,17 +1,20 @@
+import { useShallow } from 'zustand/react/shallow'
 import { useUserStore } from '@/stores/user'
 
 export function Component() {
+  console.log('login tsx')
+
   interface FormProps {
     account: string
     password: string
   }
   const { t } = useTranslation()
-  // const dispatch = useAppDispatch()
   const nav = useNavigate()
   const [search] = useSearchParams()
-  const { login } = useUserStore()
+  const { login } = useUserStore(useShallow(state => ({
+    login: state.login,
+  })))
   function onFinish(values: FormProps) {
-    console.log('Success:', values)
     login(values).then(() => {
       nav(search.get('redirectPath') ?? '/', {
         replace: true,

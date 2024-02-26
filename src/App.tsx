@@ -1,6 +1,6 @@
 import { RouterProvider, createHashRouter } from 'react-router-dom'
-import useAntdI18n from './hooks/useAntdI18n'
 import rootRoutes from './router'
+import useAntdI18n from './hooks/useAntdI18n'
 
 function App() {
   console.log('App tsx')

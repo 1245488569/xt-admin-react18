@@ -1,8 +1,9 @@
 import type { RouteObject } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
+import { useShallow } from 'zustand/react/shallow'
 import rootRoutes from '@/router'
 import privateRoutes from '@/router/private'
-import { shallowEqualApp, useAppSelector } from '@/store'
+import { useSysConfigStore } from '@/stores/config'
 
 function addPrivateChildrenIndex(privateChildrenRoutes: RouteObject[], parentIndex: number) {
   privateChildrenRoutes.forEach((item) => {
@@ -27,12 +28,9 @@ function allPrivateChildrenRoutes() {
 }
 
 export default function useSystemRouter() {
-  const { enablePermission } = useAppSelector(
-    state => ({
-      enablePermission: state.config.app.enablePermission,
-    }),
-    shallowEqualApp,
-  )
+  const { enablePermission } = useSysConfigStore(useShallow(state => ({
+    enablePermission: state.app.enablePermission,
+  })))
 
   function filterPermissionsRoutes(): Promise<RouteObject[]> {
     return new Promise((resolve) => {
