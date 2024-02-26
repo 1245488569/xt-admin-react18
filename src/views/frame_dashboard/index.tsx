@@ -1,7 +1,7 @@
 import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
 import { setMessage } from '@/store/modules/counter'
 
-const FrameDashboard: React.FC = () => {
+export function Component() {
   console.log('FrameDashboard tsx')
 
   const { count, message } = useAppSelector(
@@ -44,5 +44,3 @@ const FrameDashboard: React.FC = () => {
     </div>
   )
 }
-
-export default FrameDashboard

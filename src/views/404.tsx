@@ -1,4 +1,4 @@
-const NotFound: React.FC = () => {
+export function Component() {
   console.log('NotFound tsx')
   const { t } = useTranslation()
 
@@ -23,5 +23,3 @@ const NotFound: React.FC = () => {
     </div>
   )
 }
-
-export default NotFound

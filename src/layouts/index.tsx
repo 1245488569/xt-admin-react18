@@ -4,7 +4,7 @@ import RouterGuard from '@/router/RouterGuard'
 import { shallowEqualApp, useAppSelector } from '@/store'
 import { searchRoute } from '@/utils/router'
 
-const Layout: React.FC = () => {
+export function Component() {
   console.log('Layout tsx')
 
   // const { t } = useTranslation()
@@ -33,7 +33,6 @@ const Layout: React.FC = () => {
   return (
     <div>
       <div className="bg-red-500">top</div>
-      <RouterGuard />
       <Suspense fallback={<div>loading</div>}>
 
         <Outlet />
@@ -42,5 +41,3 @@ const Layout: React.FC = () => {
     </div>
   )
 }
-
-export default Layout

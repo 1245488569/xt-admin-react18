@@ -1,7 +1,7 @@
 import { shallowEqualApp, useAppDispatch, useAppSelector } from '@/store'
 import { setDefaultLanguage, setEnableDynamicTitle, setEnableProgress } from '@/store/modules/config'
 
-const Demo1: React.FC = () => {
+export function Component() {
   console.log('Demo1 tsx')
 
   const { t, i18n } = useTranslation()
@@ -30,9 +30,6 @@ const Demo1: React.FC = () => {
     dispatch(setDefaultLanguage(value))
     i18n.changeLanguage(value)
   }
-
-  const location = useLocation()
-  console.log(location)
 
   return (
     <div>
@@ -65,5 +62,3 @@ const Demo1: React.FC = () => {
     </div>
   )
 }
-
-export default Demo1

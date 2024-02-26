@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/store'
 import { fetchLoginAction } from '@/store/modules/user'
 
-const Login: React.FC = () => {
+export function Component() {
   interface FormProps {
     account: string
     password: string
@@ -63,5 +63,3 @@ const Login: React.FC = () => {
     </section>
   )
 }
-
-export default Login

@@ -52,11 +52,7 @@ function App() {
 
   return (
     <ConfigProvider locale={locale}>
-
-      <Suspense fallback={<div>loading</div>}>
-        <RouterProvider router={createHashRouter(rootRoutes)} />
-      </Suspense>
-
+      <RouterProvider router={createHashRouter(rootRoutes)} />
     </ConfigProvider>
 
   )
