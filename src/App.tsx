@@ -7,41 +7,6 @@ function App() {
 
   const locale = useAntdI18n()
 
-  // const [allRoutes, setAllRoutes] = useState<RouteObject[]>([])
-  // console.log('routes', allRoutes)
-
-  // const { storeRoutes } = useAppSelector(
-  //   state => ({
-  //     storeRoutes: state.permission.routes,
-  //   }),
-  //   shallowEqualApp,
-  // )
-  // const { filterPermissionsRoutes } = useSystemRouter()
-  // const dispatch = useAppDispatch()
-  // useEffect(() => {
-  //   if (!allRoutes.length && !storeRoutes.length) {
-  //     (
-  //       async () => {
-  //         const res = await filterPermissionsRoutes()
-  //         console.log('filterPermissionsRoutes res', res)
-  //         setAllRoutes(res)
-  //         // 递归删除res中的element属性 返回新的数组
-  //         const routes = cloneDeep(res)
-  //         routes.forEach((route) => {
-  //           delete route.element
-  //           if (route.children) {
-  //             route.children = route.children.map((child) => {
-  //               delete child.element
-  //               return child
-  //             })
-  //           }
-  //         })
-  //         dispatch(setRoutes(routes))
-  //       }
-  //     )()
-  //   }
-  // }, [allRoutes.length, dispatch, filterPermissionsRoutes, storeRoutes.length])
-
   return (
     <ConfigProvider locale={locale}>
       <RouterProvider router={createHashRouter(rootRoutes)} />

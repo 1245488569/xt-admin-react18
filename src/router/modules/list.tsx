@@ -1,11 +1,10 @@
 import type { RouteObject } from 'react-router-dom'
 
-const Layout = lazy(() => import('@/layouts'))
 const UserList = lazy(() => import('@/views/list/user'))
 const UserDetail = lazy(() => import('@/views/list/user/detail'))
 
 export default {
-  element: <Layout />,
+  lazy: () => import('@/layouts'),
   meta: {
     title: 'route.list.root',
   },
