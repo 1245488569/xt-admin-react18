@@ -1,12 +1,14 @@
 import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
 
-export function Component() {
+const FrameDashboard: React.FC = () => {
   console.log('FrameDashboard tsx')
+
   const nav = useNavigate()
   const { defaultLanguage } = useSysConfigStore(useShallow(state => ({
     defaultLanguage: state.defaultLanguage,
   })))
+
   function goDemo1() {
     nav('/demo1', {
       state: {
@@ -24,3 +26,5 @@ export function Component() {
     </div>
   )
 }
+
+export default FrameDashboard

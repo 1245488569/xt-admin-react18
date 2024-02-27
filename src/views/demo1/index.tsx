@@ -1,7 +1,7 @@
 import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
 
-export function Component() {
+const Demo1: React.FC = () => {
   console.log('Demo1 tsx')
 
   const { t, i18n } = useTranslation()
@@ -59,3 +59,5 @@ export function Component() {
     </div>
   )
 }
+
+export default memo(Demo1)

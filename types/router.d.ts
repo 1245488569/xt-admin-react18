@@ -1,7 +1,7 @@
 import 'react-router-dom'
 import type { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom'
 
-interface RouteMeta {
+export interface RouteMeta {
   // 标题
   title?: string
   // 菜单图标

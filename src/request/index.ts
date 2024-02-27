@@ -1,27 +1,19 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 import { message } from 'antd'
-import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
 import { useUserStore } from '@/stores/user'
-
-// import store from '@/store'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASEURL,
 })
 
 service.interceptors.request.use((config) => {
-  // const { defaultLanguage } = useSysConfigStore(useShallow(state => ({
-  //   defaultLanguage: state.defaultLanguage,
-  // })))
-  // const { token } = useUserStore(useShallow(state => ({
-  //   token: state.token,
-  // })))
-  // config.headers['Accept-Language'] = defaultLanguage
-  // console.log('token', token)
+  const defaultLanguage = useSysConfigStore.getState().defaultLanguage
+  const token = useUserStore.getState().token
+  config.headers['Accept-Language'] = defaultLanguage
 
-  // if (token)
-  //   config.headers.Authorization = token
+  if (token)
+    config.headers.Authorization = token
 
   return config
 }, (error) => {

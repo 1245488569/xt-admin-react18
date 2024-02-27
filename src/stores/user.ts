@@ -20,7 +20,7 @@ export const useUserStore = create<IState & IActions>()(
       token: '',
       userInfo: {},
       permissions: [],
-      login: async (form: any) => {
+      login: async (form) => {
         const res = await loginApi(form)
         set((state) => {
           state.token = res.token

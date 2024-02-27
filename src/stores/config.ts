@@ -15,18 +15,18 @@ export const useSysConfigStore = create<IGlobalConfig & IActions>()(
   immer(
     persist(set => ({
       ...sysGlobalConfig,
-      setEnableProgress: (payload: boolean) => {
+      setEnableProgress: (payload) => {
         // 深层数据使用produce 并且不能省略 {}
         set(produce((state: IGlobalConfig) => {
           state.app.enableProgress = payload
         }))
       },
-      setEnableDynamicTitle: (payload: boolean) => {
+      setEnableDynamicTitle: (payload) => {
         set(produce((state: IGlobalConfig) => {
           state.app.enableDynamicTitle = payload
         }))
       },
-      setDefaultLanguage: (payload: Language) => {
+      setDefaultLanguage: (payload) => {
         set((state) => {
           state.defaultLanguage = payload
         })
