@@ -1,4 +1,4 @@
-import type { RouteObject } from 'react-router-dom'
+import { type RouteObject, createHashRouter } from 'react-router-dom'
 import { Suspense } from 'react'
 import DemoLoader from './DemoLoader'
 

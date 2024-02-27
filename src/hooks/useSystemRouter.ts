@@ -26,20 +26,27 @@ function allPrivateChildrenRoutes() {
 }
 
 export default function useSystemRouter() {
-  function filterPermissionsRoutes(): Promise<RouteObject[]> {
-    console.log('1111111111111111')
+  function filterPermissionsRoutes(): RouteObject[] {
+    // return new Promise((resolve) => {
+    //   let routes: RouteObject[] = []
+    //   if (useSysConfigStore.getState().app.enablePermission) {
+    //     // 开启权限功能
+    //   }
+    //   else {
+    //     routes = [...allPrivateChildrenRoutes()]
+    //   }
 
-    return new Promise((resolve) => {
-      let routes: RouteObject[] = []
-      if (useSysConfigStore.getState().app.enablePermission) {
-        // 开启权限功能
-      }
-      else {
-        routes = [...allPrivateChildrenRoutes()]
-      }
+    //   resolve(routes)
+    // })
 
-      resolve(routes)
-    })
+    let routes: RouteObject[] = []
+    if (useSysConfigStore.getState().app.enablePermission) {
+      // 开启权限功能
+    }
+    else {
+      routes = [...allPrivateChildrenRoutes()]
+    }
+    return routes
   }
 
   return {

@@ -6,6 +6,7 @@ import { searchRouteMeta } from './utils/router'
 import { useSysConfigStore } from './stores/config'
 import { useUserStore } from './stores/user'
 import { usePermissionrStore } from './stores/permission'
+import useSystemRouter from './hooks/useSystemRouter'
 
 const Root: React.FC = () => {
   console.log('Root tsx')
@@ -29,11 +30,14 @@ const Root: React.FC = () => {
   if (useSysConfigStore.getState().app.enableDynamicTitle && curRouteMeta?.title)
     document.title = t(curRouteMeta.title)
 
+  // const { filterPermissionsRoutes } = useSystemRouter()
   if (useUserStore.getState().token) {
     if (!usePermissionrStore.getState().routes.length) {
       // TODO
-      // const { filterPermissionsRoutes } = useSystemRouter()
-      // const res = await filterPermissionsRoutes()
+      // const res = filterPermissionsRoutes()
+
+      // console.log('Root tsx filterPermissionsRoutes', res)
+      // usePermissionrStore.setState({ routes: res })
       return <Outlet />
     }
     else {
