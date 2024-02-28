@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { persist } from 'zustand/middleware'
+import { persist, subscribeWithSelector } from 'zustand/middleware'
 import { produce } from 'immer'
 import sysGlobalConfig from '@/GlobalConfig'
 import { STORAGE_PREFIX, SYS_CONFIG } from '@/config/cache'
@@ -13,27 +13,29 @@ interface IActions {
 
 export const useSysConfigStore = create<IGlobalConfig & IActions>()(
   immer(
-    persist(set => ({
-      ...sysGlobalConfig,
-      setEnableProgress: (payload) => {
-        // 深层数据使用produce 并且不能省略 {}
-        set(produce((state: IGlobalConfig) => {
-          state.app.enableProgress = payload
-        }))
-      },
-      setEnableDynamicTitle: (payload) => {
-        set(produce((state: IGlobalConfig) => {
-          state.app.enableDynamicTitle = payload
-        }))
-      },
-      setDefaultLanguage: (payload) => {
-        set((state) => {
-          state.defaultLanguage = payload
-        })
-      },
-    }), {
-      name: `${STORAGE_PREFIX}${SYS_CONFIG}`,
-      partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme, theme: state.theme }),
-    }),
+    subscribeWithSelector(
+      persist(set => ({
+        ...sysGlobalConfig,
+        setEnableProgress: (payload) => {
+          // 深层数据使用produce 并且不能省略 {}
+          set(produce((state: IGlobalConfig) => {
+            state.app.enableProgress = payload
+          }))
+        },
+        setEnableDynamicTitle: (payload) => {
+          set(produce((state: IGlobalConfig) => {
+            state.app.enableDynamicTitle = payload
+          }))
+        },
+        setDefaultLanguage: (payload) => {
+          set((state) => {
+            state.defaultLanguage = payload
+          })
+        },
+      }), {
+        name: `${STORAGE_PREFIX}${SYS_CONFIG}`,
+        partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme, theme: state.theme }),
+      }),
+    ),
   ),
 )

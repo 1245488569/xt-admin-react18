@@ -1,10 +1,16 @@
 import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
 
-const Demo1: React.FC = () => {
+// const Demo1: React.FC = () => {
+
+// }
+
+// export default Demo1
+
+export function Component() {
   console.log('Demo1 tsx')
 
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { enableProgress, enableDynamicTitle, defaultLanguage, setEnableProgress, setEnableDynamicTitle, setDefaultLanguage } = useSysConfigStore(useShallow(state => ({
     enableProgress: state.app.enableProgress,
@@ -25,7 +31,6 @@ const Demo1: React.FC = () => {
 
   function handleChangeDefaultLanguage(value: Language) {
     setDefaultLanguage(value)
-    i18n.changeLanguage(value)
   }
 
   return (
@@ -59,5 +64,3 @@ const Demo1: React.FC = () => {
     </div>
   )
 }
-
-export default memo(Demo1)

@@ -2,12 +2,12 @@ import { type RouteObject, createHashRouter } from 'react-router-dom'
 import { Suspense } from 'react'
 import DemoLoader from './DemoLoader'
 
-import Root from '@/Root'
-import Layout from '@/layouts'
+// import Root from '@/Root'
+// import Layout from '@/layouts'
 
 const Login = lazy(() => import('@/views/login'))
 const FrameDashboard = lazy(() => import('@/views/frame_dashboard'))
-const Demo1 = lazy(() => import('@/views/demo1'))
+// const Demo1 = lazy(() => import('@/views/demo1'))
 const Demo2 = lazy(() => import('@/views/demo2'))
 const Error404 = lazy(() => import('@/views/404'))
 const Error403 = lazy(() => import('@/views/403'))
@@ -24,7 +24,7 @@ export const rootRoutes: RouteObject[] = [
   {
     // lazy: () => import('@/Root'),
     id: 'root',
-    element: <Root />,
+    // element: <Root />,
     // loader: DemoLoader,
     children: [
       {
@@ -36,9 +36,9 @@ export const rootRoutes: RouteObject[] = [
         },
       },
       {
-        // lazy: () => import('@/layouts'),
+        lazy: () => import('@/layouts'),
         id: 'layout',
-        element: <Layout />,
+        // element: <Layout />,
         loader: DemoLoader,
         children: [
           {
@@ -52,8 +52,8 @@ export const rootRoutes: RouteObject[] = [
           },
           {
             path: '/demo1',
-            // lazy: () => import('@/views/demo1'),
-            element: <Suspense><Demo1 /></Suspense>,
+            lazy: () => import('@/views/demo1'),
+            // element: <Suspense><Demo1 /></Suspense>,
             meta: {
               title: 'route.personal',
               // isWhite: true,

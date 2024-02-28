@@ -1,6 +1,6 @@
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { useLoaderData, useNavigation, useRouteLoaderData } from 'react-router-dom'
+import { useNavigation, useRouteLoaderData } from 'react-router-dom'
 import { rootRoutes } from './router'
 import { searchRouteMeta } from './utils/router'
 import { useSysConfigStore } from './stores/config'

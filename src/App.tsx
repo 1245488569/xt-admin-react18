@@ -1,36 +1,44 @@
 import { RouterProvider } from 'react-router-dom'
-import useAntdI18n from './hooks/useAntdI18n'
+import zhCN from 'antd/locale/zh_CN'
+import enUS from 'antd/locale/en_US'
+import zhTW from 'antd/locale/zh_TW'
+import { shallow } from 'zustand/shallow'
+import { useSysConfigStore } from './stores/config'
 import router from './router'
+import Loading from './views/Loading'
 
 function App() {
   console.log('App tsx')
 
-  const locale = useAntdI18n()
+  const { i18n } = useTranslation()
 
-  // useEffect(() => {
-  //   const cancelSub = usePermissionrStore.subscribe(
-  //     state => state.routes,
-  //     (routes) => {
-  //       console.log('App tsx usePermissionrStore.subscribe', routes)
-  //       // setR((draft) => {
-  //       //   draft[0].children?.push({
-  //       //     path: '/demo3',
-  //       //     element: <Suspense><Demo2 /></Suspense>,
-  //       //   })
-  //       // })
-  //     },
-  //     {
-  //       // equalityFn: shallow,
-  //       fireImmediately: true,
-  //     },
-  //   )
+  const [locale, setLocale] = useState(zhCN)
+  const [loading, setLoading] = useState(true)
 
-  //   return () => cancelSub()
-  // }, [])
+  useEffect(() => {
+    const cancelSub = useSysConfigStore.subscribe(
+      state => state.defaultLanguage,
+      (language) => {
+        console.log('App tsx language', language)
+        setLocale(language === 'zhCn' ? zhCN : language === 'zhTw' ? zhTW : enUS)
+        i18n.changeLanguage(language)
+        setLoading(false)
+      },
+      {
+        equalityFn: shallow,
+        fireImmediately: true,
+      },
+    )
+
+    return () => cancelSub()
+  }, [i18n])
+
+  if (loading)
+    return 'loading...'
 
   return (
     <ConfigProvider locale={locale}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} fallbackElement={<Loading />} />
     </ConfigProvider>
 
   )

@@ -1,4 +1,4 @@
-const Layout: React.FC = () => {
+export function Component() {
   console.log('Layout tsx')
 
   return (
@@ -10,5 +10,3 @@ const Layout: React.FC = () => {
     </div>
   )
 }
-
-export default Layout
