@@ -1,6 +1,10 @@
-export function Component() {
-  console.log('NotFound tsx')
+const Error404: React.FC = () => {
+  console.log('Error404 tsx')
   const { t } = useTranslation()
+  const navigate = useNavigate()
+  function goHome() {
+    navigate('/', { replace: true })
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center from-purple-300 to-blue-200 bg-gradient-to-r">
@@ -15,7 +19,7 @@ export function Component() {
           {t('notfound.desc')}
         </div>
         <div>
-          <button className="rounded-md from-purple-400 to-blue-500 bg-gradient-to-r px-6 py-3 font-semibold hover:from-pink-500 hover:to-orange-500">
+          <button className="rounded-md from-purple-400 to-blue-500 bg-gradient-to-r px-6 py-3 font-semibold hover:from-pink-500 hover:to-orange-500" onClick={goHome}>
             {t('notfound.back')}
           </button>
         </div>
@@ -23,3 +27,5 @@ export function Component() {
     </div>
   )
 }
+
+export default Error404

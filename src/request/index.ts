@@ -34,7 +34,6 @@ service.interceptors.response.use((response) => {
 function request<T = any>(config: AxiosRequestConfig<T>): Promise<T> {
   return new Promise((resolve, reject) => {
     service.request<any, T>(config).then((res: any) => {
-      console.log('res', res)
       if (res.code !== 200) {
         message.error(res.message)
         return reject(res)

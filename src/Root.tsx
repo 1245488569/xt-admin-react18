@@ -1,12 +1,10 @@
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { useNavigation } from 'react-router-dom'
-import rootRoutes from './router'
+import { useLoaderData, useNavigation, useRouteLoaderData } from 'react-router-dom'
+import { rootRoutes } from './router'
 import { searchRouteMeta } from './utils/router'
 import { useSysConfigStore } from './stores/config'
 import { useUserStore } from './stores/user'
-import { usePermissionrStore } from './stores/permission'
-import useSystemRouter from './hooks/useSystemRouter'
 
 const Root: React.FC = () => {
   console.log('Root tsx')
@@ -30,14 +28,20 @@ const Root: React.FC = () => {
   if (useSysConfigStore.getState().app.enableDynamicTitle && curRouteMeta?.title)
     document.title = t(curRouteMeta.title)
 
-  // const { filterPermissionsRoutes } = useSystemRouter()
-  if (useUserStore.getState().token) {
-    if (!usePermissionrStore.getState().routes.length) {
-      // TODO
-      // const res = filterPermissionsRoutes()
+  const permissions = useRouteLoaderData('layout') as string[]
+  console.log('Root tsx permissions', permissions)
 
-      // console.log('Root tsx filterPermissionsRoutes', res)
-      // usePermissionrStore.setState({ routes: res })
+  if (useUserStore.getState().token) {
+    if (useSysConfigStore.getState().app.enablePermission) {
+      if (curRouteMeta?.auth) {
+        if (typeof curRouteMeta.auth === 'string' && !permissions.includes(curRouteMeta.auth))
+          return <Navigate to="/403" replace />
+
+        else if (Array.isArray(curRouteMeta.auth) && !curRouteMeta.auth.some(v => permissions.includes(v)))
+          return <Navigate to="/403" replace />
+        else
+          return <Outlet />
+      }
       return <Outlet />
     }
     else {

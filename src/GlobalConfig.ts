@@ -26,15 +26,7 @@ const sysGlobalConfig: IGlobalConfig = {
     /**
      * 是否开启权限功能
      */
-    enablePermission: false,
-    /**
-     * 路由模式（请设置enablePermission为true）
-     * frontend 前端
-     * backend 后端（个人认为路由后端生成是个不怎么有必要的需求，所以并不推荐）
-     * 后端路由：一般是你需要随时对菜单改名字，或者随时调整菜单顺序且不希望前端发包，只需修改数据库的时候才会用
-     * 后端路由使用方式本框架就算你使用后端路由，你依然需要在前端先添加路由数据，且后端返回数据中必须有name且与你写的路由的name一致，其他的参数无所谓。（具体看moke数据）
-     */
-    routeMode: 'frontend',
+    enablePermission: true,
     // 是否开启载入进度条
     enableProgress: true,
     // 是否开启动态标题

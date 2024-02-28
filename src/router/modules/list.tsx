@@ -1,26 +1,25 @@
+import { Suspense } from 'react'
 import type { RouteObject } from 'react-router-dom'
-import Layout from '@/layouts'
 
 const UserList = lazy(() => import('@/views/list/user'))
 const UserDetail = lazy(() => import('@/views/list/user/detail'))
 
 export default {
-  element: <Layout />,
   meta: {
     title: 'route.list.root',
   },
   children: [
     {
       path: '/list/user',
-      element: <UserList />,
+      element: <Suspense><UserList /></Suspense>,
       meta: {
         title: 'route.list.page1',
-        auth: 'user.read',
+        auth: 'user.read1',
       },
     },
     {
       path: '/list/user/detail',
-      element: <UserDetail />,
+      element: <Suspense><UserDetail /></Suspense>,
       meta: {
         title: 'route.list.detail1',
         hideInMenu: true,
