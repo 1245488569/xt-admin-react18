@@ -4,8 +4,10 @@ import enUS from 'antd/locale/en_US'
 import zhTW from 'antd/locale/zh_TW'
 import { shallow } from 'zustand/shallow'
 import { Fragment } from 'react'
+import { App as AntdApp } from 'antd'
 import { useSysConfigStore } from './stores/config'
 import router from './router'
+import AntdGlobal from './utils/AntdGlobal'
 
 function App() {
   console.log('App tsx')
@@ -34,12 +36,15 @@ function App() {
   }, [i18n])
 
   if (loading)
-    return 'loading...'
+    return <div>loading...</div>
 
   return (
     <ConfigProvider locale={locale}>
-      {/* fallbackElement 防止闪屏 */}
-      <RouterProvider router={router} fallbackElement={<Fragment />} />
+      <AntdApp>
+        <AntdGlobal />
+        {/* fallbackElement 防止闪屏 */}
+        <RouterProvider router={router} fallbackElement={<Fragment />} />
+      </AntdApp>
     </ConfigProvider>
 
   )

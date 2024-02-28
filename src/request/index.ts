@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig } from 'axios'
-import { message } from 'antd'
+import { message } from '@/utils/AntdGlobal'
 import { useSysConfigStore } from '@/stores/config'
 import { useUserStore } from '@/stores/user'
 

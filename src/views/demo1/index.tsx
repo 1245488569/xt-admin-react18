@@ -1,13 +1,15 @@
 import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
-
-// const Demo1: React.FC = () => {
-
-// }
-
-// export default Demo1
+import { tableListApi } from '@/api/test'
 
 export function Component() {
+  useEffect(() => {
+    tableListApi({
+      current: 1,
+      pageSize: 10,
+    })
+  }, [])
+
   console.log('Demo1 tsx')
 
   const { t } = useTranslation()
