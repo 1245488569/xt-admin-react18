@@ -1,12 +1,13 @@
 import { type RouteObject, createHashRouter } from 'react-router-dom'
 import { Suspense } from 'react'
-import DemoLoader from './DemoLoader'
+import LayoutLoader from './LayoutLoader'
+import Root from '@/Root'
 
 // import Root from '@/Root'
 // import Layout from '@/layouts'
 
 const Login = lazy(() => import('@/views/login'))
-const FrameDashboard = lazy(() => import('@/views/frame_dashboard'))
+// const FrameDashboard = lazy(() => import('@/views/frame_dashboard'))
 // const Demo1 = lazy(() => import('@/views/demo1'))
 const Demo2 = lazy(() => import('@/views/demo2'))
 const Error404 = lazy(() => import('@/views/404'))
@@ -24,8 +25,7 @@ export const rootRoutes: RouteObject[] = [
   {
     // lazy: () => import('@/Root'),
     id: 'root',
-    // element: <Root />,
-    // loader: DemoLoader,
+    element: <Root />,
     children: [
       {
         path: '/login',
@@ -39,12 +39,12 @@ export const rootRoutes: RouteObject[] = [
         lazy: () => import('@/layouts'),
         id: 'layout',
         // element: <Layout />,
-        loader: DemoLoader,
+        loader: LayoutLoader,
         children: [
           {
             path: '/',
-            // lazy: () => import('@/views/frame_dashboard'),
-            element: <Suspense><FrameDashboard /></Suspense>,
+            lazy: () => import('@/views/frame_dashboard'),
+            // element: <Suspense><FrameDashboard /></Suspense>,
             meta: {
               title: 'route.dashboard',
               icon: 'ri:home-heart-fill',

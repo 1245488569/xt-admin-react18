@@ -3,9 +3,9 @@ import zhCN from 'antd/locale/zh_CN'
 import enUS from 'antd/locale/en_US'
 import zhTW from 'antd/locale/zh_TW'
 import { shallow } from 'zustand/shallow'
+import { Fragment } from 'react'
 import { useSysConfigStore } from './stores/config'
 import router from './router'
-import Loading from './views/Loading'
 
 function App() {
   console.log('App tsx')
@@ -38,7 +38,8 @@ function App() {
 
   return (
     <ConfigProvider locale={locale}>
-      <RouterProvider router={router} fallbackElement={<Loading />} />
+      {/* fallbackElement 防止闪屏 */}
+      <RouterProvider router={router} fallbackElement={<Fragment />} />
     </ConfigProvider>
 
   )

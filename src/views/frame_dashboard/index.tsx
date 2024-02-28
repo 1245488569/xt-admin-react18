@@ -1,7 +1,7 @@
 import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from '@/stores/config'
 
-const FrameDashboard: React.FC = () => {
+export function Component() {
   console.log('FrameDashboard tsx')
 
   const nav = useNavigate()
@@ -26,5 +26,3 @@ const FrameDashboard: React.FC = () => {
     </div>
   )
 }
-
-export default FrameDashboard
