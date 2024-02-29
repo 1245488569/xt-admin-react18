@@ -5,6 +5,7 @@ import { rootRoutes } from './router'
 import { searchRouteMeta } from './utils/router'
 import { useSysConfigStore } from './stores/config'
 import { useUserStore } from './stores/user'
+import type { ILayoutLoader } from './types/common'
 
 const Root: React.FC = () => {
   console.log('Root tsx')
@@ -28,7 +29,7 @@ const Root: React.FC = () => {
   if (useSysConfigStore.getState().app.enableDynamicTitle && curRouteMeta?.title)
     document.title = t(curRouteMeta.title)
 
-  const permissions = useRouteLoaderData('layout') as string[]
+  const { permissions } = useRouteLoaderData('layout') as ILayoutLoader
   console.log('Root tsx permissions', permissions)
 
   if (useUserStore.getState().token) {

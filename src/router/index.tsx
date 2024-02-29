@@ -1,5 +1,6 @@
 import { type RouteObject, createHashRouter } from 'react-router-dom'
 import LayoutLoader from './LayoutLoader'
+import privateRoutes from './private'
 import Root from '@/Root'
 
 // import Layout from '@/layouts'
@@ -11,12 +12,12 @@ import Root from '@/Root'
 // const Error404 = lazy(() => import('@/views/404'))
 // const Error403 = lazy(() => import('@/views/403'))
 
-const importRoutesData = import.meta.glob('./modules/*.tsx', { eager: true })
+// const importRoutesData = import.meta.glob('./modules/*.tsx', { eager: true })
 
-export const privateRoutes: RouteObject[] = []
-Object.keys(importRoutesData).forEach((v) => {
-  privateRoutes.push((importRoutesData[v] as any).default)
-})
+// export const privateRoutes: RouteObject[] = []
+// Object.keys(importRoutesData).forEach((v) => {
+//   privateRoutes.push((importRoutesData[v] as any).default)
+// })
 console.log('privateRoutes', privateRoutes)
 
 export const rootRoutes: RouteObject[] = [
@@ -34,8 +35,8 @@ export const rootRoutes: RouteObject[] = [
         },
       },
       {
-        lazy: () => import('@/layouts'),
         id: 'layout',
+        lazy: () => import('@/layouts'),
         // element: <Layout />,
         loader: LayoutLoader,
         children: [

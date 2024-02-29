@@ -2,6 +2,7 @@ import axios, { type AxiosRequestConfig } from 'axios'
 import { message } from '@/utils/AntdGlobal'
 import { useSysConfigStore } from '@/stores/config'
 import { useUserStore } from '@/stores/user'
+import router from '@/router'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASEURL,
@@ -22,7 +23,8 @@ service.interceptors.request.use((config) => {
 
 service.interceptors.response.use((response) => {
   if (response.data.code === 400401) {
-    window.location.hash = '/login'
+    useUserStore.setState({ token: '' })
+    router.navigate('/login', { replace: true })
     return
   }
 
