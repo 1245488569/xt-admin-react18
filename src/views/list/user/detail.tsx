@@ -1,5 +1,3 @@
-const UserDetail: React.FC = () => {
+export function Component() {
   return <div>UserDetail</div>
 }
-
-export default UserDetail

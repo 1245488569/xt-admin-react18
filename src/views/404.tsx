@@ -1,4 +1,4 @@
-const Error404: React.FC = () => {
+export function Component() {
   console.log('Error404 tsx')
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -27,5 +27,3 @@ const Error404: React.FC = () => {
     </div>
   )
 }
-
-export default Error404

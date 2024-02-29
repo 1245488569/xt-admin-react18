@@ -1,8 +1,4 @@
-interface IProps {
-  children?: React.ReactNode
-}
-
-const Error403: React.FC<IProps> = () => {
+export function Component() {
   const navigate = useNavigate()
   function goHome() {
     navigate('/', { replace: true })
@@ -21,5 +17,3 @@ const Error403: React.FC<IProps> = () => {
     />
   )
 }
-
-export default Error403

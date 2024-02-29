@@ -1,8 +1,7 @@
-import { Suspense } from 'react'
 import type { RouteObject } from 'react-router-dom'
 
-const UserList = lazy(() => import('@/views/list/user'))
-const UserDetail = lazy(() => import('@/views/list/user/detail'))
+// const UserList = lazy(() => import('@/views/list/user'))
+// const UserDetail = lazy(() => import('@/views/list/user/detail'))
 
 export default {
   meta: {
@@ -11,7 +10,8 @@ export default {
   children: [
     {
       path: '/list/user',
-      element: <Suspense><UserList /></Suspense>,
+      // element: <Suspense><UserList /></Suspense>,
+      lazy: () => import('@/views/list/user'),
       meta: {
         title: 'route.list.page1',
         auth: 'user.read1',
@@ -19,7 +19,8 @@ export default {
     },
     {
       path: '/list/user/detail',
-      element: <Suspense><UserDetail /></Suspense>,
+      // element: <Suspense><UserDetail /></Suspense>,
+      lazy: () => import('@/views/list/user/detail'),
       meta: {
         title: 'route.list.detail1',
         hideInMenu: true,

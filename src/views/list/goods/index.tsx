@@ -1,5 +1,3 @@
-const GoodsList: React.FC = () => {
+export function Component() {
   return <div>GoodsList</div>
 }
-
-export default GoodsList
