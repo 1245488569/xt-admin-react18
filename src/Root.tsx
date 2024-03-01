@@ -2,7 +2,7 @@ import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { useNavigation, useRouteLoaderData } from 'react-router-dom'
 import { rootRoutes } from './router'
-import { searchRouteMeta } from './utils/router'
+import { getCatchRouteMeta } from './utils/router'
 import { useSysConfigStore } from './stores/config'
 import { useUserStore } from './stores/user'
 import type { ILayoutLoader } from './types/common'
@@ -15,7 +15,8 @@ const Root: React.FC = () => {
   const { pathname } = useLocation()
 
   console.log('Root tsx pathname', pathname)
-  const curRouteMeta = searchRouteMeta(pathname, rootRoutes)
+  console.log('Root tsx rootRoutes', rootRoutes)
+  const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes)
   console.log('Root tsx curRouteMeta', curRouteMeta)
 
   if (useSysConfigStore.getState().app.enableProgress) {
@@ -29,7 +30,8 @@ const Root: React.FC = () => {
   if (useSysConfigStore.getState().app.enableDynamicTitle && curRouteMeta?.title)
     document.title = t(curRouteMeta.title)
 
-  const { permissions } = useRouteLoaderData('layout') as ILayoutLoader
+  // 如果是不在layouty的页面，useRouteLoaderData('layout')是undefined
+  const { permissions } = useRouteLoaderData('layout') as ILayoutLoader || {}
   console.log('Root tsx permissions', permissions)
 
   if (useUserStore.getState().token) {

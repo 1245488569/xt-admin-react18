@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import 'virtual:svg-icons-register'
 import 'virtual:uno.css'
+import '@/assets/styles/index.less'
 import '@unocss/reset/tailwind-compat.css'
 import '@/locales/index'
 

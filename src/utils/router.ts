@@ -21,9 +21,6 @@ export function searchRoute(path: string, routes: RouteObject[] = []): RouteObje
   return result
 }
 
-// 路由元数据缓存（因为路由的meta信息是固定的，所以可采取缓存方案，优化性能）
-const routeMetadataCacheMap = new Map<string, RouteMeta | undefined>()
-
 /**
  * @description 递归查询对应的路由meta
  * @param {string} path 当前访问地址
@@ -31,20 +28,24 @@ const routeMetadataCacheMap = new Map<string, RouteMeta | undefined>()
  * @returns array
  */
 export function searchRouteMeta(path: string, routes: RouteObject[] = []): RouteMeta | undefined {
-  if (routeMetadataCacheMap.has(path))
-    return routeMetadataCacheMap.get(path)
-
   let meta: RouteMeta | undefined
   for (const item of routes) {
-    if (item.path === path) {
-      routeMetadataCacheMap.set(path, item.meta)
+    if (item.path === path)
       return item.meta
-    }
 
     if (item.children && item.children.length)
       meta = searchRouteMeta(path, item.children)
   }
+  return meta
+}
 
+// 路由元数据缓存（因为路由的meta信息是固定的，所以可采取缓存方案，优化性能）
+const routeMetadataCacheMap = new Map<string, RouteMeta | undefined>()
+export function getCatchRouteMeta(path: string, routes: RouteObject[] = []): RouteMeta | undefined {
+  if (routeMetadataCacheMap.has(path))
+    return routeMetadataCacheMap.get(path)
+
+  const meta = searchRouteMeta(path, routes)
   routeMetadataCacheMap.set(path, meta)
   return meta
 }

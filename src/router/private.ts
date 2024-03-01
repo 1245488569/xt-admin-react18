@@ -1,13 +1,13 @@
 import type { IPrivateRoutes } from 'types/router'
 import type { RouteObject } from 'react-router-dom'
-import cloneDeep from 'lodash/cloneDeep'
 import listRoutes from './modules/list'
+import layoutTwoRoutes from './modules/LayoutTwo'
 
-const privateRoutes: IPrivateRoutes[] = [
+export const privateRoutes: IPrivateRoutes[] = [
   {
     title: '演示',
     icon: 'ep:apple',
-    children: [listRoutes],
+    children: [listRoutes, layoutTwoRoutes],
   },
 ]
 
@@ -19,20 +19,14 @@ function addPrivateChildrenIndex(privateChildrenRoutes: RouteObject[], parentInd
   })
 }
 
-function addIndexPrivateRoutes() {
-  const cloneRoutes = cloneDeep(privateRoutes)
-  cloneRoutes.forEach((item, i) => {
+function allPrivateChildrenRoutes() {
+  privateRoutes.forEach((item, i) => {
     item.parentIndex = i
     if (item.children && item.children.length)
       addPrivateChildrenIndex(item.children, item.parentIndex)
   })
-  return cloneRoutes
-}
 
-function allPrivateChildrenRoutes() {
-  return addIndexPrivateRoutes().map(item => item.children).flat()
+  return privateRoutes.map(item => item.children).flat()
 }
 
 export default allPrivateChildrenRoutes()
-
-// export default privateRoutes

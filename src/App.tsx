@@ -40,7 +40,7 @@ function App() {
 
   return (
     <ConfigProvider locale={locale}>
-      <AntdApp>
+      <AntdApp component={false}>
         <AntdGlobal />
         {/* fallbackElement 防止闪屏 */}
         <RouterProvider router={router} fallbackElement={<Fragment />} />

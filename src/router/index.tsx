@@ -18,7 +18,6 @@ import Root from '@/Root'
 // Object.keys(importRoutesData).forEach((v) => {
 //   privateRoutes.push((importRoutesData[v] as any).default)
 // })
-console.log('privateRoutes', privateRoutes)
 
 export const rootRoutes: RouteObject[] = [
   {
@@ -42,8 +41,9 @@ export const rootRoutes: RouteObject[] = [
         children: [
           {
             path: '/',
-            lazy: () => import('@/views/frame_dashboard'),
+            lazy: () => import('@/views/frame-dashboard'),
             // element: <Suspense><FrameDashboard /></Suspense>,
+            parentIndex: 0,
             meta: {
               title: 'route.dashboard',
               icon: 'ri:home-heart-fill',
@@ -55,7 +55,7 @@ export const rootRoutes: RouteObject[] = [
             // element: <Suspense><Demo1 /></Suspense>,
             meta: {
               title: 'route.personal',
-              // isWhite: true,
+              isWhite: true,
             },
           },
           {
