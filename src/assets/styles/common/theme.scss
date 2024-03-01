@@ -1,0 +1,44 @@
+:root {
+  --xt-main-sidebar-width: 90px; // 侧边主导航宽度
+  --xt-main-sidebar-item-height: 60px; // 侧边主每一项的高度
+  --xt-sub-sidebar-width: 250px; // 侧边次导航宽度
+  --xt-sub-sidebar-collapse-width: 63px; // 侧边次导航收缩时宽度
+  --xt-logo-height: 50px;// Logo的高度
+  --xt-top-nav-height: 80px;// top(顶部导航栏)的高度
+  --xt-toolbar-height: 50px;// 工具栏的高度
+  --xt-tabbar-height: 50px;// 历史菜单的高度
+
+  // 暗黑模式下的颜色
+  // Logo区域
+  // --xt-sub-logo-bg-color: #060D12; // Logo背景色
+  --xt-logo-text-color: #fff; // Logo字体色
+  
+  // 主导航
+  --xt-main-menu-bg-color: #303643; // 主导航背景色
+  --xt-main-menu-text-color: #7a6b7e; // 主导航字体色
+  --xt-main-menu-hover-bg-color: #14424b; // 主导航鼠标经过背景色
+  --xt-main-menu-hover-text-color: #fff; // 主导航鼠标经过字体色
+  --xt-main-menu-active-bg-color: #14424b; // 主导航选中背景色
+  --xt-main-menu-active-text-color: #fff; // 主导航选中字体色
+
+  // 次导航区域
+  --xt-sub-menu-bg-color: #303643; // 次导航背景色
+  --xt-sub-menu-text-color: #7a6b7e; // 次导航字体色
+  --xt-sub-menu-hover-bg-color: #14424b; // 次导航鼠标经过背景色
+  --xt-sub-menu-hover-text-color: #fff; // 次导航鼠标经过字体色
+  --xt-sub-menu-active-bg-color: #14424b; // 次导航选中背景色
+  --xt-sub-menu-active-text-color: #fff; // 次导航选中字体色
+
+  // tabbar
+  --xt-tabbar-bg-color: #303643; // tabbar背景色
+  --xt-tabbar-item-bg-color: #303643; // tabbaritem背景色
+  --xt-tabbar-item-active-bg-color: #14424b; // tabbaritem选中项背景色
+  --xt-tabbar-item-hover-bg-color: #14424b; // tabbaritem鼠标经过项背景色
+  --xt-tabbar-item-text-color: #7a6b7e; // tabbaritem字体色
+  --xt-tabbar-item-active-text-color: #fff; // tabbaritem选中项字体色
+  --xt-tabbar-item-hover-text-color: #fff; // tabbaritem鼠标经过项字体色
+
+  // toolbar
+  --xt-toolbar-bg-color: #303643; // toolbar背景色
+  --xt-toolbar-text-color: #7a6b7e; // toolbar字体色
+}
