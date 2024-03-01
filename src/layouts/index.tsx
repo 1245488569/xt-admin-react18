@@ -13,7 +13,7 @@ export function Component() {
     elementSize: state.elementSize,
   })))
 
-  // 目前不清除 接下来的react版本对useMemo的态度，而且这里就算多次使用这些函数，也不会有性能问题
+  // 目前不清楚 接下来的react19版本对useMemo的态度，而且这里就算多次使用这些函数，也不会有性能问题
   function showTop() {
     return ['onlyTopNav', 'topSubSideNav'].includes(layoutMode)
   }
