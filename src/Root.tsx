@@ -2,10 +2,11 @@ import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { useNavigation, useRouteLoaderData } from 'react-router-dom'
 import { rootRoutes } from './router'
-import { getCatchRouteMeta } from './utils/router'
+import { getCatchRouteMeta, searchRoutePath } from './utils/router'
 import { useSysConfigStore } from './stores/config'
 import { useUserStore } from './stores/user'
 import type { ILayoutLoader } from './types/common'
+import { message } from './utils/AntdGlobal'
 
 const Root: React.FC = () => {
   console.log('Root tsx')
@@ -31,10 +32,25 @@ const Root: React.FC = () => {
     document.title = t(curRouteMeta.title)
 
   // 如果是不在layouty的页面，useRouteLoaderData('layout')是undefined
-  const { permissions } = useRouteLoaderData('layout') as ILayoutLoader || {}
+  const { permissions, allSubmenus } = useRouteLoaderData('layout') as ILayoutLoader || {}
   console.log('Root tsx permissions', permissions)
 
   if (useUserStore.getState().token) {
+    if (pathname === '/login')
+      return <Navigate to="/" replace />
+
+    if (!allSubmenus || !allSubmenus.length)
+      return <Navigate to="/403" replace />
+
+    if (pathname === '/' && !useSysConfigStore.getState().app.enableDashboard) {
+      const path = searchRoutePath(allSubmenus[0])
+      if (!path) {
+        message.error('路由配置错误，请检查路由配置')
+        return <Navigate to="/403" replace />
+      }
+      return <Navigate to={path} replace />
+    }
+
     if (useSysConfigStore.getState().app.enablePermission) {
       if (curRouteMeta?.auth) {
         if (typeof curRouteMeta.auth === 'string' && !permissions.includes(curRouteMeta.auth))
@@ -42,22 +58,14 @@ const Root: React.FC = () => {
 
         else if (Array.isArray(curRouteMeta.auth) && !curRouteMeta.auth.some(v => permissions.includes(v)))
           return <Navigate to="/403" replace />
+
         else
           return <Outlet />
       }
       return <Outlet />
     }
     else {
-      if (pathname === '/login') {
-        return <Navigate to="/" replace />
-      }
-      else if (pathname === '/' && !useSysConfigStore.getState().app.enableDashboard) {
-        // TODO: 跳转一个菜单项
-        return <Outlet />
-      }
-      else {
-        return <Outlet />
-      }
+      return <Outlet />
     }
   }
   else {

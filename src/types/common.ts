@@ -1,4 +1,8 @@
+import type { RouteObject } from 'react-router-dom'
+import type { IPrivateRoutes } from 'types/router'
+
 export interface ILayoutLoader {
   permissions: string[]
-  menus: any[]
+  allSubmenus: RouteObject[]
+  mainMenu: IPrivateRoutes[]
 }

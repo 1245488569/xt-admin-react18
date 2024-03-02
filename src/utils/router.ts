@@ -49,3 +49,16 @@ export function getCatchRouteMeta(path: string, routes: RouteObject[] = []): Rou
   routeMetadataCacheMap.set(path, meta)
   return meta
 }
+
+/**
+ * @description 递归查询对应的路由path
+ * @param {Array} route 查询的路由
+ * @returns string
+ */
+export function searchRoutePath(route: RouteObject): string {
+  if (route.path)
+    return route.path
+  if (route.children && route.children.length)
+    return searchRoutePath(route.children[0])
+  return ''
+}
