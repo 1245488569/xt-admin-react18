@@ -1,5 +1,6 @@
 import { useShallow } from 'zustand/react/shallow'
 import classNames from 'classnames'
+import Top from './components/top'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
@@ -118,7 +119,7 @@ export function Component() {
     <div className="h-full">
       <section className="relative h-full flex flex-col">
         {
-          showTop() && <div>top组件</div>
+          showTop() && <Top />
         }
 
         <div className="flex flex-1 overflow-hidden">
