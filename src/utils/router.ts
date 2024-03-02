@@ -12,7 +12,7 @@ export function searchRoute(path: string, routes: RouteObject[] = []): RouteObje
   for (const item of routes) {
     if (item.path === path)
       return item
-    if (item.children && item.children.length) {
+    if (item.children?.length) {
       const res = searchRoute(path, item.children)
       if (Object.keys(res).length)
         result = res
@@ -33,7 +33,7 @@ export function searchRouteMeta(path: string, routes: RouteObject[] = []): Route
     if (item.path === path)
       return item.meta
 
-    if (item.children && item.children.length)
+    if (item.children?.length)
       meta = searchRouteMeta(path, item.children)
   }
   return meta
@@ -58,7 +58,7 @@ export function getCatchRouteMeta(path: string, routes: RouteObject[] = []): Rou
 export function searchRoutePath(route: RouteObject): string {
   if (route.path)
     return route.path
-  if (route.children && route.children.length)
+  if (route.children?.length)
     return searchRoutePath(route.children[0])
   return ''
 }

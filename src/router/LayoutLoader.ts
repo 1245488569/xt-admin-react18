@@ -69,7 +69,7 @@ function generateNoAuthSubMenus(noDealMenu: RouteObject[]) {
   return menus
 }
 
-function generateMainMenu(allSubmenus: RouteObject[]) {
+function generateAllMainMenu(allSubmenus: RouteObject[]) {
   return privateRoutes.map((v) => {
     return {
       parentIndex: v.parentIndex,
@@ -83,7 +83,7 @@ function generateMainMenu(allSubmenus: RouteObject[]) {
 export default async function LayoutLoader() {
   let permissions: string[] = []
   let allSubmenus: RouteObject[] = []
-  let mainMenu: IPrivateRoutes[] = []
+  let allMainMenu: IPrivateRoutes[] = []
   if (useUserStore.getState().token && useSysConfigStore.getState().app.enablePermission) {
     permissions = await permissionApi()
     const noDealMenu = getNoDealMenu()
@@ -91,8 +91,8 @@ export default async function LayoutLoader() {
     allSubmenus = generateAllSubMenus(noDealMenu)
     console.log('allSubmenus', allSubmenus)
 
-    mainMenu = generateMainMenu(allSubmenus)
-    console.log('mainMenu', mainMenu)
+    allMainMenu = generateAllMainMenu(allSubmenus)
+    console.log('mainMenu', allMainMenu)
   }
   else if (!useUserStore.getState().token) {
     const noDealMenu = getNoDealMenu()
@@ -103,6 +103,6 @@ export default async function LayoutLoader() {
   return {
     permissions,
     allSubmenus,
-    mainMenu,
+    allMainMenu,
   }
 }

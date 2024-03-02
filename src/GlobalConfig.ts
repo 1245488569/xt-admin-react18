@@ -40,7 +40,7 @@ const sysGlobalConfig: IGlobalConfig = {
      * mainSubSideNav 侧边主导航+侧边次栏导航
      * topSubSideNav 顶部主导航+侧边次栏导航
      */
-    layoutMode: 'topSubSideNav',
+    layoutMode: 'onlyTopNav',
   },
   nav: {
     // 次导航栏是否收起

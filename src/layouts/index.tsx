@@ -49,7 +49,7 @@ export function Component() {
   const siderBarClass = classNames('h-full flex', [sideBarWidth])
 
   function actionbarLeft() {
-    if (!showSidebar)
+    if (!showSidebar())
       return 'left-0'
 
     if (!subMenuCollapse) {
