@@ -2,6 +2,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { useRouteLoaderData } from 'react-router-dom'
 import type { MenuProps } from 'antd'
 import Logo from '../logo'
+import { TopNavWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 import type { ILayoutLoader } from '@/types/common'
 import { useMenuStore } from '@/stores/menu'
@@ -9,8 +10,10 @@ import { getCatchRouteMeta } from '@/utils/router'
 import { rootRoutes } from '@/router'
 
 export default function Top() {
-  const { layoutMode } = useSysConfigStore(useShallow(state => ({
+  const { layoutMode, mainMenuBgColor, menuBgColor } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.app.layoutMode,
+    mainMenuBgColor: state.theme.mainMenuBgColor,
+    menuBgColor: state.theme.menuBgColor,
   })))
 
   const { mainMenuActive, setMainMenuActive } = useMenuStore(useShallow(state => ({
@@ -64,8 +67,15 @@ export default function Top() {
     nav(e.key)
   }
 
+  function topNavContainerBg() {
+    if (layoutMode === 'topSubSideNav')
+      return mainMenuBgColor
+    else if (layoutMode === 'onlyTopNav')
+      return menuBgColor
+  }
+
   return (
-    <div className="top-nav-container h-[var(--xt-top-nav-height)] flex flex-shrink-0 items-center px-4">
+    <TopNavWrapper className="h-[var(--xt-top-nav-height)] flex flex-shrink-0 items-center px-4" $topNavContainerBg={topNavContainerBg()}>
       <Logo className="mr-4 text-xl" />
       {/* 顶部主导航+侧边次导航 */}
       { layoutMode === 'topSubSideNav' && (
@@ -75,6 +85,6 @@ export default function Top() {
       { layoutMode === 'onlyTopNav' && (
         <Menu className="flex-1" mode="horizontal" selectedKeys={[defaultActive]} items={getSubMenuItems()} onClick={clickSubMenu} />
       ) }
-    </div>
+    </TopNavWrapper>
   )
 }

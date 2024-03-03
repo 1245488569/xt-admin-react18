@@ -1,4 +1,5 @@
 import { useShallow } from 'zustand/react/shallow'
+import { shallow } from 'zustand/shallow'
 import { useSysConfigStore } from '@/stores/config'
 import { tableListApi } from '@/api/test'
 
@@ -14,13 +15,15 @@ export function Component() {
 
   const { t } = useTranslation()
 
-  const { enableProgress, enableDynamicTitle, defaultLanguage, setEnableProgress, setEnableDynamicTitle, setDefaultLanguage } = useSysConfigStore(useShallow(state => ({
+  const { enableProgress, enableDynamicTitle, defaultLanguage, colorScheme, setEnableProgress, setEnableDynamicTitle, setDefaultLanguage, setColorScheme } = useSysConfigStore(useShallow(state => ({
     enableProgress: state.app.enableProgress,
     enableDynamicTitle: state.app.enableDynamicTitle,
     defaultLanguage: state.defaultLanguage,
+    colorScheme: state.colorScheme,
     setEnableProgress: state.setEnableProgress,
     setEnableDynamicTitle: state.setEnableDynamicTitle,
     setDefaultLanguage: state.setDefaultLanguage,
+    setColorScheme: state.setColorScheme,
   })))
 
   function handleChangeProgress() {
@@ -35,6 +38,28 @@ export function Component() {
     setDefaultLanguage(value)
   }
 
+  function handleChangeColorScheme() {
+    setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
+  }
+
+  useEffect(() => {
+    const cancelSub = useSysConfigStore.subscribe(
+      state => state.colorScheme,
+      (colorScheme) => {
+        if (colorScheme === 'dark')
+          document.documentElement.classList.add('dark')
+
+        else
+          document.documentElement.classList.remove('dark')
+      },
+      {
+        equalityFn: shallow,
+        fireImmediately: true,
+      },
+    )
+    return () => cancelSub()
+  }, [colorScheme])
+
   return (
     <div>
       <h2>
@@ -45,9 +70,19 @@ export function Component() {
         动态标题状态:
         {enableDynamicTitle.toString()}
       </h2>
+      <h2>
+        默认语言:
+        {defaultLanguage}
+      </h2>
+      <h2>
+        暗黑模式:
+        {colorScheme}
+      </h2>
 
       <Button onClick={handleChangeProgress}>开/关载入进度条</Button>
       <Button onClick={handleChangeDynamicTitle}>开/关动态标题</Button>
+      <Button onClick={handleChangeColorScheme}>切换暗黑</Button>
+
       <Select
         defaultValue={defaultLanguage}
         style={{ width: 200 }}
@@ -60,7 +95,7 @@ export function Component() {
       />
 
       <DatePicker />
-      <div>
+      <div className="dark:text-red">
         {t('notfound.title')}
       </div>
     </div>

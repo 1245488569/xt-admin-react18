@@ -9,6 +9,7 @@ interface IActions {
   setEnableProgress: (payload: boolean) => void // 开/关载入进度条
   setEnableDynamicTitle: (payload: boolean) => void // 开/关动态标题
   setDefaultLanguage: (payload: Language) => void // 切换默认语言
+  setColorScheme: (payload: ColorScheme) => void // 切换颜色方案
 }
 
 export const useSysConfigStore = create<IGlobalConfig & IActions>()(
@@ -30,6 +31,11 @@ export const useSysConfigStore = create<IGlobalConfig & IActions>()(
         setDefaultLanguage: (payload) => {
           set((state) => {
             state.defaultLanguage = payload
+          })
+        },
+        setColorScheme: (payload) => {
+          set((state) => {
+            state.colorScheme = payload
           })
         },
       }), {

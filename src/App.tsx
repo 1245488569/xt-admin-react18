@@ -4,7 +4,8 @@ import enUS from 'antd/locale/en_US'
 import zhTW from 'antd/locale/zh_TW'
 import { shallow } from 'zustand/shallow'
 import { Fragment } from 'react'
-import { App as AntdApp } from 'antd'
+import { App as AntdApp, theme } from 'antd'
+import { useShallow } from 'zustand/react/shallow'
 import { useSysConfigStore } from './stores/config'
 import router from './router'
 import AntdGlobal from './utils/AntdGlobal'
@@ -16,6 +17,12 @@ function App() {
 
   const [locale, setLocale] = useState(zhCN)
   const [loading, setLoading] = useState(true)
+
+  const { colorScheme } = useSysConfigStore(useShallow(state => ({
+    colorScheme: state.colorScheme,
+  })))
+
+  const isDark = colorScheme === 'dark'
 
   useEffect(() => {
     const cancelSub = useSysConfigStore.subscribe(
@@ -39,7 +46,7 @@ function App() {
     return <div>loading...</div>
 
   return (
-    <ConfigProvider locale={locale}>
+    <ConfigProvider locale={locale} theme={{ cssVar: true, hashed: false, algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
       <AntdApp component={false}>
         <AntdGlobal />
         {/* fallbackElement 防止闪屏 */}
