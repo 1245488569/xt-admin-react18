@@ -17,7 +17,6 @@ const sysGlobalConfig: IGlobalConfig = {
   elementSize: 'default',
   /**
    * 颜色方案
-   * '' 用户系统默认
    * light 明亮模式
    * dark 暗黑模式
    */
@@ -93,7 +92,7 @@ const sysGlobalConfig: IGlobalConfig = {
 
     // --------------主菜单----------------
     // 主菜单背景色
-    mainMenuBgColor: '#303643',
+    mainMenuBgColor: 'rgba(53, 103, 210, 1)',
     // 选中主菜单背景色
     mainMenuActiveBgColor: '#FF6600',
     // 鼠标经过主菜单背景色

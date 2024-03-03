@@ -6,6 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { Fragment } from 'react'
 import { App as AntdApp, theme } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
+import { ThemeProvider } from 'styled-components'
 import { useSysConfigStore } from './stores/config'
 import router from './router'
 import AntdGlobal from './utils/AntdGlobal'
@@ -47,11 +48,14 @@ function App() {
 
   return (
     <ConfigProvider locale={locale} theme={{ cssVar: true, hashed: false, algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
-      <AntdApp component={false}>
-        <AntdGlobal />
-        {/* fallbackElement 防止闪屏 */}
-        <RouterProvider router={router} fallbackElement={<Fragment />} />
-      </AntdApp>
+      <ThemeProvider theme={{ isDark }}>
+        <AntdApp component={false}>
+          <AntdGlobal />
+          {/* fallbackElement 防止闪屏 */}
+          <RouterProvider router={router} fallbackElement={<Fragment />} />
+        </AntdApp>
+      </ThemeProvider>
+
     </ConfigProvider>
 
   )
