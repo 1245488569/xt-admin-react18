@@ -58,7 +58,6 @@ export default function Top() {
         label: t(v.meta!.title!),
         key: v.onlyKey!,
         icon: v.meta?.icon && <SvgIcon name={v.meta?.icon} />,
-        popupClassName: 'xt-sub-menu-popup',
         children: v.children?.length
           ? getSubMenuItems(v.children)
           : undefined,
@@ -117,6 +116,7 @@ export default function Top() {
       <ConfigProvider theme={{
         components: {
           Menu: {
+            // TODO: 多级菜单的子菜单，选中状态的背景色不对
             activeBarHeight: 0,
             horizontalItemBorderRadius: 8,
             iconSize: 20,
@@ -141,7 +141,7 @@ export default function Top() {
             darkItemSelectedBg: menuClass?.darkMenuActiveBgColor,
             darkItemSelectedColor: menuClass?.darkMenuActiveTextColor,
 
-            subMenuItemBg: '#f00', // 子菜单项背景色(无效)
+            subMenuItemBg: '#f00', // 子菜单项背景色(对于是popup的无效)
             // subMenuItemBorderRadius: 20, // 子菜单项圆角
           },
         },
