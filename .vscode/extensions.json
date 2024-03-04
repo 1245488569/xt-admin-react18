@@ -4,6 +4,7 @@
     "EditorConfig.EditorConfig",
     "dsznajder.es7-react-js-snippets",
     "antfu.unocss",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "styled-components.vscode-styled-components"
   ]
 }

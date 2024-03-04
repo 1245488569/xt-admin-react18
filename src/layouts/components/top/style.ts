@@ -18,57 +18,44 @@ interface IMenuWrapper {
 }
 
 export const TopNavWrapper = styled.div<IMenuWrapper>`
-  /* background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuContainerBgColor : props.$customMenuClass?.menuContainerBgColor};
-  .ant-menu-light {
-    background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuContainerBgColor : props.$customMenuClass?.menuContainerBgColor};
+  background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuContainerBgColor : props.$customMenuClass?.menuContainerBgColor};
+  .ant-menu-light, .ant-menu-dark  {
     border-bottom: none;
   }
 
   .xt-menu {
     .ant-menu-item, .ant-menu-submenu {
       margin-right: 8px;
-      border-radius: 8px;
-      background: transparent;
-      color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuTextColor : props.$customMenuClass?.menuTextColor};
+    }
 
+    .ant-menu-item {
       &:hover {
-        background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverBgColor : props.$customMenuClass?.menuHoverBgColor};
+        border-bottom: 2px solid ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverTextColor : props.$customMenuClass?.menuHoverTextColor};
+      }
+
+      &.ant-menu-item-selected {
+        color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveTextColor : props.$customMenuClass?.menuActiveTextColor};
+        background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveBgColor : props.$customMenuClass?.menuActiveBgColor};
+        border-bottom: 2px solid ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveTextColor : props.$customMenuClass?.menuActiveTextColor};
+      }
+    }
+
+    .ant-menu-submenu {
+      &:hover {
         color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverTextColor : props.$customMenuClass?.menuHoverTextColor} !important;
         border-bottom: 2px solid ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverTextColor : props.$customMenuClass?.menuHoverTextColor};
       }
 
-      &.ant-menu-item-selected, &.ant-menu-submenu-selected {
+      &.ant-menu-submenu-selected {
         background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveBgColor : props.$customMenuClass?.menuActiveBgColor};
-        color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveTextColor : props.$customMenuClass?.menuActiveTextColor};
         border-bottom: 2px solid ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveTextColor : props.$customMenuClass?.menuActiveTextColor};
-
-        .ant-menu-submenu-title {
-          color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveTextColor : props.$customMenuClass?.menuActiveTextColor};
-        }
       }
     }
 
-    .ant-menu-item::after, .ant-menu-submenu::after {
-      content: none;
+    .ant-menu-submenu-open {
+      color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverTextColor : props.$customMenuClass?.menuHoverTextColor} !important;
+      border-bottom: 2px solid ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverTextColor : props.$customMenuClass?.menuHoverTextColor};
     }
-  } */
-
-
-  /* .ant-menu-submenu-popup.ant-menu-submenu {
-    .ant-menu-item, .ant-menu-submenu {
-      background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuContainerBgColor : props.$customMenuClass?.menuContainerBgColor};
-      color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuTextColor : props.$customMenuClass?.menuTextColor};
-
-      &:hover {
-        background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverBgColor : props.$customMenuClass?.menuHoverBgColor};
-        color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverTextColor : props.$customMenuClass?.menuHoverTextColor} !important;
-      }
-
-      &.ant-menu-item-selected, &.ant-menu-submenu-selected {
-        background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveBgColor : props.$customMenuClass?.menuActiveBgColor};
-        color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuActiveTextColor : props.$customMenuClass?.menuActiveTextColor};
-      }
-    }
-  } */
+  }
   
 `

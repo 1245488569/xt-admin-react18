@@ -115,28 +115,34 @@ export default function Top() {
   const menuClass = customMenuClass()
 
   return (
-    <TopNavWrapper className="h-[var(--xt-top-nav-height)] flex flex-shrink-0 items-center px-4" $customMenuClass={customMenuClass()}>
+    <TopNavWrapper className="h-[var(--xt-top-nav-height)] flex flex-shrink-0 items-center px-4" $customMenuClass={menuClass}>
       <Logo className="mr-4 text-xl" />
       <ConfigProvider theme={{
         components: {
           Menu: {
-            activeBarBorderWidth: 1,
             activeBarHeight: 0,
             horizontalItemBorderRadius: 8,
             iconSize: 20,
             iconMarginInlineEnd: 5, // 图标与文字间距
             itemBg: menuClass?.menuContainerBgColor, // 菜单项背景色（整个菜单背景色）
-            darkItemBg: menuClass?.darkMenuContainerBgColor, // 暗黑模式菜单项背景色
             itemColor: menuClass?.menuTextColor, // 菜单项文字颜色（整个菜单文字色）
-            horizontalItemHoverBg: menuClass?.menuHoverBgColor, // 横向菜单项横悬浮态背景色(鼠标经过)
-            horizontalItemHoverColor: '#f00', // 水平菜单项文字悬浮颜色（不清楚是啥） 对不上
-            horizontalItemSelectedBg: menuClass?.menuActiveBgColor, // 水平菜单项选中态背景色(选中的项)
-            horizontalItemSelectedColor: menuClass?.menuActiveTextColor, // 水平菜单项文字选中颜色(只针对可跳转的菜单项)
-            itemActiveBg: menuClass?.menuActiveBgColor, // 菜单项激活态背景色(点击在popup层的菜单项，点击那瞬间的背景色)
+            // horizontalItemHoverColor: '#f00', // 水平菜单项文字悬浮颜色（不清楚是啥） 对不上
+
+            horizontalItemHoverBg: colorScheme === 'dark' ? menuClass?.darkMenuHoverBgColor : menuClass?.menuHoverBgColor, // 横向菜单项横悬浮态背景色(鼠标经过)
+            // horizontalItemSelectedBg: menuClass?.menuActiveBgColor, // 水平菜单项选中态背景色(选中的项) (暗黑下没作用)
+            // horizontalItemSelectedColor: menuClass?.menuActiveTextColor, // 水平菜单项文字选中颜色(只针对可跳转的菜单项) (暗黑下没作用)
+
+            itemActiveBg: colorScheme === 'dark' ? menuClass?.darkMenuActiveBgColor : menuClass?.menuActiveBgColor, // 菜单项激活态背景色(点击在popup层的菜单项，点击那瞬间的背景色)
             itemHoverBg: menuClass?.menuHoverBgColor, // 菜单项悬浮态背景色(鼠标经过popup层的菜单项)
             itemHoverColor: menuClass?.menuHoverTextColor, // 菜单项文字悬浮颜色(鼠标经过popup层的菜单项,文字颜色)
             itemSelectedBg: menuClass?.menuActiveBgColor, // 菜单项选中态背景色(popup层的菜单项 选中的颜色)
             itemSelectedColor: menuClass?.menuActiveTextColor, // 菜单项文字选中颜色(popup层的菜单项 选中的颜色，以及子菜单项选中的文字颜色)
+
+            darkItemBg: menuClass?.darkMenuContainerBgColor, // 暗黑模式菜单项背景色
+            darkItemColor: menuClass?.darkMenuTextColor, // 暗色模式下菜单项文字颜色（整个菜单文字色）
+            darkItemHoverBg: menuClass?.darkMenuHoverBgColor,
+            darkItemSelectedBg: menuClass?.darkMenuActiveBgColor,
+            darkItemSelectedColor: menuClass?.darkMenuActiveTextColor,
           },
         },
       }}
