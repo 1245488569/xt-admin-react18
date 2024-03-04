@@ -30,11 +30,13 @@ declare module 'react-router-dom' {
   interface IndexRouteObject {
     meta?: RouteMeta
     parentIndex?: number
+    onlyKey?: string
   }
 
   interface NonIndexRouteObject {
     meta?: RouteMeta
     parentIndex?: number
+    onlyKey?: string
   }
 }
 

@@ -1,4 +1,5 @@
 import { useShallow } from 'zustand/react/shallow'
+import type { RouteObject } from 'react-router-dom'
 import { useRouteLoaderData } from 'react-router-dom'
 import type { MenuProps } from 'antd'
 import Logo from '../logo'
@@ -50,20 +51,16 @@ export default function Top() {
     setMainMenuActive(e.key)
   }
 
-  function getSubMenuItems(): MenuProps['items'] {
-    return allSubmenus.map((v, vi) => {
+  // 递归获取菜单项
+  function getSubMenuItems(menu: RouteObject[]): MenuProps['items'] {
+    return menu.map((v) => {
       return {
         label: t(v.meta!.title!),
-        key: v.path || `${vi}`,
+        key: v.onlyKey!,
         icon: v.meta?.icon && <SvgIcon name={v.meta?.icon} />,
+        popupClassName: 'xt-sub-menu-popup',
         children: v.children?.length
-          ? v.children?.map((k, ki) => {
-            return {
-              label: t(k.meta!.title!),
-              key: k.path || `${vi}-${ki}`,
-              icon: k.meta?.icon && <SvgIcon name={k.meta?.icon} />,
-            }
-          })
+          ? getSubMenuItems(v.children)
           : undefined,
       }
     })
@@ -143,6 +140,9 @@ export default function Top() {
             darkItemHoverBg: menuClass?.darkMenuHoverBgColor,
             darkItemSelectedBg: menuClass?.darkMenuActiveBgColor,
             darkItemSelectedColor: menuClass?.darkMenuActiveTextColor,
+
+            subMenuItemBg: '#f00', // 子菜单项背景色(无效)
+            // subMenuItemBorderRadius: 20, // 子菜单项圆角
           },
         },
       }}
@@ -153,7 +153,7 @@ export default function Top() {
         ) }
         {/* 只有顶部导航 */}
         { layoutMode === 'onlyTopNav' && (
-          <Menu className="xt-menu flex-1" mode="horizontal" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} items={getSubMenuItems()} onClick={clickSubMenu} />
+          <Menu className="xt-menu flex-1" mode="horizontal" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} items={getSubMenuItems(allSubmenus)} onClick={clickSubMenu} />
         ) }
       </ConfigProvider>
 

@@ -3,12 +3,13 @@ import type { RouteObject } from 'react-router-dom'
 import listRoutes from './modules/list'
 import componentRoutes from './modules/component'
 import layoutTwoRoutes from './modules/LayoutTwo'
+import multistepRoutes from './modules/multistep'
 
 export const privateRoutes: IPrivateRoutes[] = [
   {
     title: '演示',
     icon: 'ep:apple',
-    children: [listRoutes, componentRoutes],
+    children: [listRoutes, componentRoutes, multistepRoutes],
   },
   {
     title: '系统设置',

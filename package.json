@@ -14,7 +14,7 @@
   "dependencies": {
     "@unocss/reset": "^0.58.3",
     "ahooks": "^3.7.10",
-    "antd": "^5.13.2",
+    "antd": "^5.15.0",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",
     "i18next": "^23.9.0",

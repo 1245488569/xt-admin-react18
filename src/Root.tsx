@@ -36,10 +36,13 @@ const Root: React.FC = () => {
   console.log('Root tsx permissions', permissions)
 
   if (useUserStore.getState().token) {
+    if (pathname === '/403' || pathname === '/404')
+      return <Outlet />
+
     if (pathname === '/login')
       return <Navigate to="/" replace />
 
-    if (!allSubmenus || !allSubmenus.length)
+    if (!allSubmenus || !allSubmenus)
       return <Navigate to="/403" replace />
 
     if (pathname === '/' && !useSysConfigStore.getState().app.enableDashboard) {

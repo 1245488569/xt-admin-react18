@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep'
 import type { RouteObject } from 'react-router-dom'
-import { isEmpty } from 'lodash'
+import { isEmpty, random } from 'lodash'
 import type { IPrivateRoutes } from 'types/router'
 import { privateRoutes } from './private'
 import { useUserStore } from '@/stores/user'
@@ -33,6 +33,7 @@ function generateAllSubMenus(noDealMenu: RouteObject[]) {
       if (item.path === '/' && !useSysConfigStore.getState().app.enableDashboard)
         continue
       obj.children = []
+      obj.onlyKey = item.path || random(0, 10, true).toString()
       menus.push(obj)
 
       if (!isEmpty(item.children))
@@ -60,6 +61,7 @@ function generateNoAuthSubMenus(noDealMenu: RouteObject[]) {
 
     if (item.meta?.title && !item.meta.hideInMenu && item.meta.isWhite) {
       obj.children = []
+      obj.onlyKey = item.path || random(0, 10, true).toString()
       menus.push(obj)
 
       if (!isEmpty(item.children))
