@@ -14,14 +14,14 @@ function getNoDealMenu() {
   return cloneRootRoutes[0].children?.find(item => item.id === 'layout')?.children || []
 }
 
-function generateAllSubMenus(noDealMenu: RouteObject[]) {
+function generateallSubmenu(noDealMenu: RouteObject[], permissions: string[]) {
   const menus: RouteObject[] = []
   for (const item of noDealMenu) {
     if (isEmpty(item.meta) && isEmpty(item.children))
       continue
 
     if (isEmpty(item.meta) && !isEmpty(item.children)) {
-      menus.push(...generateAllSubMenus(item.children!))
+      menus.push(...generateallSubmenu(item.children!, permissions))
       continue
     }
 
@@ -32,12 +32,16 @@ function generateAllSubMenus(noDealMenu: RouteObject[]) {
     if (item.meta?.title && !item.meta.hideInMenu) {
       if (item.path === '/' && !useSysConfigStore.getState().app.enableDashboard)
         continue
+      if (item.meta?.auth) {
+        if ((typeof item.meta.auth === 'string' && !permissions.includes(item.meta.auth)) || (Array.isArray(item.meta.auth) && !item.meta.auth.some(v => permissions.includes(v))))
+          continue
+      }
       obj.children = []
       obj.onlyKey = item.path || random(0, 10, true).toString()
       menus.push(obj)
 
       if (!isEmpty(item.children))
-        obj.children.push(...generateAllSubMenus(item.children!))
+        obj.children.push(...generateallSubmenu(item.children!, permissions))
     }
   }
 
@@ -62,6 +66,7 @@ function generateNoAuthSubMenus(noDealMenu: RouteObject[]) {
     if (item.meta?.title && !item.meta.hideInMenu && item.meta.isWhite) {
       obj.children = []
       obj.onlyKey = item.path || random(0, 10, true).toString()
+
       menus.push(obj)
 
       if (!isEmpty(item.children))
@@ -71,40 +76,40 @@ function generateNoAuthSubMenus(noDealMenu: RouteObject[]) {
   return menus
 }
 
-function generateAllMainMenu(allSubmenus: RouteObject[]) {
+function generateAllMainMenu(allSubmenu: RouteObject[]) {
   return privateRoutes.map((v) => {
     return {
       parentIndex: v.parentIndex,
       title: v.title,
       icon: v.icon,
-      children: allSubmenus.filter(k => k.parentIndex === v.parentIndex),
+      children: allSubmenu.filter(k => k.parentIndex === v.parentIndex),
     }
   })
 }
 
 export default async function LayoutLoader() {
   let permissions: string[] = []
-  let allSubmenus: RouteObject[] = []
+  let allSubmenu: RouteObject[] = []
   let allMainMenu: IPrivateRoutes[] = []
   if (useUserStore.getState().token && useSysConfigStore.getState().app.enablePermission) {
     permissions = await permissionApi()
     const noDealMenu = getNoDealMenu()
     console.log('noDealMenu', noDealMenu)
-    allSubmenus = generateAllSubMenus(noDealMenu)
-    console.log('allSubmenus', allSubmenus)
+    allSubmenu = generateallSubmenu(noDealMenu, permissions)
+    console.log('allSubmenu', allSubmenu)
 
-    allMainMenu = generateAllMainMenu(allSubmenus)
+    allMainMenu = generateAllMainMenu(allSubmenu)
     console.log('mainMenu', allMainMenu)
   }
   else if (!useUserStore.getState().token) {
     const noDealMenu = getNoDealMenu()
-    allSubmenus = generateNoAuthSubMenus(noDealMenu)
-    console.log('NoAuthSubMenus', allSubmenus)
+    allSubmenu = generateNoAuthSubMenus(noDealMenu)
+    console.log('NoAuthSubMenus', allSubmenu)
   }
 
   return {
     permissions,
-    allSubmenus,
+    allSubmenu,
     allMainMenu,
   }
 }

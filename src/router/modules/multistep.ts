@@ -21,6 +21,7 @@ export default {
               lazy: () => import('@/views/multimenu/multimenu1-2'),
               meta: {
                 title: 'route.multimenu.level2.page2',
+                auth: 'sss',
               },
             },
           ],

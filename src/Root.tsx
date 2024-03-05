@@ -17,7 +17,7 @@ const Root: React.FC = () => {
 
   console.log('Root tsx pathname', pathname)
   console.log('Root tsx rootRoutes', rootRoutes)
-  const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes)
+  const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes[0].children)
   console.log('Root tsx curRouteMeta', curRouteMeta)
 
   if (useSysConfigStore.getState().app.enableProgress) {
@@ -32,7 +32,7 @@ const Root: React.FC = () => {
     document.title = t(curRouteMeta.title)
 
   // 如果是不在layouty的页面，useRouteLoaderData('layout')是undefined
-  const { permissions, allSubmenus } = useRouteLoaderData('layout') as ILayoutLoader || {}
+  const { permissions, allSubmenu } = useRouteLoaderData('layout') as ILayoutLoader || {}
   console.log('Root tsx permissions', permissions)
 
   if (useUserStore.getState().token) {
@@ -42,11 +42,11 @@ const Root: React.FC = () => {
     if (pathname === '/login')
       return <Navigate to="/" replace />
 
-    if (!allSubmenus || !allSubmenus)
+    if (!allSubmenu || !allSubmenu)
       return <Navigate to="/403" replace />
 
     if (pathname === '/' && !useSysConfigStore.getState().app.enableDashboard) {
-      const path = searchRoutePath(allSubmenus[0])
+      const path = searchRoutePath(allSubmenu[0])
       if (!path) {
         message.error('路由配置错误，请检查路由配置')
         return <Navigate to="/403" replace />

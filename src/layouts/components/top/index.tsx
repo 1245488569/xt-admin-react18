@@ -33,7 +33,7 @@ export default function Top() {
     setMainMenuActive: state.setMainMenuActive,
   })))
 
-  const { allMainMenu, allSubmenus } = useRouteLoaderData('layout') as ILayoutLoader
+  const { allMainMenu, allSubmenu } = useRouteLoaderData('layout') as ILayoutLoader
   console.log('Top tsx allMainMenu', allMainMenu)
 
   const { t } = useTranslation()
@@ -48,25 +48,36 @@ export default function Top() {
   }
 
   const clickMainMenu: MenuProps['onClick'] = (e) => {
-    setMainMenuActive(e.key)
+    setMainMenuActive(Number(e.key))
   }
 
   // 递归获取菜单项
-  function getSubMenuItems(menu: RouteObject[]): MenuProps['items'] {
-    return menu.map((v) => {
-      return {
-        label: t(v.meta!.title!),
-        key: v.onlyKey!,
-        icon: v.meta?.icon && <SvgIcon name={v.meta?.icon} />,
-        children: v.children?.length
-          ? getSubMenuItems(v.children)
-          : undefined,
+  function getSubMenuItems(arr: RouteObject[]): MenuProps['items'] {
+    const result: MenuProps['items'] = []
+    for (const item of arr) {
+      let hasValidChild = false
+      const filteredChildren = item.children?.length ? getSubMenuItems(item.children) : []
+      // 检查过滤后的子项是否存在有效路径或有子元素
+      hasValidChild = filteredChildren!.some((child: any) => child?.path || child?.children.length)
+      // 当前项自身有效（即path存在） 或者 存在有效子项时，转换并保留该节点
+      if (item.path || hasValidChild) {
+        const newItem = {
+          label: t(item.meta!.title!),
+          key: item.onlyKey!,
+          path: item.path,
+          icon: item.meta?.icon && <SvgIcon name={item.meta?.icon} />,
+          children: filteredChildren?.length ? filteredChildren : undefined,
+        }
+        // 过滤掉含有空children的顶层对象
+        if (newItem.children?.length || newItem.path)
+          result.push(newItem)
       }
-    })
+    }
+    return result
   }
 
   const { pathname } = useLocation()
-  const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes)
+  const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes[0].children)
   const defaultActive = curRouteMeta?.activeMenu || pathname
   const nav = useNavigate()
 
@@ -149,11 +160,11 @@ export default function Top() {
       >
         {/* 顶部主导航+侧边次导航 */}
         { layoutMode === 'topSubSideNav' && (
-          <Menu className="xt-menu flex-1" mode="horizontal" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[mainMenuActive]} items={getMainMenuItems()} onClick={clickMainMenu} />
+          <Menu className="xt-menu flex-1" mode="horizontal" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[`${mainMenuActive}`]} items={getMainMenuItems()} onClick={clickMainMenu} />
         ) }
         {/* 只有顶部导航 */}
         { layoutMode === 'onlyTopNav' && (
-          <Menu className="xt-menu flex-1" mode="horizontal" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} items={getSubMenuItems(allSubmenus)} onClick={clickSubMenu} />
+          <Menu className="xt-menu flex-1" mode="horizontal" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} items={getSubMenuItems(allSubmenu)} onClick={clickSubMenu} />
         ) }
       </ConfigProvider>
 

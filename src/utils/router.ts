@@ -28,15 +28,15 @@ export function searchRoute(path: string, routes: RouteObject[] = []): RouteObje
  * @returns array
  */
 export function searchRouteMeta(path: string, routes: RouteObject[] = []): RouteMeta | undefined {
-  let meta: RouteMeta | undefined
   for (const item of routes) {
     if (item.path === path)
       return item.meta
-
-    if (item.children?.length)
-      meta = searchRouteMeta(path, item.children)
+    if (item.children?.length) {
+      const res = searchRouteMeta(path, item.children)
+      if (res)
+        return res
+    }
   }
-  return meta
 }
 
 // 路由元数据缓存（因为路由的meta信息是固定的，所以可采取缓存方案，优化性能）
@@ -46,6 +46,7 @@ export function getCatchRouteMeta(path: string, routes: RouteObject[] = []): Rou
     return routeMetadataCacheMap.get(path)
 
   const meta = searchRouteMeta(path, routes)
+
   routeMetadataCacheMap.set(path, meta)
   return meta
 }
