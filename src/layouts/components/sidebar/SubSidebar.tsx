@@ -79,10 +79,10 @@ export default function SubSidebar() {
     return result
   }
 
-  const { allMainMenu, allSubmenu } = useRouteLoaderData('layout') as ILayoutLoader
+  const { allMainMenu, allSubMenu } = useRouteLoaderData('layout') as ILayoutLoader
   function dealMenu() {
     if (['onlyTopNav', 'onlySubSideNav'].includes(layoutMode))
-      return allSubmenu
+      return allSubMenu
 
     else
       return allMainMenu[mainMenuActive].children

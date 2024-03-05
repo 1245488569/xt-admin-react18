@@ -56,3 +56,49 @@ export const SubSidebarWrapper = styled.div<ISubSidebarWrapper>`
     }
   }
 `
+
+interface IMainSidebarWrapper {
+  $customMainSidebarClass: {
+    menuContainerBgColor: string
+    menuTextColor: string
+    menuHoverBgColor: string
+    menuHoverTextColor: string
+    menuActiveBgColor: string
+    menuActiveTextColor: string
+    darkMenuContainerBgColor: string
+    darkMenuTextColor: string
+    darkMenuHoverBgColor: string
+    darkMenuHoverTextColor: string
+    darkMenuActiveBgColor: string
+    darkMenuActiveTextColor: string
+  }
+}
+
+export const MainSidebarMenuWrapper = styled.div<IMainSidebarWrapper>`
+  background: ${props => props.theme.isDark ? props.$customMainSidebarClass.darkMenuContainerBgColor : props.$customMainSidebarClass.menuContainerBgColor};
+
+  .main-sidebar-menu-container {
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .main-menu-item {
+    background: transparent;
+    color: ${props => props.theme.isDark ? props.$customMainSidebarClass.darkMenuTextColor : props.$customMainSidebarClass.menuTextColor};
+
+    &:hover {
+      background: ${props => props.theme.isDark ? props.$customMainSidebarClass.darkMenuHoverBgColor : props.$customMainSidebarClass.menuHoverBgColor};
+      color: ${props => props.theme.isDark ? props.$customMainSidebarClass.darkMenuHoverTextColor : props.$customMainSidebarClass.menuHoverTextColor};
+    }
+
+    &.is-active {
+      background: ${props => props.theme.isDark ? props.$customMainSidebarClass.darkMenuActiveBgColor : props.$customMainSidebarClass.menuActiveBgColor};
+      color: ${props => props.theme.isDark ? props.$customMainSidebarClass.darkMenuActiveTextColor : props.$customMainSidebarClass.menuActiveTextColor};
+    }
+  }
+`

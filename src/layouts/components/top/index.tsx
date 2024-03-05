@@ -2,6 +2,7 @@ import { useShallow } from 'zustand/react/shallow'
 import type { RouteObject } from 'react-router-dom'
 import { useRouteLoaderData } from 'react-router-dom'
 import type { MenuProps } from 'antd'
+import { isEmpty } from 'lodash'
 import Logo from '../logo'
 import { GlobalStyles, TopNavWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
@@ -32,7 +33,7 @@ export default function Top() {
     setMainMenuActive: state.setMainMenuActive,
   })))
 
-  const { allMainMenu, allSubmenu } = useRouteLoaderData('layout') as ILayoutLoader
+  const { allMainMenu, allSubMenu } = useRouteLoaderData('layout') as ILayoutLoader
   console.log('Top tsx allMainMenu', allMainMenu)
 
   const { t } = useTranslation()
@@ -121,6 +122,26 @@ export default function Top() {
   }
   const menuClass = customMenuClass()
 
+  useEffect(() => {
+    if (layoutMode === 'topSubSideNav') {
+      function findCurItemByPath(path: string, allSubMenu: RouteObject[]): RouteObject | undefined {
+        if (isEmpty(allSubMenu))
+          return undefined
+        for (const item of allSubMenu) {
+          if (item.path === path)
+            return item
+
+          if (!isEmpty(item.children)) {
+            const res = findCurItemByPath(path, item.children!)
+            if (res)
+              return res
+          }
+        }
+      }
+      setMainMenuActive(findCurItemByPath(pathname, allSubMenu)?.parentIndex ?? 0)
+    }
+  }, [allSubMenu, layoutMode, pathname, setMainMenuActive])
+
   return (
     <TopNavWrapper className="h-[var(--xt-top-nav-height)] flex flex-shrink-0 items-center px-4" $customMenuClass={menuClass}>
       <GlobalStyles $customMenuClass={menuClass} />
@@ -161,7 +182,7 @@ export default function Top() {
         ) }
         {/* 只有顶部导航 */}
         { layoutMode === 'onlyTopNav' && (
-          <Menu className="xt-menu flex-1" mode="horizontal" selectedKeys={[defaultActive]} items={getSubMenuItems(allSubmenu)} onClick={clickSubMenu} />
+          <Menu className="xt-menu flex-1" mode="horizontal" selectedKeys={[defaultActive]} items={getSubMenuItems(allSubMenu)} onClick={clickSubMenu} />
         ) }
       </ConfigProvider>
 

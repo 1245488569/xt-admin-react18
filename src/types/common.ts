@@ -3,6 +3,6 @@ import type { IPrivateRoutes } from 'types/router'
 
 export interface ILayoutLoader {
   permissions: string[]
-  allSubmenu: RouteObject[]
+  allSubMenu: RouteObject[]
   allMainMenu: IPrivateRoutes[]
 }

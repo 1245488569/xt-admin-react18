@@ -14,14 +14,14 @@ function getNoDealMenu() {
   return cloneRootRoutes[0].children?.find(item => item.id === 'layout')?.children || []
 }
 
-function generateallSubmenu(noDealMenu: RouteObject[], permissions: string[]) {
+function generateallSubMenu(noDealMenu: RouteObject[], permissions: string[]) {
   const menus: RouteObject[] = []
   for (const item of noDealMenu) {
     if (isEmpty(item.meta) && isEmpty(item.children))
       continue
 
     if (isEmpty(item.meta) && !isEmpty(item.children)) {
-      menus.push(...generateallSubmenu(item.children!, permissions))
+      menus.push(...generateallSubMenu(item.children!, permissions))
       continue
     }
 
@@ -41,7 +41,7 @@ function generateallSubmenu(noDealMenu: RouteObject[], permissions: string[]) {
       menus.push(obj)
 
       if (!isEmpty(item.children))
-        obj.children.push(...generateallSubmenu(item.children!, permissions))
+        obj.children.push(...generateallSubMenu(item.children!, permissions))
     }
   }
 
@@ -76,40 +76,40 @@ function generateNoAuthSubMenus(noDealMenu: RouteObject[]) {
   return menus
 }
 
-function generateAllMainMenu(allSubmenu: RouteObject[]) {
+function generateAllMainMenu(allSubMenu: RouteObject[]) {
   return privateRoutes.map((v) => {
     return {
       parentIndex: v.parentIndex,
       title: v.title,
       icon: v.icon,
-      children: allSubmenu.filter(k => k.parentIndex === v.parentIndex),
+      children: allSubMenu.filter(k => k.parentIndex === v.parentIndex),
     }
   })
 }
 
 export default async function LayoutLoader() {
   let permissions: string[] = []
-  let allSubmenu: RouteObject[] = []
+  let allSubMenu: RouteObject[] = []
   let allMainMenu: IPrivateRoutes[] = []
   if (useUserStore.getState().token && useSysConfigStore.getState().app.enablePermission) {
     permissions = await permissionApi()
     const noDealMenu = getNoDealMenu()
     console.log('noDealMenu', noDealMenu)
-    allSubmenu = generateallSubmenu(noDealMenu, permissions)
-    console.log('allSubmenu', allSubmenu)
+    allSubMenu = generateallSubMenu(noDealMenu, permissions)
+    console.log('allSubMenu', allSubMenu)
 
-    allMainMenu = generateAllMainMenu(allSubmenu)
+    allMainMenu = generateAllMainMenu(allSubMenu)
     console.log('mainMenu', allMainMenu)
   }
   else if (!useUserStore.getState().token) {
     const noDealMenu = getNoDealMenu()
-    allSubmenu = generateNoAuthSubMenus(noDealMenu)
-    console.log('NoAuthSubMenus', allSubmenu)
+    allSubMenu = generateNoAuthSubMenus(noDealMenu)
+    console.log('NoAuthSubMenus', allSubMenu)
   }
 
   return {
     permissions,
-    allSubmenu,
+    allSubMenu,
     allMainMenu,
   }
 }

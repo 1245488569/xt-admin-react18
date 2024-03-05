@@ -2,6 +2,7 @@ import { useShallow } from 'zustand/react/shallow'
 import classNames from 'classnames'
 import Top from './components/top'
 import SubSidebar from './components/sidebar/SubSidebar'
+import MainSidebar from './components/sidebar/MainSidebar'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
@@ -127,7 +128,7 @@ export function Component() {
           {
             showSidebar() && (
               <div className={siderBarClass}>
-                { showMainSidebar() && <div>main-sidebar组件</div> }
+                { showMainSidebar() && <MainSidebar /> }
                 { showSubSidebar() && <SubSidebar /> }
               </div>
             )
