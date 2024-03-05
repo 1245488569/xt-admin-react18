@@ -130,7 +130,7 @@ export default function Top() {
           Menu: {
             activeBarHeight: 0,
             horizontalItemBorderRadius: 8,
-            iconSize: 20,
+            iconSize: 16,
             iconMarginInlineEnd: 5, // 图标与文字间距
             // itemBg: menuClass?.menuContainerBgColor, // 菜单项背景色（整个菜单背景色）
             // itemColor: menuClass?.menuTextColor, // 菜单项文字颜色（整个菜单文字色）

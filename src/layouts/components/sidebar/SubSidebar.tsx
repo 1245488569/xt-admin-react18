@@ -55,7 +55,7 @@ export default function SubSidebar() {
   }
 
   const { t } = useTranslation()
-  function getSubMenuItems(arr: RouteObject[]): MenuProps['items'] {
+  function getSubMenuItems(arr: RouteObject[]) {
     const result: MenuProps['items'] = []
     for (const item of arr) {
       let hasValidChild = false
@@ -88,21 +88,55 @@ export default function SubSidebar() {
       return allMainMenu[mainMenuActive].children
   }
 
-  const nav = useNavigate()
-  const clickSubMenu: MenuProps['onClick'] = (e) => {
-    nav(e.key)
-  }
+  const menuItems = getSubMenuItems(dealMenu())
 
   const { pathname } = useLocation()
   const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes[0].children)
   const defaultActive = curRouteMeta?.activeMenu || pathname
 
+  const nav = useNavigate()
+  const clickSubMenu: MenuProps['onClick'] = (e) => {
+    if (e.key === defaultActive)
+      return
+    nav(e.key)
+  }
+
+  // 查找父级key
+  function findParentKeys(arr: any, path: string): string[] {
+    const result: string[] = []
+    for (const item of arr) {
+      if (item.children?.length) {
+        const find = findParentKeys(item.children, path)
+        if (find.length) {
+          result.push(item.key)
+          result.push(...find)
+        }
+      }
+      else if (item.path === path) {
+        result.push(item.key)
+      }
+    }
+    return result
+  }
+  const defaultOpenKeys = findParentKeys(menuItems, '/multimenu/one-two')
+  console.log('defaultOpenKeys', defaultOpenKeys)
+
   return (
     <SubSidebarWrapper className={classNames('flex flex-col', [subSidebarWidth()])} $customSubSidebarClass={menuClass}>
       { showLogo() && <Logo showLogoImage={layoutMode !== 'mainSubSideNav'} showLogoText={!(layoutMode === 'onlySubSideNav' && subMenuCollapse)} /> }
-      <div className="flex-1 overflow-hidden py-2 hover:overflow-y-auto">
-        <Menu className="xt-menu flex-1" mode="inline" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} defaultOpenKeys={[defaultActive]} items={getSubMenuItems(dealMenu())} onClick={clickSubMenu} />
-      </div>
+      <ConfigProvider theme={{
+        components: {
+          Menu: {
+            iconSize: 16,
+            iconMarginInlineEnd: 5, // 图标与文字间距
+          },
+        },
+      }}
+      >
+        <div className="flex-1 overflow-hidden py-2 hover:overflow-y-auto">
+          <Menu className="xt-menu flex-1" mode="inline" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} defaultOpenKeys={defaultOpenKeys} items={menuItems} onClick={clickSubMenu} />
+        </div>
+      </ConfigProvider>
     </SubSidebarWrapper>
   )
 }
