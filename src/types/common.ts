@@ -12,5 +12,6 @@ export interface ITabbarItem {
   search: string
   state: any | null
   meta: RouteMeta
+  key: string
 }
 export type ITabbarRemoveType = 'self' | 'otherOnce' | 'right' | 'left' | 'otherAll'

@@ -31,7 +31,7 @@ export const useTabbarStore = create<IState & IActions>()(
             }
           }
           else {
-            const isFind = state.list.some(item => item.pathname === tab.pathname)
+            const isFind = state.list.some(item => item.key === tab.key)
             if (!isFind) {
               const isMergeIndex = state.list.findIndex(item => tab.pathname === item.meta.mergeTabbarPath)
               if (isMergeIndex !== -1)

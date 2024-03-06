@@ -55,26 +55,41 @@ export default function Tabbar() {
       search: location.search,
       state: location.state,
       meta: curRouteMeta,
+      // 以pathname search state组成的唯一值
+      key: location.pathname + location.search + JSON.stringify(location.state),
     })
   }, [addTab, location.pathname, location.search, location.state])
 
   const dropdownMenus: MenuProps['items'] = [
     {
-      label: '1st menu item',
-      key: '1',
+      label: t('tabbar.refresh'),
+      key: 'refresh',
     },
     {
-      label: '2nd menu item',
-      key: '2',
+      label: t('tabbar.delete'),
+      key: 'delete',
     },
     {
-      label: '3rd menu item',
-      key: '3',
+      label: t('tabbar.deleteLeft'),
+      key: 'deleteLeft',
+    },
+    {
+      label: t('tabbar.deleteRight'),
+      key: 'deleteRight',
+    },
+    {
+      label: t('tabbar.deleteOther'),
+      key: 'deleteOther',
+      disabled: true,
     },
   ]
 
   const nav = useNavigate()
   function goTo(item: ITabbarItem) {
+    console.log('item', item)
+    if (location.pathname + location.search + JSON.stringify(item.state) === item.key)
+      return
+
     nav(item.pathname + item.search, {
       state: item.state,
     })
@@ -85,11 +100,11 @@ export default function Tabbar() {
       <div className="h-full flex px-2 py-1">
         {
         tabList.map(item => (
-          <Dropdown key={item.pathname} menu={{ items: dropdownMenus }} trigger={['contextMenu']}>
-            <div className={classNames('tabbar-item mr-2 h-full flex cursor-pointer items-center rounded-md px-2 duration-300', { active: item.pathname + item.search === location.pathname + location.search })} onClick={() => goTo(item)}>
-              <div className="w-[80px] flex items-center">
-                <span className="w-[60px] truncate">{ t(item.meta.title!) }</span>
-                { tabList.length > 1 && <span><SvgIcon name="ant-design:close-circle-outlined" className="h-14px w-14px" /></span> }
+          <Dropdown key={item.key} menu={{ items: dropdownMenus }} trigger={['contextMenu']}>
+            <div className={classNames('tabbar-item mr-2 h-full flex cursor-pointer items-center rounded-md px-2 duration-300', { active: item.key === location.pathname + location.search + JSON.stringify(item.state) })} onClick={() => goTo(item)}>
+              <div className="w-[100px] flex items-center">
+                <span className="w-[70px] truncate">{ t(item.meta.title!) }</span>
+                { tabList.length > 1 && <span className="ml-1"><SvgIcon name="ant-design:close-circle-outlined" className="h-14px w-14px" /></span> }
               </div>
             </div>
           </Dropdown>
