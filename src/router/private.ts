@@ -8,12 +8,12 @@ import multistepRoutes from './modules/multistep'
 export const privateRoutes: IPrivateRoutes[] = [
   {
     title: '演示',
-    icon: 'ep:apple',
+    icon: 'ant-design:appstore-outlined',
     children: [listRoutes, componentRoutes, multistepRoutes],
   },
   {
     title: '系统设置',
-    icon: 'ep:setting',
+    icon: 'ant-design:setting-outlined',
     children: [layoutTwoRoutes],
   },
 ]

@@ -4,15 +4,15 @@ interface ILogoWrapper {
   $customLogoClass: {
     logoTextColor: string
     darkLogoTextColor: string
-  } | undefined
+  }
 }
 
 export const LogoWrapper = styled(Link)<ILogoWrapper>`
   width: inherit;
-  color: ${props => props.theme.isDark ? props.$customLogoClass?.darkLogoTextColor : props.$customLogoClass?.logoTextColor};
+  color: ${props => props.theme.isDark ? props.$customLogoClass.darkLogoTextColor : props.$customLogoClass.logoTextColor};
   background: transparent;
 
   &:hover {
-    color: ${props => props.theme.isDark ? props.$customLogoClass?.darkLogoTextColor : props.$customLogoClass?.logoTextColor};
+    color: ${props => props.theme.isDark ? props.$customLogoClass.darkLogoTextColor : props.$customLogoClass.logoTextColor};
   }
 `

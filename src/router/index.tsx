@@ -53,6 +53,7 @@ export const rootRoutes: RouteObject[] = [
             path: '/demo1',
             lazy: () => import('@/views/demo1'),
             // element: <Suspense><Demo1 /></Suspense>,
+            parentIndex: 0,
             meta: {
               title: 'route.personal',
               isWhite: true,

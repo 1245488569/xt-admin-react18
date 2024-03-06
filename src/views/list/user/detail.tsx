@@ -1,3 +1,12 @@
 export function Component() {
-  return <div>UserDetail</div>
+  const loaction = useLocation()
+
+  console.log(loaction)
+
+  return (
+    <div>
+      UserDetail:
+      {loaction.state?.id}
+    </div>
+  )
 }

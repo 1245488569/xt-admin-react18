@@ -122,7 +122,7 @@ const sysGlobalConfig: IGlobalConfig = {
     // tabbar背景色
     tabbarBgColor: '#f2f3f5',
     // tabbarItem背景色
-    tabbarItemBgColor: '#f2f3f5',
+    tabbarItemBgColor: '#e9eaea',
     // 选中tabbarItem背景色
     tabbarItemActiveBgColor: '#ffffff',
     // 鼠标经过tabbarItem背景色
@@ -132,7 +132,7 @@ const sysGlobalConfig: IGlobalConfig = {
     // 选中tabbarItem文字色
     tabbarItemActiveTextColor: '#42b983',
     // 鼠标经过tabbarItem文字色
-    tabbarItemHoverTextColor: '#999',
+    tabbarItemHoverTextColor: '#42b983',
 
     // --------------toolbar----------------
     // toolbar背景色

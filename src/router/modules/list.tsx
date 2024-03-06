@@ -14,7 +14,7 @@ export default {
       lazy: () => import('@/views/list/user'),
       meta: {
         title: 'route.list.page1',
-        auth: 'user.read1',
+        auth: 'user.read',
       },
     },
     {

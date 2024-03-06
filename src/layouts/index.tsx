@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import Top from './components/top'
 import SubSidebar from './components/sidebar/SubSidebar'
 import MainSidebar from './components/sidebar/MainSidebar'
+import Tabbar from './components/tabbar'
+import Toolbar from './components/toolbar'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
@@ -136,8 +138,8 @@ export function Component() {
 
           <main className={classNames('main-box flex flex-1 flex-col overflow-x-hidden bg-[#f5f5f5] dark:bg-[var(--el-bg-color)]', { 'overflow-auto': navFixed })}>
             <div className={actionbarClass}>
-              { showTabbar && <div>tabbar组件</div> }
-              { showToolbar && <div>toolbar组件</div> }
+              { showTabbar && <Tabbar /> }
+              { showToolbar && <Toolbar /> }
             </div>
 
             <section className={viewContextClass}>

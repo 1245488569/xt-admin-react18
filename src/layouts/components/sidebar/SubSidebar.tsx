@@ -12,7 +12,7 @@ import { getCatchRouteMeta } from '@/utils/router'
 import { rootRoutes } from '@/router'
 
 export default function SubSidebar() {
-  const { layoutMode, colorScheme, subMenuCollapse, menuBgColor, menuTextColor, menuHoverBgColor, menuHoverTextColor, menuActiveBgColor, menuActiveTextColor } = useSysConfigStore(useShallow(state => ({
+  const { layoutMode, subMenuCollapse, menuBgColor, menuTextColor, menuHoverBgColor, menuHoverTextColor, menuActiveBgColor, menuActiveTextColor } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.app.layoutMode,
     colorScheme: state.colorScheme,
     subMenuCollapse: state.nav.subMenuCollapse,
@@ -96,7 +96,7 @@ export default function SubSidebar() {
 
   const nav = useNavigate()
   const clickSubMenu: MenuProps['onClick'] = (e) => {
-    if (e.key === defaultActive)
+    if (e.key === pathname)
       return
     nav(e.key)
   }
@@ -118,7 +118,7 @@ export default function SubSidebar() {
     }
     return result
   }
-  const defaultOpenKeys = findParentKeys(menuItems, '/multimenu/one-two')
+  const defaultOpenKeys = findParentKeys(menuItems, pathname)
   console.log('defaultOpenKeys', defaultOpenKeys)
 
   return (
@@ -134,7 +134,7 @@ export default function SubSidebar() {
       }}
       >
         <div className="flex-1 overflow-hidden py-2 hover:overflow-y-auto">
-          <Menu className="xt-menu flex-1" mode="inline" theme={colorScheme === 'dark' ? 'dark' : 'light'} selectedKeys={[defaultActive]} defaultOpenKeys={defaultOpenKeys} items={menuItems} onClick={clickSubMenu} />
+          <Menu className="xt-menu flex-1" mode="inline" selectedKeys={[defaultActive]} defaultOpenKeys={defaultOpenKeys} items={menuItems} onClick={clickSubMenu} />
         </div>
       </ConfigProvider>
     </SubSidebarWrapper>

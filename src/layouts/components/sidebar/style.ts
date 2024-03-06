@@ -20,9 +20,22 @@ interface ISubSidebarWrapper {
 export const SubSidebarWrapper = styled.div<ISubSidebarWrapper>`
   background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuContainerBgColor : props.$customSubSidebarClass.menuContainerBgColor};
 
+  .ant-menu {
+    color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuTextColor : props.$customSubSidebarClass.menuTextColor} !important;
+  }
+
   .xt-menu {
     background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuContainerBgColor : props.$customSubSidebarClass.menuContainerBgColor};
     color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuTextColor : props.$customSubSidebarClass.menuTextColor};
+    border-inline-end: none !important;
+
+    .ant-menu-sub.ant-menu-inline {
+      background: transparent;
+
+      .ant-menu-item, .ant-menu-submenu {
+        margin: 0 4px 2px;
+      }
+    }
 
     .ant-menu-item {
       background: transparent;
