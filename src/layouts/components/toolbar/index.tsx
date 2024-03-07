@@ -2,6 +2,10 @@ import { useShallow } from 'zustand/react/shallow'
 import SidebarCollapse from '../tools/SidebarCollapse'
 import ChangeSize from '../tools/ChangeSize'
 import Reload from '../tools/Reload'
+import LangSelect from '../tools/LangSelect'
+import Screenfull from '../tools/Screenfull'
+import ChangeColorScheme from '../tools/ChangeColorScheme'
+import ChangeTheme from '../tools/ChangeTheme'
 import { ToolbarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 
@@ -24,8 +28,8 @@ export default function Toolbar() {
     return {
       toolbarBgColor,
       toolbarTextColor,
-      darkToolbarBgColor: 'var(--xt-tabbar-bg-color)',
-      darkToolbarTextColor: 'var(--xt-tabbar-item-bg-color)',
+      darkToolbarBgColor: 'var(--xt-toolbar-bg-color)',
+      darkToolbarTextColor: 'var(--xt-toolbar-text-color)',
     }
   }
 
@@ -38,6 +42,10 @@ export default function Toolbar() {
       <div className="ml-auto flex items-center">
         { enableElementSize && <ChangeSize className="mr-2" /> }
         { enablePageReload && <Reload className="mr-2" /> }
+        { enableI18n && <LangSelect className="mr-2" /> }
+        { enableFullscreen && <Screenfull className="mr-2" /> }
+        { enableColorScheme && <ChangeColorScheme className="mr-2" /> }
+        { enableChangeTheme && <ChangeTheme className="mr-2" /> }
       </div>
     </ToolbarWrapper>
   )
