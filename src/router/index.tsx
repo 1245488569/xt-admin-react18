@@ -65,6 +65,10 @@ export const rootRoutes: RouteObject[] = [
             lazy: () => import('@/views/demo2'),
           },
           ...privateRoutes,
+          {
+            path: '/reload',
+            lazy: () => import('@/views/reload'),
+          },
         ],
       },
       {

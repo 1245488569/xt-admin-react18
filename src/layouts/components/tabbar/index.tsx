@@ -6,7 +6,7 @@ import { useSysConfigStore } from '@/stores/config'
 import { getCatchRouteMeta } from '@/utils/router'
 import { rootRoutes } from '@/router'
 import { useTabbarStore } from '@/stores/tabbar'
-import type { ITabbarItem } from '@/types/common'
+import type { ITabbarItem, ITabbarRemoveType } from '@/types/common'
 
 export default function Tabbar() {
   const { tabbarBgColor, tabbarItemBgColor, tabbarItemActiveBgColor, tabbarItemHoverBgColor, tabbarItemTextColor, tabbarItemActiveTextColor, tabbarItemHoverTextColor } = useSysConfigStore(useShallow(state => ({
@@ -19,9 +19,10 @@ export default function Tabbar() {
     tabbarItemHoverTextColor: state.theme.tabbarItemHoverTextColor,
   })))
 
-  const { tabList, addTab } = useTabbarStore(useShallow(state => ({
+  const { tabList, addTab, removeTab } = useTabbarStore(useShallow(state => ({
     tabList: state.list,
     addTab: state.add,
+    removeTab: state.remove,
   })))
 
   function customTabbarClass() {
@@ -60,34 +61,10 @@ export default function Tabbar() {
     })
   }, [addTab, location.pathname, location.search, location.state])
 
-  const dropdownMenus: MenuProps['items'] = [
-    {
-      label: t('tabbar.refresh'),
-      key: 'refresh',
-    },
-    {
-      label: t('tabbar.delete'),
-      key: 'delete',
-    },
-    {
-      label: t('tabbar.deleteLeft'),
-      key: 'deleteLeft',
-    },
-    {
-      label: t('tabbar.deleteRight'),
-      key: 'deleteRight',
-    },
-    {
-      label: t('tabbar.deleteOther'),
-      key: 'deleteOther',
-      disabled: true,
-    },
-  ]
-
   const nav = useNavigate()
   function goTo(item: ITabbarItem) {
     console.log('item', item)
-    if (location.pathname + location.search + JSON.stringify(item.state) === item.key)
+    if (location.pathname + location.search + JSON.stringify(location.state) === item.key)
       return
 
     nav(item.pathname + item.search, {
@@ -95,16 +72,73 @@ export default function Tabbar() {
     })
   }
 
+  function closeTab(e: React.MouseEvent<HTMLSpanElement, MouseEvent>, index: number) {
+    e.stopPropagation()
+    const activeIndex = tabList.findIndex(item => item.key === location.pathname + location.search + JSON.stringify(location.state))
+    if (activeIndex === index)
+      removeTab('self', index, activeIndex)
+
+    else
+      removeTab('otherOnce', index, activeIndex)
+  }
+
+  const activeIndex = tabList.findIndex(item => item.key === location.pathname + location.search + JSON.stringify(location.state))
+  function contextMenuCloseTab(index: number, type?: ITabbarRemoveType) {
+    if (!type) {
+      if (index === activeIndex)
+        type = 'self'
+      else
+        type = 'otherOnce'
+    }
+
+    removeTab(type, index, activeIndex)
+  }
+
+  function renderContextMenu(index: number): MenuProps['items'] {
+    return [
+      {
+        label: t('tabbar.refresh'),
+        key: 'refresh',
+        disabled: index !== activeIndex,
+        onClick: () => nav('/reload'),
+      },
+      {
+        label: t('tabbar.delete'),
+        key: 'deleteOnce',
+        disabled: tabList.length <= 1,
+        onClick: () => contextMenuCloseTab(index),
+      },
+      {
+        label: t('tabbar.deleteLeft'),
+        key: 'deleteLeft',
+        disabled: index === 0,
+        onClick: () => contextMenuCloseTab(index, 'left'),
+      },
+      {
+        label: t('tabbar.deleteRight'),
+        key: 'deleteRight',
+        disabled: index === tabList.length - 1,
+        onClick: () => contextMenuCloseTab(index, 'right'),
+      },
+      {
+        label: t('tabbar.deleteOther'),
+        key: 'deleteOther',
+        disabled: tabList.length <= 1,
+        onClick: () => contextMenuCloseTab(index, 'otherAll'),
+      },
+    ]
+  }
+
   return (
     <TabbarWrapper className="h-[var(--xt-tabbar-height)] w-full flex items-center overflow-hidden whitespace-nowrap text-xs" $customTabbarClass={customTabbarClass()}>
       <div className="h-full flex px-2 py-1">
         {
-        tabList.map(item => (
-          <Dropdown key={item.key} menu={{ items: dropdownMenus }} trigger={['contextMenu']}>
-            <div className={classNames('tabbar-item mr-2 h-full flex cursor-pointer items-center rounded-md px-2 duration-300', { active: item.key === location.pathname + location.search + JSON.stringify(item.state) })} onClick={() => goTo(item)}>
+        tabList.map((tab, index) => (
+          <Dropdown key={tab.key} menu={{ items: renderContextMenu(index) }} trigger={['contextMenu']}>
+            <div className={classNames('tabbar-item mr-2 h-full flex cursor-pointer items-center rounded-md px-2 duration-300', { active: tab.key === location.pathname + location.search + JSON.stringify(location.state) })} onClick={() => goTo(tab)}>
               <div className="w-[100px] flex items-center">
-                <span className="w-[70px] truncate">{ t(item.meta.title!) }</span>
-                { tabList.length > 1 && <span className="ml-1"><SvgIcon name="ant-design:close-circle-outlined" className="h-14px w-14px" /></span> }
+                <span className="w-[70px] truncate">{ t(tab.meta.title!) }</span>
+                { tabList.length > 1 && <span className="ml-1" onClick={e => closeTab(e, index)}><SvgIcon name="ant-design:close-circle-outlined" className="h-14px w-14px" /></span> }
               </div>
             </div>
           </Dropdown>

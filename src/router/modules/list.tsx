@@ -26,7 +26,7 @@ export default {
         hideInMenu: true,
         hideInSearch: true,
         activeMenu: '/list/user',
-        // mergeTabbarPath: '/list/user',
+        mergeTabbarPath: '/list/user',
         auth: 'user.detail',
       },
     },

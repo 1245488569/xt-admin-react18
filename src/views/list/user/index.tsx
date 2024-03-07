@@ -2,7 +2,9 @@ export function Component() {
   const nav = useNavigate()
 
   const goTo = (id: number) => {
-    nav(`/list/user/detail?id=${id}`)
+    nav(`/list/user/detail`, {
+      state: { id },
+    })
   }
   return (
     <div>

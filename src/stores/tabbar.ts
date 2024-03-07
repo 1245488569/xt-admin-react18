@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import type { ITabbarItem, ITabbarRemoveType } from '@/types/common'
+import router from '@/router'
 
 interface IState {
   list: ITabbarItem[]
@@ -46,6 +47,46 @@ export const useTabbarStore = create<IState & IActions>()(
       remove: (type, clickIndex, activeIndex) => {
         set((state) => {
           console.log(type, clickIndex, activeIndex, state.list)
+          switch (type) {
+            case 'self':
+              if (clickIndex < state.list.length - 1) {
+                const tab = state.list[clickIndex + 1]
+                router.navigate(tab.pathname + tab.search, { state: tab.state })
+              }
+              else {
+                const tab = state.list[clickIndex - 1]
+                router.navigate(tab.pathname + tab.search, { state: tab.state })
+              }
+              state.list.splice(clickIndex, 1)
+              break
+            case 'otherOnce':
+              state.list.splice(clickIndex, 1)
+              break
+            case 'left': {
+              if (activeIndex < clickIndex) {
+                const tab = state.list[clickIndex]
+                router.navigate(tab.pathname + tab.search, { state: tab.state })
+              }
+              state.list.splice(0, clickIndex)
+              break
+            }
+            case 'right': {
+              if (activeIndex > clickIndex) {
+                const tab = state.list[clickIndex]
+                router.navigate(tab.pathname + tab.search, { state: tab.state })
+              }
+              state.list.splice(clickIndex + 1, state.list.length - (clickIndex + 1))
+              break
+            }
+            case 'otherAll': {
+              if (activeIndex !== clickIndex) {
+                const tab = state.list[clickIndex]
+                router.navigate(tab.pathname + tab.search, { state: tab.state })
+              }
+              state.list = state.list.filter(item => item.key === state.list[clickIndex].key)
+              break
+            }
+          }
         })
       },
     }),

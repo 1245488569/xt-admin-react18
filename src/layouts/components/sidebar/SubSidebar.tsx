@@ -3,6 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import type { RouteObject } from 'react-router-dom'
 import { useRouteLoaderData } from 'react-router-dom'
 import type { MenuProps } from 'antd'
+import Logo from '../logo'
 import { SubSidebarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 import type { ILayoutLoader } from '@/types/common'
@@ -49,6 +50,10 @@ export default function SubSidebar() {
   }
   const menuClass = customMenuClass()
 
+  function showLogo() {
+    return ['onlySubSideNav', 'mainSubSideNav'].includes(layoutMode)
+  }
+
   const { t } = useTranslation()
   function getSubMenuItems(arr: RouteObject[]) {
     const result: MenuProps['items'] = []
@@ -84,7 +89,6 @@ export default function SubSidebar() {
   }
 
   const menuItems = getSubMenuItems(dealMenu())
-  console.log('menuItems', menuItems)
 
   const { pathname } = useLocation()
   const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes[0].children)
@@ -97,46 +101,48 @@ export default function SubSidebar() {
     nav(e.key)
   }
 
-  type MenuItem = Required<MenuProps>['items'][number]
-  function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-  ): MenuItem {
-    return {
-      key,
-      icon,
-      children,
-      label,
-    } as MenuItem
+  // 查找父级key, 不包括自己
+  function findParentKeys(arr: any, key: string): string[] {
+    let result: string[] = []
+    for (const item of arr) {
+      if (item.children?.length) {
+        if (item.children.some((child: any) => child.key === key)) {
+          result = [item.key]
+          break
+        }
+        else {
+          result = findParentKeys(item.children, key)
+          if (result.length) {
+            result.unshift(item.key)
+            break
+          }
+        }
+      }
+    }
+    return result
   }
+  // function findParentKeys(arr: any, path: string): string[] {
+  //   const result: string[] = []
+  //   for (const item of arr) {
+  //     if (item.children?.length) {
+  //       const find = findParentKeys(item.children, path)
+  //       if (find.length) {
+  //         result.push(item.key)
+  //         result.push(...find)
+  //       }
+  //     }
+  //     else if (item.path === path) {
+  //       result.push(item.key)
+  //     }
+  //   }
+  //   return result
+  // }
 
-  const items: MenuProps['items'] = [
-    getItem('Navigation One', 'sub1', null, [
-      getItem('Item 1', 'g1', null, [getItem('Option 1', '/')]),
-      getItem('Item 2', 'g2', null, [getItem('Option 3', '/demo1')]),
-    ]),
-
-    getItem('Navigation Two', 'sub2', null, [
-      getItem('Option 5', '5'),
-      getItem('Option 6', '6'),
-      getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
-    ]),
-    getItem('Navigation Three', 'sub4', null, [
-      getItem('Option 9', '9'),
-      getItem('Option 10', '10'),
-      getItem('Option 11', '11'),
-      getItem('Option 12', '12'),
-    ]),
-
-    getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')]),
-  ]
-
-  const [openKeys, setOpenKeys] = useState(['sub1', 'g1'])
+  const defaultOpenKeys = findParentKeys(menuItems, curRouteMeta?.activeMenu || pathname)
 
   return (
     <SubSidebarWrapper className={classNames('flex flex-col', [subSidebarWidth()])} $customSubSidebarClass={menuClass}>
+      { showLogo() && <Logo showLogoImage={layoutMode !== 'mainSubSideNav'} showLogoText={!(layoutMode === 'onlySubSideNav' && subMenuCollapse)} /> }
       <ConfigProvider theme={{
         components: {
           Menu: {
@@ -147,7 +153,7 @@ export default function SubSidebar() {
       }}
       >
         <div className="flex-1 overflow-hidden py-2 hover:overflow-y-auto">
-          <Menu className="xt-menu flex-1" mode="inline" selectedKeys={[defaultActive]} openKeys={openKeys} items={items} onClick={clickSubMenu} onOpenChange={(e) => { setOpenKeys(e) }} />
+          <Menu className="xt-menu flex-1" mode="inline" selectedKeys={[defaultActive]} defaultOpenKeys={defaultOpenKeys} items={menuItems} onClick={clickSubMenu} />
         </div>
       </ConfigProvider>
     </SubSidebarWrapper>
