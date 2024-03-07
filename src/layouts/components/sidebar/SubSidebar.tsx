@@ -4,6 +4,7 @@ import type { RouteObject } from 'react-router-dom'
 import { useRouteLoaderData } from 'react-router-dom'
 import type { MenuProps } from 'antd'
 import Logo from '../logo'
+import { GlobalStyles } from '../top/style'
 import { SubSidebarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 import type { ILayoutLoader } from '@/types/common'
@@ -34,6 +35,7 @@ export default function SubSidebar() {
 
   function customMenuClass() {
     return {
+      // menuCollapsed: subSidebarWidth(),
       menuContainerBgColor: menuBgColor,
       menuTextColor,
       menuHoverBgColor,
@@ -68,8 +70,9 @@ export default function SubSidebar() {
           label: t(item.meta!.title!),
           key: item.onlyKey!,
           path: item.path,
-          icon: item.meta?.icon && <SvgIcon name={item.meta?.icon} />,
+          icon: item.meta?.icon && <SvgIcon name={item.meta?.icon} size={20} />,
           children: filteredChildren?.length ? filteredChildren : undefined,
+          popupClassName: 'xt-admin-popup-menu',
         }
         // 过滤掉含有空children的顶层对象
         if (newItem.children?.length || newItem.path)
@@ -141,19 +144,19 @@ export default function SubSidebar() {
   const defaultOpenKeys = findParentKeys(menuItems, curRouteMeta?.activeMenu || pathname)
 
   return (
-    <SubSidebarWrapper className={classNames('flex flex-col', [subSidebarWidth()])} $customSubSidebarClass={menuClass}>
+    <SubSidebarWrapper className={classNames('flex flex-col', [subSidebarWidth()])} $customMenuClass={menuClass}>
+      <GlobalStyles $customMenuClass={menuClass} />
       { showLogo() && <Logo showLogoImage={layoutMode !== 'mainSubSideNav'} showLogoText={!(layoutMode === 'onlySubSideNav' && subMenuCollapse)} /> }
       <ConfigProvider theme={{
         components: {
           Menu: {
-            iconSize: 16,
             iconMarginInlineEnd: 5, // 图标与文字间距
           },
         },
       }}
       >
         <div className="flex-1 overflow-hidden py-2 hover:overflow-y-auto">
-          <Menu className="xt-menu flex-1" mode="inline" selectedKeys={[defaultActive]} defaultOpenKeys={defaultOpenKeys} items={menuItems} onClick={clickSubMenu} />
+          <Menu className="xt-menu flex-1" mode="inline" inlineCollapsed={subMenuCollapse} selectedKeys={[defaultActive]} defaultOpenKeys={defaultOpenKeys} items={menuItems} onClick={clickSubMenu} />
         </div>
       </ConfigProvider>
     </SubSidebarWrapper>

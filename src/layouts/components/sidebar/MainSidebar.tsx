@@ -75,7 +75,7 @@ export default function MainSidebar() {
         <ul>
           {allMainMenu.map((item, index) => (
             <li key={index} className={classNames('main-menu-item mx-2 mb-1 h-[var(--xt-main-sidebar-item-height)] flex flex-col cursor-pointer items-center justify-center rounded-lg px-1 text-14px', { 'is-active': item.parentIndex === mainMenuActive })} onClick={() => clickMainMenu(item.parentIndex!)}>
-              <SvgIcon name={item.icon} className="h-[20px] w-[20px]" />
+              <SvgIcon name={item.icon} size={20} />
               <span className="w-full truncate text-center" title={t(item.title)}>{t(item.title)}</span>
             </li>
           ))}

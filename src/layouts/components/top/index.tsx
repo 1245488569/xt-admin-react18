@@ -42,7 +42,7 @@ export default function Top() {
       return {
         label: t(k.title),
         key: `${k.parentIndex!}`,
-        icon: <SvgIcon name={k.icon} />,
+        icon: <SvgIcon name={k.icon} size={16} />,
       }
     })
   }
@@ -65,7 +65,7 @@ export default function Top() {
           label: t(item.meta!.title!),
           key: item.onlyKey!,
           path: item.path,
-          icon: item.meta?.icon && <SvgIcon name={item.meta?.icon} />,
+          icon: item.meta?.icon && <SvgIcon name={item.meta?.icon} size={16} />,
           children: filteredChildren?.length ? filteredChildren : undefined,
           popupClassName: 'xt-admin-popup-menu',
         }
@@ -151,7 +151,6 @@ export default function Top() {
           Menu: {
             activeBarHeight: 0,
             horizontalItemBorderRadius: 8,
-            iconSize: 16,
             iconMarginInlineEnd: 5, // 图标与文字间距
             // itemBg: menuClass?.menuContainerBgColor, // 菜单项背景色（整个菜单背景色）
             // itemColor: menuClass?.menuTextColor, // 菜单项文字颜色（整个菜单文字色）

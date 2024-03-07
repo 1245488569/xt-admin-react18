@@ -4,15 +4,16 @@ interface IProps {
   name: string
   className?: string
   prefix?: string
+  size?: number
 }
 
 export default function SvgIcon(props: IProps) {
-  const { name, className, prefix = 'icon' } = props
+  const { name, className, prefix = 'icon', size = 14 } = props
   return (
     name.includes(':')
-      ? <Icon className={`overflow-hidden fill-[currentcolor] ${className}`} icon={name} />
+      ? <Icon className={`overflow-hidden fill-[currentcolor] ${className}`} style={{ width: `${size}px`, height: `${size}px` }} icon={name} />
       : (
-        <svg className={`overflow-hidden fill-[currentcolor] ${className}`} aria-hidden="true">
+        <svg className={`overflow-hidden fill-[currentcolor] ${className}`} style={{ width: `${size}px`, height: `${size}px` }} aria-hidden="true">
           <use xlinkHref={`#${prefix}-${name}`} />
         </svg>
         )

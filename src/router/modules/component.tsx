@@ -3,6 +3,7 @@ import type { RouteObject } from 'react-router-dom'
 export default {
   meta: {
     title: '组件',
+    icon: 'ant-design:mac-command-filled',
   },
   children: [
     {

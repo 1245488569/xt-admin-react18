@@ -57,6 +57,7 @@ export const rootRoutes: RouteObject[] = [
             meta: {
               title: 'route.personal',
               isWhite: true,
+              icon: 'ri:home-heart-fill',
             },
           },
           {

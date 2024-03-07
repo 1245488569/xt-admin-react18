@@ -19,8 +19,9 @@ function App() {
   const [locale, setLocale] = useState(zhCN)
   const [loading, setLoading] = useState(true)
 
-  const { colorScheme } = useSysConfigStore(useShallow(state => ({
+  const { colorScheme, elementSize } = useSysConfigStore(useShallow(state => ({
     colorScheme: state.colorScheme,
+    elementSize: state.elementSize,
   })))
 
   const isDark = colorScheme === 'dark'
@@ -47,7 +48,7 @@ function App() {
     return <div>loading...</div>
 
   return (
-    <ConfigProvider locale={locale} theme={{ cssVar: true, hashed: false, algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
+    <ConfigProvider locale={locale} componentSize={elementSize} theme={{ cssVar: true, hashed: false, algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
       <ThemeProvider theme={{ isDark }}>
         <AntdApp component={false}>
           <AntdGlobal />
@@ -55,9 +56,7 @@ function App() {
           <RouterProvider router={router} fallbackElement={<Fragment />} />
         </AntdApp>
       </ThemeProvider>
-
     </ConfigProvider>
-
   )
 }
 

@@ -6,6 +6,7 @@ import type { RouteObject } from 'react-router-dom'
 export default {
   meta: {
     title: 'route.list.root',
+    icon: 'ant-design:hdd-filled',
   },
   children: [
     {

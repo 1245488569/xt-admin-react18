@@ -138,7 +138,7 @@ export default function Tabbar() {
             <div className={classNames('tabbar-item mr-2 h-full flex cursor-pointer items-center rounded-md px-2 duration-300', { active: tab.key === location.pathname + location.search + JSON.stringify(location.state) })} onClick={() => goTo(tab)}>
               <div className="w-[100px] flex items-center">
                 <span className="w-[70px] truncate">{ t(tab.meta.title!) }</span>
-                { tabList.length > 1 && <span className="ml-1" onClick={e => closeTab(e, index)}><SvgIcon name="ant-design:close-circle-outlined" className="h-14px w-14px" /></span> }
+                { tabList.length > 1 && <span className="ml-1" onClick={e => closeTab(e, index)}><SvgIcon name="ant-design:close-circle-outlined" size={14} /></span> }
               </div>
             </div>
           </Dropdown>

@@ -9,12 +9,12 @@ const sysGlobalConfig: IGlobalConfig = {
   /**
    * Element 组件尺寸
    * 这里有和主内容区默认文字大小关联
-   * 可选：large、default、small
+   * 可选：large、middle、small
    * large 主内容区默认文字大小 16px
-   * default 主内容区默认文字大小 14px
+   * middle 主内容区默认文字大小 14px
    * small 主内容区默认文字大小 12px
    */
-  elementSize: 'default',
+  elementSize: 'middle',
   /**
    * 颜色方案
    * light 明亮模式

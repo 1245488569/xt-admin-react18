@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface ISubSidebarWrapper {
-  $customSubSidebarClass: {
+  $customMenuClass: {
     menuContainerBgColor: string
     menuTextColor: string
     menuHoverBgColor: string
@@ -18,15 +18,19 @@ interface ISubSidebarWrapper {
 }
 
 export const SubSidebarWrapper = styled.div<ISubSidebarWrapper>`
-  background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuContainerBgColor : props.$customSubSidebarClass.menuContainerBgColor};
+  background: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuContainerBgColor : props.$customMenuClass.menuContainerBgColor};
+
+  .ant-menu-inline-collapsed {
+    width: auto;
+  }
 
   .ant-menu {
-    color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuTextColor : props.$customSubSidebarClass.menuTextColor} !important;
+    color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuTextColor : props.$customMenuClass.menuTextColor} !important;
   }
 
   .xt-menu {
-    background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuContainerBgColor : props.$customSubSidebarClass.menuContainerBgColor};
-    color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuTextColor : props.$customSubSidebarClass.menuTextColor};
+    background: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuContainerBgColor : props.$customMenuClass.menuContainerBgColor};
+    color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuTextColor : props.$customMenuClass.menuTextColor};
     border-inline-end: none !important;
 
     .ant-menu-sub.ant-menu-inline {
@@ -39,32 +43,32 @@ export const SubSidebarWrapper = styled.div<ISubSidebarWrapper>`
 
     .ant-menu-item {
       background: transparent;
-      color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuTextColor : props.$customSubSidebarClass.menuTextColor};
+      color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuTextColor : props.$customMenuClass.menuTextColor};
 
       &:hover {
-        background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuHoverBgColor : props.$customSubSidebarClass.menuHoverBgColor} !important;
-        color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuHoverTextColor : props.$customSubSidebarClass.menuHoverTextColor} !important;
+        background: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuHoverBgColor : props.$customMenuClass.menuHoverBgColor} !important;
+        color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuHoverTextColor : props.$customMenuClass.menuHoverTextColor} !important;
       }
 
       &.ant-menu-item-selected {
-        background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuActiveBgColor : props.$customSubSidebarClass.menuActiveBgColor};
-        color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuActiveTextColor : props.$customSubSidebarClass.menuActiveTextColor};
+        background: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuActiveBgColor : props.$customMenuClass.menuActiveBgColor};
+        color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuActiveTextColor : props.$customMenuClass.menuActiveTextColor};
       }
     }
 
     .ant-menu-submenu {
       background: transparent;
-      /* color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuTextColor : props.$customSubSidebarClass.menuTextColor}; */
+      /* color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuTextColor : props.$customMenuClass.menuTextColor}; */
 
       .ant-menu-submenu-title {
         &:hover {
-          background: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuHoverBgColor : props.$customSubSidebarClass.menuHoverBgColor};
-          color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuHoverTextColor : props.$customSubSidebarClass.menuHoverTextColor};
+          background: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuHoverBgColor : props.$customMenuClass.menuHoverBgColor};
+          color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuHoverTextColor : props.$customMenuClass.menuHoverTextColor};
         } 
       }
 
       .ant-menu-submenu-selected {
-        color: ${props => props.theme.isDark ? props.$customSubSidebarClass.darkMenuActiveBgColor : props.$customSubSidebarClass.menuActiveBgColor};
+        color: ${props => props.theme.isDark ? props.$customMenuClass.darkMenuActiveBgColor : props.$customMenuClass.menuActiveBgColor};
       }
     }
   }

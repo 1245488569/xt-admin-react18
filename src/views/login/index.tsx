@@ -46,11 +46,11 @@ export function Component() {
 
           <Form autoComplete="off" onFinish={onFinish}>
             <Form.Item name="account" rules={[{ required: true, message: t('login.accountRequired') }, { min: 3, max: 20, message: t('login.accountLength') }]}>
-              <Input placeholder={t('login.account')} prefix={<SvgIcon name="ant-design:user-outlined" />} />
+              <Input placeholder={t('login.account')} prefix={<SvgIcon name="ant-design:user-outlined" size={16} />} />
             </Form.Item>
 
             <Form.Item name="password" rules={[{ required: true, message: t('login.passwordRquired') }, { min: 6, max: 20, message: t('login.passwordLength') }]}>
-              <Input.Password placeholder={t('login.password')} prefix={<SvgIcon name="ant-design:lock-outlined" />} />
+              <Input.Password placeholder={t('login.password')} prefix={<SvgIcon name="ant-design:lock-outlined" size={16} />} />
             </Form.Item>
 
             <Form.Item>

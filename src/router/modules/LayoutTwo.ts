@@ -8,6 +8,7 @@ export default {
       lazy: () => import('@/views/layout-two/page1'),
       meta: {
         title: 'page1',
+        icon: 'ant-design:layout-filled',
       },
     },
     {
@@ -15,6 +16,7 @@ export default {
       lazy: () => import('@/views/layout-two/page2'),
       meta: {
         title: 'page2',
+        icon: 'ant-design:project-filled',
       },
     },
   ],

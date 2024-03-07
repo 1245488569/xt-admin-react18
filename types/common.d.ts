@@ -1,5 +1,5 @@
 type Language = 'zhCn' | 'zhTw' | 'en'
-type ElementSize = 'large' | 'default' | 'small'
+type ElementSize = 'large' | 'middle' | 'small'
 type LayoutMode = 'onlyTopNav' | 'onlySubSideNav' | 'mainSubSideNav' | 'topSubSideNav'
 type ColorScheme = 'light' | 'dark'
 // type RouteMode = 'frontend' | 'backend'

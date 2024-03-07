@@ -3,7 +3,7 @@ import type { RouteObject } from 'react-router-dom'
 export default {
   meta: {
     title: 'route.multimenu.root',
-    icon: 'ri:menu-3-line',
+    icon: 'ant-design:signal-filled',
   },
   children: [
     {

@@ -10,6 +10,8 @@ interface IActions {
   setEnableDynamicTitle: (payload: boolean) => void // 开/关动态标题
   setDefaultLanguage: (payload: Language) => void // 切换默认语言
   setColorScheme: (payload: ColorScheme) => void // 切换颜色方案
+  setSubMenuCollapse: (payload: boolean) => void // 开/关子菜单收起
+  setElementSize: (payload: ElementSize) => void // 切换框架元素大小
 }
 
 export const useSysConfigStore = create<IGlobalConfig & IActions>()(
@@ -36,6 +38,16 @@ export const useSysConfigStore = create<IGlobalConfig & IActions>()(
         setColorScheme: (payload) => {
           set((state) => {
             state.colorScheme = payload
+          })
+        },
+        setSubMenuCollapse: (payload) => {
+          set(produce((state: IGlobalConfig) => {
+            state.nav.subMenuCollapse = payload
+          }))
+        },
+        setElementSize: (payload) => {
+          set((state) => {
+            state.elementSize = payload
           })
         },
       }), {
