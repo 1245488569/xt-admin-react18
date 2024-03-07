@@ -42,24 +42,6 @@ export function Component() {
     setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
   }
 
-  useEffect(() => {
-    const cancelSub = useSysConfigStore.subscribe(
-      state => state.colorScheme,
-      (colorScheme) => {
-        if (colorScheme === 'dark')
-          document.documentElement.classList.add('dark')
-
-        else
-          document.documentElement.classList.remove('dark')
-      },
-      {
-        equalityFn: shallow,
-        fireImmediately: true,
-      },
-    )
-    return () => cancelSub()
-  }, [colorScheme])
-
   return (
     <div>
       <h2>

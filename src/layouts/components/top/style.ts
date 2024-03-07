@@ -31,6 +31,9 @@ export const TopNavWrapper = styled.div<IMenuWrapper>`
       margin-right: 8px;
       background: transparent;
       color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuTextColor : props.$customMenuClass?.menuTextColor};
+      .ant-menu-submenu-title {
+        color: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuTextColor : props.$customMenuClass?.menuTextColor};
+      }
 
       &:hover {
         background: ${props => props.theme.isDark ? props.$customMenuClass?.darkMenuHoverBgColor : props.$customMenuClass?.menuHoverBgColor};

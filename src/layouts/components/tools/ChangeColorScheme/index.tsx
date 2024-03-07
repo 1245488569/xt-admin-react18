@@ -1,4 +1,5 @@
 import { useShallow } from 'zustand/react/shallow'
+import { shallow } from 'zustand/shallow'
 import { useSysConfigStore } from '@/stores/config'
 
 interface IProps {
@@ -15,6 +16,24 @@ export default function ChangeColorScheme(props: IProps) {
   function toggleClick() {
     setColorScheme(colorScheme === 'light' ? 'dark' : 'light')
   }
+
+  useEffect(() => {
+    const cancelSub = useSysConfigStore.subscribe(
+      state => state.colorScheme,
+      (colorScheme) => {
+        if (colorScheme === 'dark')
+          document.documentElement.classList.add('dark')
+
+        else
+          document.documentElement.classList.remove('dark')
+      },
+      {
+        equalityFn: shallow,
+        fireImmediately: true,
+      },
+    )
+    return () => cancelSub()
+  }, [colorScheme])
 
   return (
     <div className={`${className}`} onClick={toggleClick}>

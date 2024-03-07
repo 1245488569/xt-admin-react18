@@ -5,17 +5,19 @@ import SubSidebar from './components/sidebar/SubSidebar'
 import MainSidebar from './components/sidebar/MainSidebar'
 import Tabbar from './components/tabbar'
 import Toolbar from './components/toolbar'
+import Setting from './components/tools/Setting'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
   console.log('Layout tsx')
-  const { layoutMode, navFixed, subMenuCollapse, showToolbar, showTabbar, elementSize } = useSysConfigStore(useShallow(state => ({
+  const { layoutMode, navFixed, subMenuCollapse, showToolbar, showTabbar, elementSize, enableAppSetting } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.app.layoutMode,
     navFixed: state.nav.fixed,
     subMenuCollapse: state.nav.subMenuCollapse,
     showToolbar: state.toolbar.enable,
     showTabbar: state.tabbar.enable,
     elementSize: state.elementSize,
+    enableAppSetting: state.toolbar.enableAppSetting,
   })))
 
   // 目前不清楚 接下来的react19版本对useMemo的态度，而且这里就算多次使用这些函数，也不会有性能问题
@@ -147,8 +149,9 @@ export function Component() {
             </section>
           </main>
         </div>
-
       </section>
+
+      { enableAppSetting && <div className="fixed right-0 top-50% z-10"><Setting /></div> }
     </div>
   )
 }
