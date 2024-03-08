@@ -42,8 +42,8 @@ const Root: React.FC = () => {
     if (pathname === '/login')
       return <Navigate to="/" replace />
 
-    if (!allSubMenu || !allSubMenu)
-      return <Navigate to="/403" replace />
+    // if (!allSubMenu || !allSubMenu)
+    //   return <Navigate to="/403" replace />
 
     if (pathname === '/' && !useSysConfigStore.getState().app.enableDashboard) {
       const path = searchRoutePath(allSubMenu[0])
