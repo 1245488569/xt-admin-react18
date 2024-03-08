@@ -63,9 +63,3 @@ export function searchRoutePath(route: RouteObject): string {
     return searchRoutePath(route.children[0])
   return ''
 }
-
-/**
- * @description 递归组装菜单
- * @param {Array} menu 所有菜单项
- * @returns {Array} array antd组件需要的菜单数据
- */

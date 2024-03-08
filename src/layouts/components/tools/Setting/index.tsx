@@ -15,18 +15,39 @@ const layoutModeOptions = [
 export default function Reload(props: IProps) {
   const { className } = props
 
-  const { layoutMode, enableProgress, enableDynamicTitle, subMenuCollapse, actionBarfixed, setLayoutMode, setEnableProgress, setEnableDynamicTitle, setSubMenuCollapse, setActionBarFixed } = useSysConfigStore(useShallow(state => ({
+  const { layoutMode, enableProgress, enableDynamicTitle, subMenuCollapse, actionBarfixed, tabbarEnable, toolbarEnable, enableFullscreen, enableChangeTheme, enableColorScheme, enableI18n, enableSidebarCollapse, enableBreadcrumb, enablePageReload, enableMenuSearch, setLayoutMode, setEnableProgress, setEnableDynamicTitle, setSubMenuCollapse, setActionBarFixed, setEnableTabbar, setEnableToolbar, setEnableFullscreen, setEnableChangeTheme, setEnableColorScheme, setEnableI18n, setEnableSidebarCollapse, setEnableBreadcrumb, setEnablePageReload, setEnableMenuSearch } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.app.layoutMode,
     enableProgress: state.app.enableProgress,
     enableDynamicTitle: state.app.enableDynamicTitle,
     subMenuCollapse: state.nav.subMenuCollapse,
     actionBarfixed: state.nav.fixed,
+    tabbarEnable: state.tabbar.enable,
+    toolbarEnable: state.toolbar.enable,
+    enableFullscreen: state.toolbar.enableFullscreen,
+    enableChangeTheme: state.toolbar.enableChangeTheme,
+    enableColorScheme: state.toolbar.enableColorScheme,
+    enableI18n: state.toolbar.enableI18n,
+    enableSidebarCollapse: state.toolbar.enableSidebarCollapse,
+    enableBreadcrumb: state.toolbar.enableBreadcrumb,
+    enablePageReload: state.toolbar.enablePageReload,
+    enableMenuSearch: state.toolbar.enableMenuSearch,
 
     setLayoutMode: state.setLayoutMode,
     setEnableProgress: state.setEnableProgress,
     setEnableDynamicTitle: state.setEnableDynamicTitle,
     setSubMenuCollapse: state.setSubMenuCollapse,
     setActionBarFixed: state.setActionBarFixed,
+    setEnableTabbar: state.setEnableTabbar,
+    setEnableToolbar: state.setEnableToolbar,
+    setEnableFullscreen: state.setEnableFullscreen,
+    setEnableColorScheme: state.setEnableColorScheme,
+    setEnableChangeTheme: state.setEnableChangeTheme,
+    setEnableI18n: state.setEnableI18n,
+    setEnableSidebarCollapse: state.setEnableSidebarCollapse,
+    setEnableBreadcrumb: state.setEnableBreadcrumb,
+    setEnablePageReload: state.setEnablePageReload,
+    setEnableMenuSearch: state.setEnableMenuSearch,
+    setEnableElementSize: state.setEnableElementSize,
   })))
 
   const [open, setOpen] = useState(false)
@@ -65,6 +86,50 @@ export default function Reload(props: IProps) {
         <div className="mb-4 flex items-center justify-between">
           <span className="text-gray-500">开启操作栏固定</span>
           <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={actionBarfixed} onChange={e => setActionBarFixed(e)} />
+        </div>
+
+        <Divider>标签栏</Divider>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">开启标签栏</span>
+          <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={tabbarEnable} onChange={e => setEnableTabbar(e)} />
+        </div>
+
+        <Divider>工具栏</Divider>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">开启工具栏</span>
+          <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={toolbarEnable} onChange={e => setEnableToolbar(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示全屏按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableFullscreen} onChange={e => setEnableFullscreen(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示换肤按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableChangeTheme} onChange={e => setEnableChangeTheme(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示暗黑按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableColorScheme} onChange={e => setEnableColorScheme(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示国际化按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableI18n} onChange={e => setEnableI18n(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示侧边栏展开收起按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableSidebarCollapse} onChange={e => setEnableSidebarCollapse(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示面包屑导航</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableBreadcrumb} onChange={e => setEnableBreadcrumb(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示页面刷新按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enablePageReload} onChange={e => setEnablePageReload(e)} />
+        </div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-gray-500">显示菜单搜索按钮</span>
+          <Switch checkedChildren="显示" unCheckedChildren="关闭" defaultChecked={enableMenuSearch} onChange={e => setEnableMenuSearch(e)} />
         </div>
       </Drawer>
     </>
