@@ -31,6 +31,27 @@ export default {
         auth: 'user.detail',
       },
     },
+
+    {
+      path: '/list/goods',
+      lazy: () => import('@/views/list/goods'),
+      meta: {
+        title: 'route.list.page2',
+      },
+      children: [
+        {
+          path: '/list/goods/detail',
+          lazy: () => import('@/views/list/goods/detail'),
+          meta: {
+            title: 'route.list.detail2',
+            hideInMenu: true,
+            hideInSearch: true,
+            activeMenu: '/list/goods',
+            mergeTabbarPath: '/list/goods',
+          },
+        },
+      ],
+    },
   ],
 
 } as RouteObject

@@ -62,7 +62,7 @@ export default function Reload(props: IProps) {
         <SvgIcon name="ri:settings-2-line" size={25} />
       </div>
       <Drawer title="应用配置" onClose={() => setOpen(false)} open={open}>
-        <Alert message={<span className="text-[#f56c6c]">应用配置可实时预览效果，仅临时生效。</span>} type="error" />
+        <Alert message={<span className="text-[#f56c6c]">应用配置可实时预览效果，仅临时生效。更多配置请前往代码的GlobalConfig.ts文件中查看。</span>} type="error" />
         <Divider>布局模式</Divider>
         <div>
           <Select style={{ width: '100%' }} defaultValue={layoutMode} options={layoutModeOptions} onChange={handleChange} />

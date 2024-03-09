@@ -6,14 +6,18 @@ import LangSelect from '../tools/LangSelect'
 import Screenfull from '../tools/Screenfull'
 import ChangeColorScheme from '../tools/ChangeColorScheme'
 import ChangeTheme from '../tools/ChangeTheme'
+import CustomBreadcrumb from '../tools/CustomBreadcrumb'
 import { ToolbarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 
 export default function Toolbar() {
-  const { toolbarBgColor, toolbarTextColor, enableSidebarCollapse, enableMenuSearch, enableElementSize, enablePageReload, enableI18n, enableFullscreen, enableColorScheme, enableChangeTheme } = useSysConfigStore(useShallow(state => ({
+  console.log('Toolbar tsx')
+
+  const { toolbarBgColor, toolbarTextColor, enableSidebarCollapse, enableMenuSearch, enableElementSize, enablePageReload, enableI18n, enableFullscreen, enableColorScheme, enableChangeTheme, enableBreadcrumb } = useSysConfigStore(useShallow(state => ({
     toolbarBgColor: state.theme.toolbarBgColor,
     toolbarTextColor: state.theme.toolbarTextColor,
     enableSidebarCollapse: state.toolbar.enableSidebarCollapse,
+    enableBreadcrumb: state.toolbar.enableBreadcrumb,
     enableMenuSearch: state.toolbar.enableMenuSearch,
     enableElementSize: state.toolbar.enableElementSize,
     enablePageReload: state.toolbar.enablePageReload,
@@ -22,7 +26,7 @@ export default function Toolbar() {
     enableColorScheme: state.toolbar.enableColorScheme,
     enableChangeTheme: state.toolbar.enableChangeTheme,
   })))
-  console.log(enableMenuSearch, enableI18n, enableFullscreen, enableColorScheme, enableChangeTheme)
+  console.log('todo enableMenuSearch', enableMenuSearch)
 
   function customToolbarClass() {
     return {
@@ -37,6 +41,8 @@ export default function Toolbar() {
     <ToolbarWrapper className="h-[var(--xt-toolbar-height)] flex items-center px-4" $customToolbarClass={customToolbarClass()}>
       <div className="flex items-center">
         { enableSidebarCollapse && <SidebarCollapse className="mr-2" /> }
+
+        { enableBreadcrumb && <CustomBreadcrumb /> }
       </div>
 
       <div className="ml-auto flex items-center">
