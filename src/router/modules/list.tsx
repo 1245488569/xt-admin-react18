@@ -37,6 +37,7 @@ export default {
       lazy: () => import('@/views/list/goods'),
       meta: {
         title: 'route.list.page2',
+        auth: 'user.read',
       },
       children: [
         {
@@ -48,6 +49,7 @@ export default {
             hideInSearch: true,
             activeMenu: '/list/goods',
             mergeTabbarPath: '/list/goods',
+            auth: 'user.detail',
           },
         },
       ],

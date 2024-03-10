@@ -1,4 +1,3 @@
-import { useShallow } from 'zustand/react/shallow'
 import { useUserStore } from '@/stores/user'
 
 export function Component() {
@@ -9,11 +8,8 @@ export function Component() {
   const { t } = useTranslation()
   const nav = useNavigate()
   const [search] = useSearchParams()
-  const { login } = useUserStore(useShallow(state => ({
-    login: state.login,
-  })))
   function onFinish(values: FormProps) {
-    login(values).then(() => {
+    useUserStore.getState().login(values).then(() => {
       nav(search.get('redirectPath') ?? '/', {
         replace: true,
       })
@@ -45,11 +41,11 @@ export function Component() {
 
           <Form autoComplete="off" onFinish={onFinish}>
             <Form.Item name="account" rules={[{ required: true, message: t('login.accountRequired') }, { min: 3, max: 20, message: t('login.accountLength') }]}>
-              <Input placeholder={t('login.account')} prefix={<SvgIcon name="ant-design:user-outlined" size={16} />} />
+              <Input placeholder={`${t('login.account')}:admin/test`} prefix={<SvgIcon name="ant-design:user-outlined" size={16} />} />
             </Form.Item>
 
             <Form.Item name="password" rules={[{ required: true, message: t('login.passwordRquired') }, { min: 6, max: 20, message: t('login.passwordLength') }]}>
-              <Input.Password placeholder={t('login.password')} prefix={<SvgIcon name="ant-design:lock-outlined" size={16} />} />
+              <Input.Password placeholder={`${t('login.password')}:123456`} prefix={<SvgIcon name="ant-design:lock-outlined" size={16} />} />
             </Form.Item>
 
             <Form.Item>

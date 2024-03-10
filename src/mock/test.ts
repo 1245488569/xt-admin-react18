@@ -43,11 +43,14 @@ export default defineFakeRoute([
     url: '/api/user/permission',
     method: 'get',
     response: ({ headers }: any) => {
+      console.log(headers)
+      console.log(headers.authorization && headers.authorization.includes('test'))
+
       return {
         code: 200,
         message: '请求成功',
         type: 'success',
-        result: headers.token && headers.token.includes('test') ? ['user.edit'] : ['user.read', 'user.detail', 'user.add', 'user.edit'],
+        result: headers.authorization && headers.authorization.includes('test') ? ['user.edit'] : ['user.read', 'user.detail', 'user.add', 'user.edit'],
       }
     },
   },

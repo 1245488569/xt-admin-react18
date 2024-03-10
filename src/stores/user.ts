@@ -31,6 +31,7 @@ export const useUserStore = create<IState & IActions>()(
         })
       },
       login: async (form) => {
+        get().init()
         const res = await loginApi(form)
         set((state) => {
           state.token = res.token
