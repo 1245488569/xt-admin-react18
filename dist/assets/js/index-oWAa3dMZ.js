@@ -1,0 +1,1 @@
+import{Y as i,$ as s,a0 as n}from"./index-x6leLypU.js";function a(){const o=i(),t=e=>{o("/list/user/detail",{state:{id:e}})};return s.jsxs("div",{children:["UserList",s.jsx(n,{onClick:()=>t(1),children:"详情1"}),s.jsx(n,{onClick:()=>t(2),children:"详情2"})]})}export{a as Component};

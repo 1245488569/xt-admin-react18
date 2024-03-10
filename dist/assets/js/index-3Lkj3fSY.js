@@ -1,1 +1,0 @@
-import{Y as e,a1 as o,a2 as t}from"./index-VOjbm7ci.js";function r(){const n=e(),s=i=>{n("/list/goods/detail",{state:{id:i}})};return o.jsxs("div",{children:["GoodsList",o.jsx(t,{onClick:()=>s(1),children:"详情1"}),o.jsx(t,{onClick:()=>s(2),children:"详情2"})]})}export{r as Component};

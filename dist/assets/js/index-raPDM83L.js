@@ -1,1 +1,0 @@
-import{a1 as s,bk as e}from"./index-VOjbm7ci.js";function x(){return s.jsxs("div",{children:[s.jsx("div",{className:"h-50px bg-blue-500"}),s.jsx(e,{}),s.jsx("div",{className:"h-50px bg-green-500"})]})}export{x as Component};
