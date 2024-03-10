@@ -6,12 +6,20 @@
 
 ### 如果大家觉得有用，请帮忙点下star，十分感谢
 
-### 代码地址
+### React18版本代码地址
 1. 码云：https://gitee.com/nideweixiaonuannuande/xt-admin-react18
 2. github：https://github.com/1245488569/xt-admin-react18
 
-### 演示地址
-1. 稍等片刻，正在部署中
+### vue3版本代码地址
+1. 码云：https://gitee.com/nideweixiaonuannuande/xt-admin-vue3
+2. github：https://github.com/1245488569/xt-admin-vue3
+
+### React18版本演示地址
+1. http://nideweixiaonuannuande.gitee.io/xt-admin-react18/#/login
+
+### Vue3版本演示地址
+1. 常用：http://nideweixiaonuannuande.gitee.io/xt-admin-vue3/#/login
+（目前账号密码可以随便输入）
 
 ## 特点
 1. react18
@@ -40,11 +48,11 @@
 24. 统一的代码规范与风格支持
 25. 漂亮的 login 404 403 页 支持
 26. 配置选择支持
-27. svg-icon支持
+27. SvgIcon支持
 28. 多级缓存(暂未实现)
 29. 历史菜单
 30. 面包屑导航
-31. 其余的（请查看app.ts 或者 .env文件 或者assets/styles/globals/layout.scss）
+31. 其余的（请查看app.ts 或者 .env文件 或者assets/styles/globals/layout.less）
 
 ## `node` 版本推荐
 最低18，推荐20

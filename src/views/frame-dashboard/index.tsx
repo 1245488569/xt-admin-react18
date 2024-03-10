@@ -87,8 +87,10 @@ export function Component() {
 
           <div className="ml-2 w-300px rounded bg-[#f6f6f7] p-5 dark:bg-[#252529]">
             <div className="mb-4 flex items-center">
-              🎉
-              <a className="ml-2 text-[#409eff] hover:text-[#409eff]" href="https://gitee.com/nideweixiaonuannuande/unplugin-antd-resolver" target="_blank" rel="noreferrer">unplugin-antd-resolver</a>
+              <span className="text-lg font-bold">
+                🎉
+                <a className="ml-2 text-[#409eff] hover:text-[#409eff]" href="https://gitee.com/nideweixiaonuannuande/unplugin-antd-resolver" target="_blank" rel="noreferrer">unplugin-antd-resolver</a>
+              </span>
             </div>
             <div className="text-[#3c3c43bf] dark:text-white">
               用于在 unplugin-auto-import 中实现 antd 组件的按需引入(antd5版本)。
