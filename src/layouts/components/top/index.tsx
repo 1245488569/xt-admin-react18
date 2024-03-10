@@ -13,7 +13,7 @@ import { rootRoutes } from '@/router'
 
 export default function Top() {
   const { layoutMode, mainMenuBgColor, menuBgColor, mainMenuTextColor, menuTextColor, mainMenuHoverBgColor, menuHoverBgColor, mainMenuHoverTextColor, menuHoverTextColor, mainMenuActiveBgColor, menuActiveBgColor, mainMenuActiveTextColor, menuActiveTextColor } = useSysConfigStore(useShallow(state => ({
-    layoutMode: state.app.layoutMode,
+    layoutMode: state.layoutMode,
     mainMenuBgColor: state.theme.mainMenuBgColor,
     menuBgColor: state.theme.menuBgColor,
     mainMenuTextColor: state.theme.mainMenuTextColor,

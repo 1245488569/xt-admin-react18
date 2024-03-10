@@ -75,7 +75,7 @@ export const useSysConfigStore = create<IGlobalConfig & IActions>()(
         },
         setLayoutMode: (payload) => {
           set((state) => {
-            state.app.layoutMode = payload
+            state.layoutMode = payload
           })
         },
         setSubMenuCollapse: (payload) => {
@@ -151,8 +151,7 @@ export const useSysConfigStore = create<IGlobalConfig & IActions>()(
         },
       }), {
         name: `${STORAGE_PREFIX}${SYS_CONFIG}`,
-        partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme, theme: state.theme }),
-        // partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme }),
+        partialize: state => ({ defaultLanguage: state.defaultLanguage, colorScheme: state.colorScheme, theme: state.theme, layoutMode: state.layoutMode }),
       }),
     ),
   ),

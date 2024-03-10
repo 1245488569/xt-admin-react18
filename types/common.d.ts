@@ -10,7 +10,6 @@ interface IGlobalApp {
   enableProgress: boolean
   enableDynamicTitle: boolean
   enableDashboard: boolean
-  layoutMode: LayoutMode
 }
 
 interface IGlobalNav {
@@ -70,6 +69,7 @@ declare interface IGlobalConfig {
   defaultLanguage: Language
   elementSize: ElementSize
   colorScheme: ColorScheme
+  layoutMode: LayoutMode
   app: IGlobalApp
   nav: IGlobalNav
   tabbar: IGlobalTabbar

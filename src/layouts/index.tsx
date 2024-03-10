@@ -13,7 +13,7 @@ import { useSysConfigStore } from '@/stores/config'
 export function Component() {
   console.log('Layout tsx')
   const { layoutMode, navFixed, subMenuCollapse, showToolbar, showTabbar, elementSize, enableAppSetting } = useSysConfigStore(useShallow(state => ({
-    layoutMode: state.app.layoutMode,
+    layoutMode: state.layoutMode,
     navFixed: state.nav.fixed,
     subMenuCollapse: state.nav.subMenuCollapse,
     showToolbar: state.toolbar.enable,

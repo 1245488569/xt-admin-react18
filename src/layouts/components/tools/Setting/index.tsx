@@ -16,7 +16,7 @@ export default function Reload(props: IProps) {
   const { className } = props
 
   const { layoutMode, enableProgress, enableDynamicTitle, subMenuCollapse, actionBarfixed, tabbarEnable, toolbarEnable, enableFullscreen, enableChangeTheme, enableColorScheme, enableI18n, enableSidebarCollapse, enableBreadcrumb, enablePageReload, enableMenuSearch, setLayoutMode, setEnableProgress, setEnableDynamicTitle, setSubMenuCollapse, setActionBarFixed, setEnableTabbar, setEnableToolbar, setEnableFullscreen, setEnableChangeTheme, setEnableColorScheme, setEnableI18n, setEnableSidebarCollapse, setEnableBreadcrumb, setEnablePageReload, setEnableMenuSearch } = useSysConfigStore(useShallow(state => ({
-    layoutMode: state.app.layoutMode,
+    layoutMode: state.layoutMode,
     enableProgress: state.app.enableProgress,
     enableDynamicTitle: state.app.enableDynamicTitle,
     subMenuCollapse: state.nav.subMenuCollapse,

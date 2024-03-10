@@ -21,6 +21,14 @@ const sysGlobalConfig: IGlobalConfig = {
    * dark 暗黑模式
    */
   colorScheme: 'light',
+  /**
+   * 布局模式
+   * onlyTopNav 只有顶部导航
+   * onlySubSideNav 只有侧边栏导航
+   * mainSubSideNav 侧边主导航+侧边次栏导航
+   * topSubSideNav 顶部主导航+侧边次栏导航
+   */
+  layoutMode: 'topSubSideNav',
   app: {
     /**
      * 是否开启权限功能
@@ -32,14 +40,6 @@ const sysGlobalConfig: IGlobalConfig = {
     enableDynamicTitle: true,
     // 是否开启boshboard(设置为false，登录后框架会跳转到菜单中的第一个模块)
     enableDashboard: true,
-    /**
-     * 布局模式
-     * onlyTopNav 只有顶部导航
-     * onlySubSideNav 只有侧边栏导航
-     * mainSubSideNav 侧边主导航+侧边次栏导航
-     * topSubSideNav 顶部主导航+侧边次栏导航
-     */
-    layoutMode: 'mainSubSideNav',
   },
   nav: {
     // 次导航栏是否收起

@@ -59,7 +59,7 @@ export default function SubSiderbarMenu() {
   console.log('SidebarMenu tsx')
 
   const { layoutMode, subMenuCollapse } = useSysConfigStore(useShallow(state => ({
-    layoutMode: state.app.layoutMode,
+    layoutMode: state.layoutMode,
     subMenuCollapse: state.nav.subMenuCollapse,
   })))
 
