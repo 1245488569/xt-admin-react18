@@ -7,6 +7,7 @@ import Screenfull from '../tools/Screenfull'
 import ChangeColorScheme from '../tools/ChangeColorScheme'
 import ChangeTheme from '../tools/ChangeTheme'
 import CustomBreadcrumb from '../tools/CustomBreadcrumb'
+import Personal from '../personal'
 import { ToolbarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 
@@ -50,6 +51,7 @@ export default function Toolbar() {
         { enableFullscreen && <Screenfull className="mr-2" /> }
         { enableColorScheme && <ChangeColorScheme className="mr-2" /> }
         { enableChangeTheme && <ChangeTheme className="mr-2" /> }
+        <Personal />
       </div>
     </ToolbarWrapper>
   )

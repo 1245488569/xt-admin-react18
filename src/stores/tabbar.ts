@@ -8,6 +8,7 @@ interface IState {
 }
 
 interface IActions {
+  init: () => void
   add: (tab: ITabbarItem) => void
   remove: (type: ITabbarRemoveType, clickIndex: number, activeIndex: number) => void
 }
@@ -16,6 +17,11 @@ export const useTabbarStore = create<IState & IActions>()(
   immer(
     set => ({
       list: [],
+      init: () => {
+        set((state) => {
+          state.list = []
+        })
+      },
       add: (tab) => {
         set((state) => {
           if (tab.meta.mergeTabbarPath) {

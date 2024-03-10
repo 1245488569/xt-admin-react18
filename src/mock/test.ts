@@ -51,6 +51,7 @@ export default defineFakeRoute([
       }
     },
   },
+
   {
     url: '/api/list',
     method: 'post',
@@ -76,6 +77,19 @@ export default defineFakeRoute([
           total,
           totalPages,
         },
+      }
+    },
+  },
+
+  {
+    url: '/api/logout',
+    method: 'get',
+    response: () => {
+      return {
+        code: 200,
+        message: '请求成功',
+        type: 'success',
+        result: {},
       }
     },
   },
