@@ -31,7 +31,6 @@ export default function CustomBreadcrumb() {
       }
       return []
     }
-    console.log('CustomBreadcrumb tsx pathname', getBreadcrumbByPath(pathname, rootRoutes[0].children!))
 
     setBreadcrumb(getBreadcrumbByPath(pathname, rootRoutes[0].children!))
   }, [allSubMenu, pathname, t])

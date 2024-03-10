@@ -12,8 +12,6 @@ import router from './router'
 import AntdGlobal from './utils/AntdGlobal'
 
 function App() {
-  console.log('App tsx')
-
   const { i18n } = useTranslation()
 
   const [locale, setLocale] = useState(zhCN)
@@ -30,7 +28,6 @@ function App() {
     const cancelSub = useSysConfigStore.subscribe(
       state => state.defaultLanguage,
       (language) => {
-        console.log('App tsx language', language)
         setLocale(language === 'zhCn' ? zhCN : language === 'zhTw' ? zhTW : enUS)
         i18n.changeLanguage(language)
         setLoading(false)

@@ -86,7 +86,6 @@ export default function Tabbar() {
 
   const nav = useNavigate()
   function goTo(item: ITabbarItem) {
-    console.log('item', item)
     if (location.pathname + location.search + JSON.stringify(location.state) === item.key)
       return
 

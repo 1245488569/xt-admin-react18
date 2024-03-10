@@ -34,7 +34,6 @@ export default function Top() {
   })))
 
   const { allMainMenu, allSubMenu } = useRouteLoaderData('layout') as ILayoutLoader
-  console.log('Top tsx allMainMenu', allMainMenu)
 
   const { t } = useTranslation()
   function getMainMenuItems(): MenuProps['items'] {

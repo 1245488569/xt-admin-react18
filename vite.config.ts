@@ -6,10 +6,10 @@ import setupVitePlugins from './vite/plugins'
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
   const drop = []
-  if (env.VITE_DROP_CONSOLE === 'true')
+  if (env.VITE_BUILD_DROP_CONSOLE === 'true')
     drop.push('console')
 
-  if (env.VITE_DROP_DEBUGGER === 'true')
+  if (env.VITE_BUILD_DROP_DEBUGGER === 'true')
     drop.push('debugger')
 
   return {
@@ -35,6 +35,7 @@ export default defineConfig(({ command, mode }) => {
       esbuild: {
         drop,
       },
+      chunkSizeWarningLimit: 1500,
       rollupOptions: {
         output: {
           chunkFileNames: 'assets/js/[name]-[hash].js',

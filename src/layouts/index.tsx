@@ -11,7 +11,6 @@ import { LayoutWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
-  console.log('Layout tsx')
   const { layoutMode, navFixed, subMenuCollapse, showToolbar, showTabbar, elementSize, enableAppSetting } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.layoutMode,
     navFixed: state.nav.fixed,

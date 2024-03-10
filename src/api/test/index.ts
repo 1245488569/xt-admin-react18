@@ -1,8 +1,6 @@
 import { get, post } from '@/request'
 
 export function loginApi(form: any) {
-  console.log('form', form)
-
   return post('/login', {
     data: form,
   })

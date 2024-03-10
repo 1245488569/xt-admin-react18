@@ -94,17 +94,13 @@ export default async function LayoutLoader() {
   if (useUserStore.getState().token && useSysConfigStore.getState().app.enablePermission) {
     permissions = await permissionApi()
     const noDealMenu = getNoDealMenu()
-    console.log('noDealMenu', noDealMenu)
     allSubMenu = generateallSubMenu(noDealMenu, permissions)
-    console.log('allSubMenu', allSubMenu)
 
     allMainMenu = generateAllMainMenu(allSubMenu)
-    console.log('mainMenu', allMainMenu)
   }
   else if (!useUserStore.getState().token) {
     const noDealMenu = getNoDealMenu()
     allSubMenu = generateNoAuthSubMenus(noDealMenu)
-    console.log('NoAuthSubMenus', allSubMenu)
   }
 
   return {

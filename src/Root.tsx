@@ -9,16 +9,12 @@ import type { ILayoutLoader } from './types/common'
 import { message } from './utils/AntdGlobal'
 
 const Root: React.FC = () => {
-  console.log('Root tsx')
   const navigation = useNavigation()
 
   const { t } = useTranslation()
   const { pathname } = useLocation()
 
-  console.log('Root tsx pathname', pathname)
-  console.log('Root tsx rootRoutes', rootRoutes)
   const curRouteMeta = getCatchRouteMeta(pathname, rootRoutes[0].children)
-  console.log('Root tsx curRouteMeta', curRouteMeta)
 
   if (useSysConfigStore.getState().app.enableProgress) {
     if (navigation.state === 'loading')
@@ -33,7 +29,6 @@ const Root: React.FC = () => {
 
   // 如果是不在layouty的页面，useRouteLoaderData('layout')是undefined
   const { permissions, allSubMenu } = useRouteLoaderData('layout') as ILayoutLoader || {}
-  console.log('Root tsx permissions', permissions)
 
   if (useUserStore.getState().token) {
     if (pathname === '/403' || pathname === '/404')

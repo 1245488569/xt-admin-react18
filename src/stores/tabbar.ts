@@ -46,7 +46,6 @@ export const useTabbarStore = create<IState & IActions>()(
       },
       remove: (type, clickIndex, activeIndex) => {
         set((state) => {
-          console.log(type, clickIndex, activeIndex, state.list)
           switch (type) {
             case 'self':
               if (clickIndex < state.list.length - 1) {

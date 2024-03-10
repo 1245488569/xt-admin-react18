@@ -7,8 +7,6 @@ import SubSiderbarMenu from './SubSiderbarMenu'
 import { useSysConfigStore } from '@/stores/config'
 
 export default function SubSidebar() {
-  console.log('SubSidebar tsx')
-
   const { layoutMode, subMenuCollapse, menuBgColor, menuTextColor, menuHoverBgColor, menuHoverTextColor, menuActiveBgColor, menuActiveTextColor } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.layoutMode,
     colorScheme: state.colorScheme,

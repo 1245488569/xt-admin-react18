@@ -11,8 +11,6 @@ import { ToolbarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 
 export default function Toolbar() {
-  console.log('Toolbar tsx')
-
   const { toolbarBgColor, toolbarTextColor, enableSidebarCollapse, enableMenuSearch, enableElementSize, enablePageReload, enableI18n, enableFullscreen, enableColorScheme, enableChangeTheme, enableBreadcrumb } = useSysConfigStore(useShallow(state => ({
     toolbarBgColor: state.theme.toolbarBgColor,
     toolbarTextColor: state.theme.toolbarTextColor,

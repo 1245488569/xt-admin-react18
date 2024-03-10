@@ -2,7 +2,6 @@ import { useShallow } from 'zustand/react/shallow'
 import { useUserStore } from '@/stores/user'
 
 export function Component() {
-  console.log('login tsx')
   interface FormProps {
     account: string
     password: string

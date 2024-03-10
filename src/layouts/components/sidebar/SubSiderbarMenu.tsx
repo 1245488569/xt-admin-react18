@@ -56,8 +56,6 @@ function getSubMenuItems(arr: RouteObject[], t: TFunction<'translation', undefin
 }
 
 export default function SubSiderbarMenu() {
-  console.log('SidebarMenu tsx')
-
   const { layoutMode, subMenuCollapse } = useSysConfigStore(useShallow(state => ({
     layoutMode: state.layoutMode,
     subMenuCollapse: state.nav.subMenuCollapse,
@@ -101,7 +99,6 @@ export default function SubSiderbarMenu() {
   }, [allMainMenu, allSubMenu, layoutMode, mainMenuActive, pathname, t])
 
   function handleChange(e: string[]) {
-    console.log('SubSidebar handleChange e', e)
     setOpenKeys(e)
   }
 

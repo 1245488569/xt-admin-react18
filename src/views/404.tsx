@@ -1,5 +1,4 @@
 export function Component() {
-  console.log('Error404 tsx')
   const { t } = useTranslation()
   const navigate = useNavigate()
   function goHome() {
