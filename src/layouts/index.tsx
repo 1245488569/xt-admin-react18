@@ -1,11 +1,13 @@
 import { useShallow } from 'zustand/react/shallow'
 import classNames from 'classnames'
+
 import Top from './components/top'
 import SubSidebar from './components/sidebar/SubSidebar'
 import MainSidebar from './components/sidebar/MainSidebar'
 import Tabbar from './components/tabbar'
 import Toolbar from './components/toolbar'
 import Setting from './components/tools/Setting'
+import { LayoutWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 
 export function Component() {
@@ -122,7 +124,7 @@ export function Component() {
   }, [viewContextMarginTop(), viewContextFontSize()])
 
   return (
-    <div className="h-full">
+    <LayoutWrapper>
       <section className="relative h-full flex flex-col">
         {
           showTop() && <Top />
@@ -138,7 +140,7 @@ export function Component() {
             )
           }
 
-          <main className={classNames('main-box flex flex-1 flex-col overflow-x-hidden bg-[#f5f5f5] dark:bg-[var(--el-bg-color)]', { 'overflow-auto': navFixed })}>
+          <main className={classNames('main-box flex flex-1 flex-col overflow-x-hidden bg-[#f5f5f5] dark:bg-[#141414]', { 'overflow-auto': navFixed })}>
             <div className={actionbarClass}>
               { showTabbar && <Tabbar /> }
               { showToolbar && <Toolbar /> }
@@ -152,6 +154,6 @@ export function Component() {
       </section>
 
       { enableAppSetting && <div className="fixed right-0 top-50% z-10"><Setting /></div> }
-    </div>
+    </LayoutWrapper>
   )
 }

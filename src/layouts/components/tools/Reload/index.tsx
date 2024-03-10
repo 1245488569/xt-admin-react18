@@ -12,7 +12,7 @@ export default function Reload(props: IProps) {
 
   return (
     <div className={`${className}`} onClick={reload}>
-      <SvgIcon name="ep:refresh" size={20} className="cursor-pointer" />
+      <SvgIcon name="carbon:renew" size={20} className="cursor-pointer" />
     </div>
   )
 }
