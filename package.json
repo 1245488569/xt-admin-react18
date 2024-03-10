@@ -12,6 +12,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.5.1",
     "@unocss/reset": "^0.58.3",
     "ahooks": "^3.7.10",
     "antd": "^5.15.0",

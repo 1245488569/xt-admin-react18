@@ -1,6 +1,8 @@
 import { useShallow } from 'zustand/react/shallow'
 import classNames from 'classnames'
 import type { MenuProps } from 'antd'
+import BScroll from '@better-scroll/core'
+import type { BScrollConstructor } from '@better-scroll/core/dist/types/BScroll'
 import { TabbarWrapper } from './style'
 import { useSysConfigStore } from '@/stores/config'
 import { getCatchRouteMeta } from '@/utils/router'
@@ -47,6 +49,22 @@ export default function Tabbar() {
   const { t } = useTranslation()
   const location = useLocation()
 
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollItemRef = useRef<HTMLDivElement>(null)
+  const [bs, setBs] = useState<BScrollConstructor>()
+
+  useEffect(() => {
+    setBs(new BScroll(scrollRef.current!, {
+      scrollX: true,
+      probeType: 0,
+    }))
+
+    return () => {
+      bs?.destroy()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
     const curRouteMeta = getCatchRouteMeta(location.pathname, rootRoutes[0].children)
     if (!curRouteMeta?.title)
@@ -59,7 +77,12 @@ export default function Tabbar() {
       // 以pathname search state组成的唯一值
       key: location.pathname + location.search + JSON.stringify(location.state),
     })
-  }, [addTab, location.pathname, location.search, location.state])
+
+    bs?.refresh()
+    const scrollIndex = tabList.findIndex(item => item.key === location.pathname + location.search + JSON.stringify(location.state))
+    if (scrollIndex !== -1 && scrollItemRef.current?.children)
+      bs?.scrollToElement(scrollItemRef.current.children[scrollIndex] as HTMLElement, 500, true, false)
+  }, [addTab, bs, location.pathname, location.search, location.state, tabList])
 
   const nav = useNavigate()
   function goTo(item: ITabbarItem) {
@@ -130,8 +153,8 @@ export default function Tabbar() {
   }
 
   return (
-    <TabbarWrapper className="h-[var(--xt-tabbar-height)] w-full flex items-center overflow-hidden whitespace-nowrap text-xs" $customTabbarClass={customTabbarClass()}>
-      <div className="h-full flex px-2 py-1">
+    <TabbarWrapper ref={scrollRef} className="h-[var(--xt-tabbar-height)] w-full flex items-center overflow-hidden whitespace-nowrap text-xs" $customTabbarClass={customTabbarClass()}>
+      <div ref={scrollItemRef} className="h-full flex px-2 py-1">
         {
         tabList.map((tab, index) => (
           <Dropdown key={tab.key} menu={{ items: renderContextMenu(index) }} trigger={['contextMenu']}>
