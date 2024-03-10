@@ -5,14 +5,15 @@ interface IProps {
   size?: number
   collaspe?: boolean
   height?: string
+  className?: string
 }
 
 export default function Home(props: IProps) {
-  const { children, size = 20, collaspe = false, height = '' } = props
+  const { children, size = 20, collaspe = false, height = '', className } = props
   const isCollaspe = collaspe
 
   return (
-    <PageMainWrapper className={classNames('relative m-5 rounded-lg p-5', { 'overflow-hidden': isCollaspe })} style={{ height: isCollaspe ? height : '' }}>
+    <PageMainWrapper className={classNames(`relative m-5 rounded-lg p-5 ${className}`, { 'overflow-hidden': isCollaspe })} style={{ height: isCollaspe ? height : '' }}>
 
       {children}
 
